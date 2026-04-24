@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR SearchBar - Reyes Coca-Cola Bottling</title>
+  https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;700;800;900&display=swap
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Nunito', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(to bottom, #f8f8f8, #f0f0f0);
+      min-height: 100vh;
+      line-height: 1.5;
+      color: #1a1a1a;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero-container { margin: 16px; }
+
+    .hero {
+      background: linear-gradient(180deg, #E31837 0%, #CC0000 50%, #B80000 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px 50px;
+    }
+
+    canvas#bubbles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-decorations {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-decorations .circle1 {
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 256px; height: 256px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-decorations .circle2 {
+      position: absolute;
+      bottom: -128px; right: -128px;
+      width: 384px; height: 384px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .hero-decorations .circle3 {
+      position: absolute;
+      top: 25%; right: 40px;
+      width: 128px; height: 128px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 16px;
+    }
+
+    .main-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(42px, 8vw, 72px);
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+
+    .tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+    }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 50px;
+      padding: 7px 7px 7px 20px;
+      max-width: 480px;
+      margin: 0 auto 28px;
+      gap: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .search-wrap:focus-within {
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.3), 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .search-wrap svg { flex-shrink: 0; opacity: 0.4; }
+
+    .search-wrap input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      color: #1a1a1a;
+      background: transparent;
+    }
+
+    .typewriter-text {
+      position: absolute;
+      left: 52px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      color: #888;
+      pointer-events: none;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 16px;
+      background: #aaa;
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    .search-btn {
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      padding: 11px 26px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .search-btn:hover { transform: scale(1.05); }
+    .search-btn:active { transform: scale(0.95); }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .logo-row .dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .logo-row span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .request-btn {
+      position: absolute;
+      top: 20px; right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 10px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 20;
+    }
+
+    .request-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* ========== FILTERS ========== */
+    .filters-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    .filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid #e5e5e5;
+      background: white;
+      color: #555;
+    }
+
+    .filter-chip:hover {
+      border-color: #E31837;
+      color: #E31837;
+      box-shadow: 0 4px 12px rgba(227,24,55,0.15);
+    }
+
+    .filter-chip.active {
+      background: #E31837;
+      border-color: #E31837;
+      color: white;
+      box-shadow: 0 8px 24px rgba(227,24,55,0.25);
+      transform: scale(1.05);
+    }
+
+    .filter-chip .icon {
+      font-size: 14px;
+      transition: transform 0.2s;
+    }
+
+    .filter-chip:hover .icon,
+    .filter-chip.active .icon { transform: scale(1.1); }
+
+    .results-count {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      color: #888;
+      white-space: nowrap;
+    }
+
+    .results-count strong {
+      color: #E31837;
+      font-weight: 700;
+    }
+
+    /* ========== CARDS GRID ========== */
+    .cards-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px 64px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .flip-wrap {
+      perspective: 1000px;
+      height: 240px;
+      cursor: pointer;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    .flip-wrap.flipped .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%; height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .flip-front {
+      background: #fff;
+      border: 2px solid #e8e8e8;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .flip-wrap:hover .flip-front {
+      border-color: #E31837;
+      box-shadow: 0 12px 40px rgba(227, 24, 55, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .flip-wrap.coming-soon:hover .flip-front {
+      border-color: #D97706;
+      box-shadow: 0 12px 40px rgba(217, 119, 6, 0.12);
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .color-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      border-radius: 16px 0 0 16px;
+      transition: width 0.3s;
+    }
+
+    .flip-wrap:hover .color-bar { width: 7px; }
+
+    .front-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 8px;
+      padding-left: 10px;
+    }
+
+    .book-icon-wrap {
+      width: 50px; height: 58px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .flip-wrap:hover .book-icon-wrap { transform: scale(1.1) rotate(3deg); }
+
+    .front-tag {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .front-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #1a1a1a;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      padding-left: 10px;
+    }
+
+    .front-desc {
+      font-size: 12px;
+      color: #666666;
+      line-height: 1.55;
+      flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      padding-left: 10px;
+    }
+
+    .flip-hint {
+      margin-top: auto;
+      padding-top: 10px;
+      padding-left: 10px;
+      font-size: 11px;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .flip-wrap:hover .flip-hint { color: #E31837; }
+
+    .flip-hint .arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .flip-wrap:hover .flip-hint .arrow { transform: rotate(-12deg); }
+
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FCD34D;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 12px;
+      margin-top: auto;
+      margin-left: 10px;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cs-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #D97706;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    .back-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .back-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .back-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .back-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-open {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 999px;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-open:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn-open.amber-btn {
+      color: #7a5200;
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    .btn-back {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #e5e5e5;
+      background: linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #E31837 0%, #CC0000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .footer-brand span {
+      color: #888;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .footer p {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+/* ========== AI BOT ========== */
+    .ai-bot-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+    }
+
+    .ai-bot-tooltip {
+      position: absolute;
+      bottom: calc(100% + 20px);
+      right: 0;
+      width: 260px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      border: 1px solid rgba(0,0,0,0.05);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(8px) scale(0.95);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .ai-bot-container:not(.chat-open):hover .ai-bot-tooltip {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .ai-bot-tooltip-header {
+      background: linear-gradient(135deg, #E31837 0%, #CC0000 100%);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ai-bot-tooltip-avatar {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      overflow: hidden;
+    }
+
+    .ai-bot-tooltip-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .ai-bot-tooltip-subtitle {
+      font-size: 10px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .ai-bot-tooltip-content {
+      padding: 16px;
+    }
+
+    .ai-bot-tooltip-content p {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .ai-bot-tooltip-cta {
+      font-size: 11px;
+      font-weight: 700;
+      color: #E31837;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ai-bot-tooltip-arrow {
+      position: absolute;
+      bottom: -8px;
+      right: 48px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      transform: rotate(45deg);
+      border-right: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .ai-bot-button {
+      width: 80px;
+      height: 100px;
+      border-radius: 40px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #E31837 0%, #990000 100%);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s;
+      box-shadow: 0 10px 36px rgba(227, 24, 55, 0.35), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+
+    .ai-bot-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 16px 48px rgba(227, 24, 55, 0.45), 0 0 0 4px rgba(227, 24, 55, 0.15), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+
+    .ai-bot-ping {
+      position: absolute;
+      inset: 0;
+      border-radius: 40px;
+      background: rgba(227, 24, 55, 0.2);
+      animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    .ai-bot-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 44px;
+      border: 2px solid rgba(227, 24, 55, 0.15);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .ai-bot-character {
+      position: relative;
+      z-index: 10;
+      transition: transform 0.3s;
+    }
+
+    .ai-bot-button:hover .ai-bot-character {
+      transform: scale(1.06) rotate(-2deg);
+    }
+
+    .ai-bot-label {
+      position: absolute;
+      bottom: -36px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 10px;
+      font-weight: 800;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ========== CHAT WINDOW ========== */
+    .chat-window {
+      position: fixed;
+      bottom: 144px;
+      right: 24px;
+      width: 380px;
+      max-width: calc(100vw - 48px);
+      height: 520px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.25), 0 10px 30px rgba(227,24,55,0.15);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      z-index: 1001;
+      animation: slideIn 0.3s ease;
+    }
+
+    .chat-window.open { display: flex; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #E31837 0%, #CC0000 100%);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      overflow: hidden;
+    }
+
+    .chat-avatar .online-dot {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 16px;
+      height: 16px;
+      background: #10B981;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .chat-header-info h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-header-info p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .chat-header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-header-btn {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .chat-header-btn:hover { background: rgba(255,255,255,0.25); }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      background: linear-gradient(to bottom, #f8f8f8, white);
+    }
+
+    .chat-message { margin-bottom: 16px; }
+
+    .chat-message-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .chat-message-row.user { justify-content: flex-end; }
+
+    .chat-message-avatar {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #fef2f2, #fee2e2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #fee2e2;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .chat-bubble {
+      max-width: 75%;
+      padding: 10px 16px;
+      border-radius: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .chat-bubble.bot {
+      background: white;
+      color: #333;
+      border: 1px solid #eee;
+      border-top-left-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .chat-bubble.user {
+      background: linear-gradient(135deg, #E31837, #CC0000);
+      color: white;
+      border-top-right-radius: 4px;
+      box-shadow: 0 4px 12px rgba(227,24,55,0.2);
+    }
+
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      margin-left: 44px;
+    }
+
+    .quick-reply-btn {
+      padding: 6px 12px;
+      background: white;
+      border: 2px solid rgba(227,24,55,0.2);
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #E31837;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .quick-reply-btn:hover {
+      border-color: #E31837;
+      background: #fef2f2;
+      transform: scale(1.05);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 16px;
+      border-top-left-radius: 4px;
+      border: 1px solid #eee;
+    }
+
+    .typing-dots span {
+      width: 8px;
+      height: 8px;
+      background: #E31837;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+    .chat-input-area {
+      padding: 16px;
+      border-top: 1px solid #eee;
+      background: white;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 10px 16px;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 50px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+
+    .chat-input:focus { box-shadow: 0 0 0 2px rgba(227,24,55,0.2); }
+
+    .chat-send-btn {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #E31837, #CC0000);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(227,24,55,0.3);
+    }
+
+    .chat-send-btn:hover:not(:disabled) { transform: scale(1.05); }
+    .chat-send-btn:disabled { opacity: 0.5; cursor: default; }
+
+    .chat-footer-link { text-align: center; margin-top: 8px; }
+
+    .chat-footer-link button {
+      background: none;
+      border: none;
+      font-size: 10px;
+      color: #999;
+      cursor: pointer;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+
+    .chat-footer-link button:hover { color: #E31837; }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.active .modal { transform: scale(1); }
+
+    .modal-header {
+      background: linear-gradient(135deg, #E31837 0%, #CC0000 100%);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-header-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .modal-header h2 {
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.25); }
+
+    .modal-body { height: 600px; }
+    .modal-body iframe { width: 100%; height: 100%; border: none; }
+
+    /* ========== NO RESULTS ========== */
+    .no-results {
+      text-align: center;
+      padding: 64px 24px;
+    }
+
+    .no-results .icon { font-size: 64px; margin-bottom: 16px; }
+    .no-results p { color: #999; font-size: 18px; }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes ping {
+      75%, 100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in { animation: fadeInUp 0.4s ease both; }
+
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #E31837; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero { padding: 40px 20px; min-height: 380px; }
+      .request-btn { position: relative; top: auto; right: auto; margin-bottom: 24px; }
+      .filters-row { flex-direction: column; align-items: flex-start; }
+      .chat-window { width: calc(100vw - 32px); right: 16px; bottom: 130px; height: 480px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <div class="hero-container">
+    <div class="hero">
+      <canvas id="bubbles"></canvas>
+      <div class="hero-decorations">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+      </div>
+      
+      <button class="request-btn" onclick="openModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        Request Resource
+      </button>
+
+      <div class="hero-content">
+        <p class="eyebrow">Reyes Coca-Cola Bottling</p>
+        <h1 class="main-title">The HR SearchBar</h1>
+        <p class="tagline">Your refreshing one-stop shop for all things HR</p>
+
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="6.5" cy="6.5" r="5" stroke="#333" stroke-width="1.5"/>
+            <path d="M10.5 10.5L14 14" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="">
+          <span class="typewriter-text" id="typewriterText"></span>
+          <button class="search-btn" onclick="document.getElementById('searchInput').focus()">Search</button>
+        </div>
+
+        <div class="logo-row">
+          <div class="dot"></div>
+          <span>Powered by Reyes Coca-Cola Bottling HR Team</span>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTERS SECTION -->
+  <div class="filters-section">
+    <div class="filters-row">
+      <div class="filter-chips" id="filterChips"></div>
+      <p class="results-count"><strong id="resultsCount">28</strong> resources found</p>
+    </div>
+  </div>
+
+  <!-- CARDS GRID -->
+  <div class="cards-section">
+    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="no-results" id="noResults" style="display: none;">
+      <div class="icon">🔍</div>
+      <p>No resources found. Try a different search term.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <div class="footer-logo">R</div>
+      <span>Reyes Coca-Cola Bottling</span>
+    </div>
+    <p>© 2025 Reyes Coca-Cola Bottling. All rights reserved. • Human Resources</p>
+  </footer>
+
+  <!-- AI BOT -->
+  <div class="ai-bot-container" id="aiBotContainer">
+    <div class="ai-bot-tooltip">
+      <div class="ai-bot-tooltip-header">
+        <div class="ai-bot-tooltip-avatar" id="tooltipAvatar"></div>
+        <div>
+          <div class="ai-bot-tooltip-title">Hey, I'm Fizz!</div>
+          <div class="ai-bot-tooltip-subtitle">Your HR Buddy 🫧</div>
+        </div>
+      </div>
+      <div class="ai-bot-tooltip-content">
+        <p>Need help finding a resource? Have an HR question? Let's chat! 💬</p>
+        <div class="ai-bot-tooltip-cta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Click to start chatting
+        </div>
+      </div>
+      <div class="ai-bot-tooltip-arrow"></div>
+    </div>
+    
+    <button class="ai-bot-button" onclick="toggleChat()">
+      <div class="ai-bot-ping" id="botPing"></div>
+      <div class="ai-bot-ring" id="botRing"></div>
+      <div class="ai-bot-character" id="botCharacter"></div>
+    </button>
+    <div class="ai-bot-label" id="botLabel">Ask Fizz!</div>
+  </div>
+
+  <!-- CHAT WINDOW -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-avatar">
+          <div id="chatAvatar"></div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="chat-header-info">
+          <h3>Fizz <span style="color: #facc15;">✨</span></h3>
+          <p>Your HR Buddy • Online</p>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button class="chat-header-btn" onclick="openCopilot()" title="Open full Copilot">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </button>
+        <button class="chat-header-btn" onclick="toggleChat()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-area">
+      <form class="chat-input-row" onsubmit="sendMessage(event)">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
+        <button type="submit" class="chat-send-btn" id="sendBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </form>
+      <div class="chat-footer-link">
+        <button onclick="openCopilot()">Need more help? Open full HR Copilot →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REQUEST MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-header-icon">➕</div>
+          <div>
+            <h2>Request a New Resource</h2>
+            <p>Submit your request via the form below</p>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Cxkb__jtnUWCNwVFSXrfetn1EJbfFG9IlaNb-VnxdmRUQUFKQjlKNTZEOUJOVElEQzQ0MDdET0ZKMC4u&embed=true
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ========== DATA ==========
+  const hrResources = [
+    { id: 1, title: "I9 and ICE Inspections", topic: "Policies & Compliance", desc: "Guidance on I9 documentation and ICE inspection procedures.", url: null, status: "pending" },
+    { id: 2, title: "Leaves / FMLA Training for HR", topic: "Policies & Compliance", desc: "Comprehensive training resource covering leave policies and FMLA requirements.", url: "https://heyzine.com/flip-book/RCCBLeavesToolkit", status: "live" },
+    { id: 3, title: "Kronos Attendance Tracking (KAT)", topic: "Policies & Compliance", desc: "Attendance tracking guide for union employees. Deploying June/July 2026.", url: null, status: "pending" },
+    { id: 4, title: "Reasonable Suspicion", topic: "Policies & Compliance", desc: "Training and reference guide for reasonable suspicion protocols.", url: "https://heyzine.com/flip-book/RCCBReasonableSuspicion", status: "live" },
+    { id: 5, title: "Tax Credit Resources", topic: "Policies & Compliance", desc: "Resources related to available tax credit programs. Currently in development.", url: null, status: "pending" },
+    { id: 6, title: "Performance Management Guide", topic: "Talent Management", desc: "End-to-end guide for managing employee performance and development conversations.", url: "https://heyzine.com/flip-book/RCCBPerformanceGuide", status: "live" },
+    { id: 7, title: "Onboarding Guide", topic: "Onboarding", desc: "Everything a new hire needs for a smooth and successful start at RCCB.", url: "https://heyzine.com/flip-book/baa9b97ca3.html#page/1", status: "live" },
+    { id: 8, title: "YRJ People Leader Page", topic: "Professional Development", desc: "Learning and development hub for people leaders across the Reyes organization.", url: "https://reyesholdings.sharepoint.com/teams/DEMOYRJ/SitePages/LearningTeamHome11.aspx", status: "live" },
+    { id: 9, title: "YRJ Frontline Training", topic: "Professional Development", desc: "Frontline employee training materials and resources.", url: "https://heyzine.com/flip-book/e57d4c81e3.html#page/1", status: "live" },
+    { id: 10, title: "HR Excellence Competency Model", topic: "Professional Development", desc: "Framework defining the core competencies for HR excellence at Reyes.", url: "https://heyzine.com/flip-book/ReyesExcellencemodel.html", status: "live" },
+    { id: 11, title: "Employee Career & Development Guide", topic: "Professional Development", desc: "Career pathing guide helping RCCB employees plan and grow their careers.", url: "https://heyzine.com/flip-book/RCCBEmployeeDevelopmentGuide#page/1", status: "live" },
+    { id: 12, title: "Development Plan Workbook", topic: "Professional Development", desc: "Interactive workbook for building individual development plans.", url: "https://heyzine.com/flip-book/72c6c722b1.html", status: "live" },
+    { id: 13, title: "Career Connect Curriculum Guidebook", topic: "Professional Development", desc: "Curriculum guide for the Career Connect development program.", url: "https://heyzine.com/flip-book/CareerconnectCurriculum#page/1", status: "live" },
+    { id: 14, title: "Mentoring Tool", topic: "Professional Development", desc: "Structured tool for establishing and managing mentoring relationships.", url: "https://heyzine.com/flip-book/RCCBMentoringTool", status: "live" },
+    { id: 15, title: "Accelerate Resources", topic: "Professional Development", desc: "Resources for the Accelerate leadership development program. In development.", url: null, status: "pending" },
+    { id: 16, title: "Merchandiser Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Merchandiser roles at RCCB.", url: "https://heyzine.com/flip-book/MerchandiserCareerRoadmap", status: "live" },
+    { id: 17, title: "Production Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Production roles. Final version coming soon.", url: null, status: "pending" },
+    { id: 18, title: "Transportation Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Transportation roles. Final version coming soon.", url: null, status: "pending" },
+    { id: 19, title: "Warehouse Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Warehouse roles. Final version coming soon.", url: null, status: "pending" },
+    { id: 20, title: "Mandatory Compliance Training", topic: "Professional Development", desc: "Required compliance training materials available in SharePoint documents.", url: "#", status: "live" },
+    { id: 21, title: "Recognition Toolkit", topic: "Engagement & Recognition", desc: "Manager's guide to building a meaningful recognition culture at RCCB.", url: "https://heyzine.com/flip-book/RCCBRecognitionToolkit", status: "live" },
+    { id: 22, title: "Service Awards", topic: "Engagement & Recognition", desc: "Resources and materials for the RCCB employee service awards program.", url: "https://reyesholdings.sharepoint.com/:f:/s/rc-rccb/IgCM8wvj79hORq_3b2vMcO-0AWu-N6psGZkce_sylCGINNo?e=LfDlJA", status: "live" },
+    { id: 23, title: "RCCB Awards (GPTW, Fortune, Brandon Hall)", topic: "Engagement & Recognition", desc: "Showcase of RCCB's award recognitions. Resource currently in development.", url: null, status: "pending" },
+    { id: 24, title: "Internal Interview Guide", topic: "Talent Acquisition", desc: "Step-by-step guide for conducting structured internal interviews.", url: "https://heyzine.com/flip-book/1dea1e4827.html#page/1", status: "live" },
+    { id: 25, title: "Build Your Own Interview Guide", topic: "Talent Acquisition", desc: "Customizable interview guide template for hiring managers.", url: "https://acrobat.adobe.com/id/urn:aaid:sc:US:80f61a10-90c6-426f-8fa9-e069289d1e2f", status: "live" },
+    { id: 26, title: "Military Hiring Toolkit", topic: "Talent Acquisition", desc: "Resources and best practices for recruiting military talent.", url: "https://heyzine.com/flip-book/RCCBMilitary", status: "live" },
+    { id: 27, title: "Campus Recruitment Toolkit", topic: "Talent Acquisition", desc: "Toolkit for campus recruiting events, outreach, and hiring programs.", url: "https://heyzine.com/flip-book/RCCBcampustoolkit", status: "live" },
+    { id: 28, title: "Career Fair Checklist", topic: "Talent Acquisition", desc: "Complete checklist and prep guide for career fair events.", url: "https://reyesholdings.sharepoint.com/teams/RecruitmentResources/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources%2FCareer%20Fair%20Checklist%20%28Rev%202025%29%2Epdf&parent=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources", status: "live" },
+  ];
+
+  const filterChipsData = [
+    { filter: 'All', label: 'All', icon: '✨' },
+    { filter: 'Policies & Compliance', label: 'Policies', icon: '📋' },
+    { filter: 'Talent Management', label: 'Talent Mgmt', icon: '📊' },
+    { filter: 'Onboarding', label: 'Onboarding', icon: '👋' },
+    { filter: 'Professional Development', label: 'Development', icon: '📈' },
+    { filter: 'Engagement & Recognition', label: 'Recognition', icon: '🏆' },
+    { filter: 'Talent Acquisition', label: 'Acquisition', icon: '🔍' },
+  ];
+
+  const tagStyles = {
+    "Policies & Compliance": { bg: "#DBEAFE", color: "#1E40AF", accent: "#2563EB" },
+    "Talent Management": { bg: "#D1FAE5", color: "#065F46", accent: "#059669" },
+    "Onboarding": { bg: "#FEE2E2", color: "#991B1B", accent: "#DC2626" },
+    "Professional Development": { bg: "#EDE9FE", color: "#5B21B6", accent: "#7C3AED" },
+    "Engagement & Recognition": { bg: "#FEF3C7", color: "#92400E", accent: "#D97706" },
+    "Talent Acquisition": { bg: "#FCE7F3", color: "#9D174D", accent: "#DB2777" },
+  };
+
+  const topicIcons = {
+    "Policies & Compliance": "📋",
+    "Talent Management": "📊",
+    "Onboarding": "👋",
+    "Professional Development": "📈",
+    "Engagement & Recognition": "🏆",
+    "Talent Acquisition": "🔍",
+  };
+
+  // ========== STATE ==========
+  let currentFilter = 'All';
+  let searchQuery = '';
+  let chatMessages = [
+    {
+      id: 1,
+      text: "Hey there! 👋 I'm Fizz, your HR buddy! I'm bubbling with excitement to help you today. What can I do for you? 🥤",
+      isBot: true,
+      quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!']
+    }
+  ];
+  let isTyping = false;
+  let isChatOpen = false;
+
+  // ========== FIZZ CHARACTER SVG ==========
+  function getFizzSVG(size = 80) {
+    return `
+      <svg width="${size}" height="${size}" viewBox="0 0 60 120" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
+        <defs>
+          <linearGradient id="bottleBody" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1a0505"/>
+            <stop offset="15%" stop-color="#3d1111"/>
+            <stop offset="50%" stop-color="#4a1515"/>
+            <stop offset="85%" stop-color="#3d1111"/>
+            <stop offset="100%" stop-color="#1a0505"/>
+          </linearGradient>
+          <linearGradient id="glassShine" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+            <stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <linearGradient id="capColor" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF4444"/>
+            <stop offset="50%" stop-color="#E31837"/>
+            <stop offset="100%" stop-color="#CC0000"/>
+          </linearGradient>
+        </defs>
+        <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#bottleBody)"/>
+        <path d="M17 40 C14 48 13 60 12 72 C11 84 12 96 14 105" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="30" cy="70" rx="6" ry="28" fill="url(#glassShine)" opacity="0.3"/>
+        <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#capColor)"/>
+        <rect x="24" y="11" width="12" height="2" rx="1" fill="rgba(255,255,255,0.4)"/>
+        <rect x="15" y="58" width="30" height="18" rx="1.5" fill="white" opacity="0.97"/>
+        <rect x="16" y="59" width="28" height="16" rx="1" fill="#E31837"/>
+        <path d="M18 67 Q24 63 30 67 Q36 71 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
+        <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
+        <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
+        <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
+        <circle cx="26" cy="40.5" r="0.8" fill="white"/>
+        <circle cx="36" cy="40.5" r="0.8" fill="white"/>
+        <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="20" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
+        <circle cx="40" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
+        <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="13" cy="40" rx="4" ry="6" fill="#444"/>
+        <ellipse cx="13" cy="40" rx="2.8" ry="4.5" fill="#E31837"/>
+        <ellipse cx="47" cy="40" rx="4" ry="6" fill="#444"/>
+        <ellipse cx="47" cy="40" rx="2.8" ry="4.5" fill="#E31837"/>
+        <path d="M13 46 Q13 54 18 56 L24 56" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="26" cy="56" rx="3" ry="2.5" fill="#444"/>
+        <circle cx="22" cy="90" r="1.5" fill="rgba(255,255,255,0.4)">
+          <animate attributeName="cy" values="95;82;95" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="35" cy="98" r="1" fill="rgba(255,255,255,0.35)">
+          <animate attributeName="cy" values="100;85;100" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.35;0.1;0.35" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="40" cy="92" r="0.8" fill="rgba(255,255,255,0.3)">
+          <animate attributeName="cy" values="95;80;95" dur="2.2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0.08;0.3" dur="2.2s" repeatCount="indefinite"/>
+        </circle>
+        <g transform="translate(42, 12)">
+          <circle cx="6" cy="6" r="7" fill="#10B981"/>
+          <path d="M3 4.5 L9 4.5 L9 7.5 L7 7.5 L5.5 9 L5.5 7.5 L3 7.5 Z" fill="white"/>
+        </g>
+      </svg>
+    `;
+  }
+
+  function getMiniFizzSVG(size = 32) {
+    return `
+      <svg width="${size}" height="${size}" viewBox="0 0 60 120">
+        <defs>
+          <linearGradient id="miniBody" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1a0505"/>
+            <stop offset="50%" stop-color="#4a1515"/>
+            <stop offset="100%" stop-color="#1a0505"/>
+          </linearGradient>
+          <linearGradient id="miniCap" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF4444"/>
+            <stop offset="100%" stop-color="#CC0000"/>
+          </linearGradient>
+        </defs>
+        <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#miniBody)"/>
+        <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#miniCap)"/>
+        <rect x="16" y="59" width="28" height="16" rx="1" fill="#E31837"/>
+        <path d="M18 67 Q30 61 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
+        <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
+        <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
+        <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
+        <circle cx="26" cy="40.5" r="0.8" fill="white"/>
+        <circle cx="36" cy="40.5" r="0.8" fill="white"/>
+        <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none"/>
+        <ellipse cx="13" cy="40" rx="3" ry="5" fill="#E31837"/>
+        <ellipse cx="47" cy="40" rx="3" ry="5" fill="#E31837"/>
+      </svg>
+    `;
+  }
+
+  // ========== INIT ==========
+  document.addEventListener('DOMContentLoaded', function() {
+    initBubbles();
+    initTypewriter();
+    renderFilterChips();
+    renderCards();
+    initFizzCharacters();
+    initSearch();
+    initChatInput();
+    renderChatMessages();
+  });
+
+  function initFizzCharacters() {
+    document.getElementById('botCharacter').innerHTML = getFizzSVG(80);
+    document.getElementById('tooltipAvatar').innerHTML = getMiniFizzSVG(42);
+    document.getElementById('chatAvatar').innerHTML = getMiniFizzSVG(48);
+  }
+
+  // ========== BUBBLES ==========
+  function initBubbles() {
+    const canvas = document.getElementById('bubbles');
+    const hero = canvas.parentElement;
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const bubbles = Array.from({length: 42}, () => ({
+      x: Math.random() * canvas.width,
+      y: canvas.height + Math.random() * canvas.height,
+      r: 4 + Math.random() * 22,
+      speed: 0.3 + Math.random() * 1.2,
+      opacity: 0.05 + Math.random() * 0.18,
+      wobble: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.008 + Math.random() * 0.025
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      bubbles.forEach(b => {
+        b.y -= b.speed;
+        b.wobble += b.wobbleSpeed;
+        const xOff = Math.sin(b.wobble) * 2;
+        if (b.y + b.r < 0) {
+          b.y = canvas.height + b.r;
+          b.x = Math.random() * canvas.width;
+        }
+        ctx.beginPath();
+        ctx.arc(b.x + xOff, b.y, b.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255,255,255,${b.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(b.x + xOff - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.22, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${b.opacity * 0.9})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  // ========== TYPEWRITER ==========
+  function initTypewriter() {
+    const phrases = ['HR resources', 'benefits info', 'pay stubs', 'vacation policy', 'onboarding docs', 'contact HR', 'career development', 'recognition toolkit'];
+    const input = document.getElementById('searchInput');
+    const typewriter = document.getElementById('typewriterText');
+    let pi = 0, ci = 0, deleting = false;
+
+    function type() {
+      if (document.activeElement === input || input.value) {
+        typewriter.innerHTML = '';
+        return;
+      }
+      const phrase = phrases[pi];
+      if (!deleting) {
+        ci++;
+        typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
+        if (ci === phrase.length) {
+          deleting = true;
+          setTimeout(type, 2000);
+          return;
+        }
+        setTimeout(type, 90);
+      } else {
+        ci--;
+        typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
+        if (ci === 0) {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(type, 500);
+          return;
+        }
+        setTimeout(type, 50);
+      }
+    }
+    setTimeout(type, 1000);
+
+    input.addEventListener('focus', () => typewriter.innerHTML = '');
+    input.addEventListener('blur', () => {
+      if (!input.value) setTimeout(type, 500);
+    });
+  }
+
+  // ========== SEARCH ==========
+  function initSearch() {
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderCards();
+    });
+  }
+
+  // ========== FILTER CHIPS ==========
+  function renderFilterChips() {
+    const container = document.getElementById('filterChips');
+    container.innerHTML = filterChipsData.map(chip => `
+      <button class="filter-chip ${currentFilter === chip.filter ? 'active' : ''}" data-filter="${chip.filter}">
+        <span class="icon">${chip.icon}</span>
+        ${chip.label}
+      </button>
+    `).join('');
+
+    container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-chip');
+      if (btn) {
+        currentFilter = btn.dataset.filter;
+        renderFilterChips();
+        renderCards();
+      }
+    });
+  }
+
+  // ========== CARDS ==========
+  function renderCards() {
+    const grid = document.getElementById('cardsGrid');
+    const noResults = document.getElementById('noResults');
+    
+    let filtered = hrResources;
+    if (currentFilter !== 'All') {
+      filtered = filtered.filter(r => r.topic === currentFilter);
+    }
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(r => 
+        r.title.toLowerCase().includes(q) || 
+        r.desc.toLowerCase().includes(q) ||
+        r.topic.toLowerCase().includes(q)
+      );
+    }
+
+    document.getElementById('resultsCount').textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '';
+      noResults.style.display = 'block';
+      return;
+    }
+
+    noResults.style.display = 'none';
+    grid.innerHTML = filtered.map((resource, index) => {
+      const style = tagStyles[resource.topic] || { bg: '#eee', color: '#333', accent: '#666' };
+      const icon = topicIcons[resource.topic] || '📄';
+      const isLive = resource.status === 'live';
+      
+      return `
+        <div class="flip-wrap fade-in ${!isLive ? 'coming-soon' : ''}" style="animation-delay: ${index * 0.05}s" data-id="${resource.id}">
+          <div class="flip-inner">
+            <div class="flip-front" onclick="flipCard(${resource.id})">
+              <div class="color-bar" style="background-color: ${style.accent}"></div>
+              <div class="front-top">
+                <div class="book-icon-wrap" style="background: ${style.bg}">${icon}</div>
+                <span class="front-tag" style="background: ${style.bg}; color: ${style.color}">${resource.topic}</span>
+              </div>
+              <div class="front-title">${resource.title}</div>
+              <div class="front-desc">${resource.desc}</div>
+              ${isLive ? 
+                `<div class="flip-hint"><span class="arrow">↩</span> Click to flip</div>` :
+                `<div class="coming-soon-badge"><span class="cs-dot"></span>Coming Soon</div>`
+              }
+            </div>
+            <div class="flip-back" style="background-color: ${isLive ? style.accent : '#7a5200'}">
+              <div class="back-label">${isLive ? 'HR Resource' : 'In Development'}</div>
+              <div class="back-title">${resource.title}</div>
+              <div class="back-desc">${resource.desc} ${isLive ? 'Click "Open" to launch the full resource.' : 'This resource is currently being developed and will be available soon.'}</div>
+              <div class="back-actions">
+                ${isLive ? 
+                  `${resource.url || Open resource →</a>` :
+                  `<button class="btn-open amber-btn" disabled>Coming soon</button>`
+                }
+                <button class="btn-back" onclick="event.stopPropagation(); unflipCard(${resource.id})">↩ Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function flipCard(id) {
+    const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
+    if (card) card.classList.add('flipped');
+  }
+
+  function unflipCard(id) {
+    const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
+    if (card) card.classList.remove('flipped');
+  }
+
+  // ========== MODAL ==========
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('active');
+  }
+
+  function closeModal(event) {
+    if (!event || event.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ========== CHAT ==========
+  function toggleChat() {
+    isChatOpen = !isChatOpen;
+    const chatWindow = document.getElementById('chatWindow');
+    const container = document.getElementById('aiBotContainer');
+    const ping = document.getElementById('botPing');
+    const ring = document.getElementById('botRing');
+    const label = document.getElementById('botLabel');
+
+    if (isChatOpen) {
+      chatWindow.classList.add('open');
+      container.classList.add('chat-open');
+      ping.style.display = 'none';
+      ring.style.display = 'none';
+      label.textContent = '💬 Chatting!';
+      label.style.color = '#E31837';
+      document.getElementById('chatInput').focus();
+    } else {
+      chatWindow.classList.remove('open');
+      container.classList.remove('chat-open');
+      ping.style.display = 'block';
+      ring.style.display = 'block';
+      label.textContent = 'Ask Fizz!';
+      label.style.color = '#666';
+    }
+  }
+
+  function openCopilot() {
+    window.open('https://m365.cloud.microsoft/chat/?titleId=T_0ec4de2d-d8ee-6d64-fdb5-689d4cb47bfb&source=embedded-builder', '_blank');
+  }
+
+  const botResponses = {
+    'hi': { response: "Hey there! 👋 I'm Fizz, your HR buddy! I'm here to help you find resources, answer questions, or just chat. What can I help you with today?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!'] },
+    'hello': { response: "Hello! 🥤 Welcome to the HR SearchBar! I'm Fizz, and I'm bubbling with excitement to help you! What brings you here today?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!'] },
+    'hey': { response: "Hey hey! 🎉 Great to see you! I'm Fizz, your friendly HR assistant. How can I make your day a little more refreshing?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR'] },
+    'just saying hi!': { response: "Aww, that's so nice! 😊 It's always great to have a friendly chat. I'm here whenever you need me - whether it's finding HR docs, answering questions, or just vibing. Stay refreshing! 🥤✨", quickReplies: ['Tell me a joke', 'What can you help with?', 'Bye!'] },
+    'find a resource': { response: "Perfect! 📚 I can help you find all sorts of HR goodies! What kind of resource are you looking for?", quickReplies: ['Onboarding', 'Benefits', 'Career Development', 'Policies'] },
+    'benefits info': { response: "Great question! 💪 For benefits, you'll want to check out the **Employee Center** on SharePoint, or our **Healthy Reyes** portal. What specifically do you want to know about?", quickReplies: ['Health insurance', 'PTO/Vacation', 'Talk to HR team'] },
+    'career development': { response: "Love the growth mindset! 📈 We have tons of career resources: **Career Roadmaps**, **Development Plan Workbook**, **Mentoring Tools**, and more! What area interests you?", quickReplies: ['Career Roadmaps', 'Mentoring', 'Training programs'] },
+    'tell me a joke': { response: "Okay okay, here's one! 😄\n\nWhy did the HR manager bring a ladder to work?\n\n...Because they wanted to reach new *heights* in employee engagement! 🪜😂\n\nI know, I know... I'll stick to HR stuff! 😅", quickReplies: ['Another joke!', 'Back to business', 'That was terrible 😂'] },
+    'another joke!': { response: "Alright, one more! 🤣\n\nWhat's an HR professional's favorite type of music?\n\n...*Employee-ectric* beats! ⚡🎵\n\n...Okay that one was worse. I promise I'm better at finding resources! 😬", quickReplies: ['Okay help me find something', 'One more!', 'You\'re funny 😂'] },
+    'that was terrible 😂': { response: "Hey, I tried! 😂 Comedy isn't my *core competency* but HR definitely is! Let me redeem myself - what can I actually help you with?", quickReplies: ['Find a resource', 'Benefits info', 'Career Development'] },
+    'bye!': { response: "Take care! 👋🥤 Remember, I'm always here if you need HR help. Stay refreshing and have an amazing day! ✨", quickReplies: ['Actually, one more thing', 'Bye Fizz!'] },
+    'bye fizz!': { response: "Bye bye! 🎉 Come back anytime! *fizzes away happily* 🫧🫧🫧", quickReplies: ['Start over'] },
+    'start over': { response: "Hey there! 👋 I'm Fizz, your HR buddy! Ready to help you navigate all things HR at RCCB. What can I do for you?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!'] },
+    'default': { response: "Hmm, I'm not quite sure about that one! 🤔 But I'm always learning. For more complex questions, try our full HR Copilot assistant, or let me help you find a resource!", quickReplies: ['Open full chat', 'Find a resource', 'Talk to HR'] }
+  };
+
+  function getBotResponse(msg) {
+    const normalized = msg.toLowerCase().trim();
+    if (botResponses[normalized]) return botResponses[normalized];
+    for (const key of Object.keys(botResponses)) {
+      if (normalized.includes(key)) return botResponses[key];
+    }
+    if (normalized.match(/^(hi|hello|hey|howdy|greetings|sup|yo)/)) return botResponses['hi'];
+    if (normalized.match(/(bye|goodbye|see you|later|cya)/)) return botResponses['bye!'];
+    if (normalized.match(/(thank|thanks|thx)/)) return { response: "You're so welcome! 😊 That's what I'm here for. Anything else I can help with?", quickReplies: ['Find a resource', 'Nope, all good!', 'Bye!'] };
+    return botResponses['default'];
+  }
+
+  function initChatInput() {
+    const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    input.addEventListener('input', () => {
+      sendBtn.disabled = !input.value.trim();
+    });
+    sendBtn.disabled = true;
+  }
+
+  function sendMessage(e) {
+    e.preventDefault();
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    if (text.toLowerCase().includes('open hr copilot') || text.toLowerCase().includes('open full chat')) {
+      openCopilot();
+    }
+
+    chatMessages.push({ id: Date.now(), text, isBot: false });
+    input.value = '';
+    document.getElementById('sendBtn').disabled = true;
+    renderChatMessages();
+
+    isTyping = true;
+    renderChatMessages();
+
+    setTimeout(() => {
+      const { response, quickReplies } = getBotResponse(text);
+      chatMessages.push({ id: Date.now() + 1, text: response, isBot: true, quickReplies });
+      isTyping = false;
+      renderChatMessages();
+    }, 800 + Math.random() * 700);
+  }
+
+  function handleQuickReply(reply) {
+    document.getElementById('chatInput').value = reply;
+    sendMessage(new Event('submit'));
+  }
+
+  function renderChatMessages() {
+    const container = document.getElementById('chatMessages');
+    let html = chatMessages.map(msg => `
+      <div class="chat-message">
+        <div class="chat-message-row ${msg.isBot ? '' : 'user'}">
+          ${msg.isBot ? `<div class="chat-message-avatar">${getMiniFizzSVG(32)}</div>` : ''}
+          <div class="chat-bubble ${msg.isBot ? 'bot' : 'user'}">${msg.text}</div>
+        </div>
+        ${msg.isBot && msg.quickReplies && msg.quickReplies.length > 0 ? `
+          <div class="quick-replies">
+            ${msg.quickReplies.map(r => `<button class="quick-reply-btn" onclick="handleQuickReply('${r.replace(/'/g, "\\'")}')">${r}</button>`).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `).join('');
+
+    if (isTyping) {
+      html += `
+        <div class="chat-message">
+          <div class="typing-indicator">
+            <div class="chat-message-avatar">${getMiniFizzSVG(32)}</div>
+            <div class="typing-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = html;
+    container.scrollTop = container.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
