@@ -2071,476 +2071,235 @@ if (searchQuery) {
     if (e.key === 'Escape') closeModal();
   });
 
-  // ========== CHAT ==========
-  function toggleChat() {
-    isChatOpen = !isChatOpen;
-    const chatWindow = document.getElementById('chatWindow');
-    const container = document.getElementById('aiBotContainer');
-    const ping = document.getElementById('botPing');
-    const ring = document.getElementById('botRing');
-    const label = document.getElementById('botLabel');
+  // ========== CHAT (CLEAN + SMART, SINGLE VERSION) ==========
 
-    if (isChatOpen) {
-      chatWindow.classList.add('open');
-      container.classList.add('chat-open');
-      ping.style.display = 'none';
-      ring.style.display = 'none';
-      label.textContent = 'Chatting';
-      label.style.color = '#F40009';
-      document.getElementById('chatInput').focus();
-    } else {
-      chatWindow.classList.remove('open');
-      container.classList.remove('chat-open');
-      ping.style.display = 'block';
-      ring.style.display = 'block';
-      label.textContent = 'Ask Fizz';
-      label.style.color = '';
-    }
+// Uses your existing hrResources array (the one powering the cards grid)
+const keywordMap = [
+  { keywords: ['fmla','leave','maternity','paternity','parental'], ids: [2], intro: "Here’s the FMLA & Leaves resource:" },
+  { keywords: ['i9','i-9','ice','immigration'], ids: [1], intro: "I9 & ICE Inspection guidance (in development):" },
+  { keywords: ['kronos','kat','attendance'], ids: [3], intro: "Kronos Attendance Tracking (KAT):" },
+  { keywords: ['performance','review'], ids: [6], intro: "Performance Management Guide:" },
+  { keywords: ['onboarding','new hire','orientation'], ids: [7], intro: "Welcome aboard! Here’s our Onboarding Guide:" },
+  { keywords: ['career','growth','development','idp'], ids: [11,12,14], intro: "Love the growth mindset—try these:" },
+  { keywords: ['mentor','mentoring'], ids: [14], intro: "Here’s the Mentoring Tool:" },
+  { keywords: ['recognition','kudos','service award','service awards'], ids: [21,22,23], intro: "Recognition & Awards resources:" },
+  { keywords: ['interview','interviewing'], ids: [24,25], intro: "Interview resources:" },
+  { keywords: ['military','veteran'], ids: [26], intro: "Military Hiring Toolkit:" },
+  { keywords: ['career fair','job fair'], ids: [28], intro: "Career Fair Checklist:" },
+  { keywords: ['recruit','recruiting','hiring','talent'], ids: [24,26,27,28], intro: "Talent Acquisition resources:" },
+  { keywords: ['benefit','benefits','401k','pto','vacation','health insurance','healthy reyes'], ids: [], intro: "Benefits live in the Employee Center + Healthy Reyes. Open HR Copilot for specifics:" }
+];
+
+const botResponses = {
+  'hi': { response: "Hey there! 👋 I’m Fizz, your HR buddy. What can I help you find?", quickReplies: ['Find a resource','Benefits info','Talk to HR','Just saying hi!'] },
+  'hello': { response: "Hello! 🥤 What can I help you with today?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
+  'hey': { response: "Hey hey! 🎉 What can I do for you?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
+  'just saying hi!': { response: "Hi friend! 😊 I’m here whenever you need HR help.", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
+  'find a resource': { response: "Sure! What are you looking for?", quickReplies: ['Onboarding','Policies','Recruiting','Recognition','Development'] },
+  'benefits info': { response: "Benefits live in the Employee Center + Healthy Reyes portal. Want a deeper answer?", quickReplies: ['Open full chat','Find a resource','Talk to HR'], openCopilot: true },
+  'talk to hr': { response: "If you need a person—email HR support or open HR Copilot for fast answers.", quickReplies: ['Open full chat','Find a resource'], openCopilot: true }
+};
+
+function toggleChat() {
+  isChatOpen = !isChatOpen;
+
+  const chatWindow = document.getElementById('chatWindow');
+  const container = document.getElementById('aiBotContainer');
+  const ping = document.getElementById('botPing');
+  const ring = document.getElementById('botRing');
+  const label = document.getElementById('botLabel');
+
+  if (isChatOpen) {
+    chatWindow.classList.add('open');
+    container.classList.add('chat-open');
+    ping.style.display = 'none';
+    ring.style.display = 'none';
+    label.textContent = 'Chatting';
+    label.style.color = '#F40009';
+    document.getElementById('chatInput').focus();
+  } else {
+    chatWindow.classList.remove('open');
+    container.classList.remove('chat-open');
+    ping.style.display = 'block';
+    ring.style.display = 'block';
+    label.textContent = 'Ask Fizz';
+    label.style.color = '';
+  }
+}
+
+function openCopilot() {
+  window.open('https://m365.cloud.microsoft/chat/?titleId=T_0ec4de2d-d8ee-6d64-fdb5-689d4cb47bfb&source=embedded-builder', '_blank', 'noopener');
+}
+
+function openResource(url) {
+  if (url && url !== '#') window.open(url, '_blank', 'noopener');
+  else openCopilot();
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (m) => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[m]));
+}
+
+function initChatInput() {
+  const input = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendBtn');
+
+  input.addEventListener('input', () => {
+    sendBtn.disabled = !input.value.trim();
+  });
+  sendBtn.disabled = true;
+}
+
+function getBotResponse(msg) {
+  const normalized = msg.toLowerCase().trim();
+
+  // direct match
+  if (botResponses[normalized]) return botResponses[normalized];
+
+  // partial match
+  for (const key of Object.keys(botResponses)) {
+    if (normalized.includes(key)) return botResponses[key];
   }
 
-  function openCopilot() {
-    window.open('https://m365.cloud.microsoft/chat/?titleId=T_0ec4de2d-d8ee-6d64-fdb5-689d4cb47bfb&source=embedded-builder', '_blank');
-  }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Fizz - HR Assistant</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
-    min-height: 100vh;
-    padding: 20px;
-  }
-  .chat-launcher {
-    position: fixed; bottom: 24px; right: 24px;
-    width: 64px; height: 64px; border-radius: 50%;
-    background: linear-gradient(135deg, #dc2626, #ea580c);
-    border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(220,38,38,0.4);
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 28px; transition: transform 0.2s;
-  }
-  .chat-launcher:hover { transform: scale(1.1); }
-  .chat-window {
-    position: fixed; bottom: 100px; right: 24px;
-    width: 400px; max-width: calc(100vw - 48px);
-    height: 600px; max-height: calc(100vh - 140px);
-    background: white; border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    display: none; flex-direction: column; overflow: hidden;
-  }
-  .chat-window.open { display: flex; }
-  .chat-header {
-    background: linear-gradient(135deg, #dc2626, #ea580c);
-    color: white; padding: 16px; display: flex;
-    align-items: center; gap: 12px;
-  }
-  .fizz-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: white; display: flex; align-items: center;
-    justify-content: center; font-size: 22px;
-  }
-  .header-info { flex: 1; }
-  .header-info h3 { font-size: 16px; font-weight: 600; }
-  .header-info p { font-size: 12px; opacity: 0.9; }
-  .header-btn {
-    background: rgba(255,255,255,0.2); border: none; color: white;
-    padding: 6px 10px; border-radius: 8px; cursor: pointer;
-    font-size: 12px; display: flex; align-items: center; gap: 4px;
-  }
-  .header-btn:hover { background: rgba(255,255,255,0.3); }
-  .close-btn {
-    background: transparent; border: none; color: white;
-    cursor: pointer; font-size: 20px; padding: 4px 8px;
-  }
-  .messages {
-    flex: 1; overflow-y: auto; padding: 16px;
-    background: #fafafa; display: flex; flex-direction: column; gap: 12px;
-  }
-  .message { display: flex; gap: 8px; max-width: 85%; }
-  .message.user { align-self: flex-end; flex-direction: row-reverse; }
-  .message-bubble {
-    padding: 10px 14px; border-radius: 16px;
-    font-size: 14px; line-height: 1.4; white-space: pre-wrap;
-  }
-  .message.bot .message-bubble {
-    background: white; color: #1f2937;
-    border: 1px solid #e5e7eb; border-bottom-left-radius: 4px;
-  }
-  .message.user .message-bubble {
-    background: linear-gradient(135deg, #dc2626, #ea580c);
-    color: white; border-bottom-right-radius: 4px;
-  }
-  .message-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: linear-gradient(135deg, #dc2626, #ea580c);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; flex-shrink: 0;
-  }
-  .quick-replies {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    margin-top: 8px; padding-left: 36px;
-  }
-  .quick-reply {
-    background: white; border: 1px solid #dc2626; color: #dc2626;
-    padding: 6px 12px; border-radius: 16px; font-size: 12px;
-    cursor: pointer; transition: all 0.15s;
-  }
-  .quick-reply:hover { background: #dc2626; color: white; }
-  .resource-cards { padding-left: 36px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
-  .resource-card {
-    background: white; border: 1px solid #e5e7eb; border-radius: 10px;
-    padding: 10px; cursor: pointer; display: flex; gap: 10px;
-    align-items: center; transition: all 0.15s; text-decoration: none; color: inherit;
-  }
-  .resource-card:hover { border-color: #dc2626; box-shadow: 0 2px 8px rgba(220,38,38,0.15); }
-  .resource-icon {
-    width: 32px; height: 32px; border-radius: 8px;
-    background: linear-gradient(135deg, #fef2f2, #fff7ed);
-    display: flex; align-items: center; justify-content: center; font-size: 16px;
-  }
-  .resource-info { flex: 1; min-width: 0; }
-  .resource-title { font-size: 13px; font-weight: 600; color: #1f2937; }
-  .resource-topic { font-size: 11px; color: #6b7280; margin-top: 2px; }
-  .resource-badge {
-    font-size: 10px; padding: 2px 6px; border-radius: 4px;
-    background: #fef3c7; color: #92400e; margin-left: 4px;
-  }
-  .copilot-cta {
-    margin: 8px 0 0 36px; padding: 12px;
-    background: linear-gradient(135deg, #dc2626, #ea580c);
-    border-radius: 12px; color: white; cursor: pointer;
-    display: flex; align-items: center; gap: 10px; transition: transform 0.15s;
-  }
-  .copilot-cta:hover { transform: translateY(-2px); }
-  .copilot-cta-text { flex: 1; }
-  .copilot-cta-text strong { font-size: 13px; display: block; }
-  .copilot-cta-text span { font-size: 11px; opacity: 0.9; }
-  .input-area {
-    padding: 12px; background: white; border-top: 1px solid #e5e7eb;
-  }
-  .input-row { display: flex; gap: 8px; }
-  .input-row input {
-    flex: 1; padding: 10px 14px; border: 1px solid #e5e7eb;
-    border-radius: 20px; font-size: 14px; outline: none;
-  }
-  .input-row input:focus { border-color: #dc2626; }
-  .send-btn {
-    width: 40px; height: 40px; border-radius: 50%; border: none;
-    background: linear-gradient(135deg, #dc2626, #ea580c);
-    color: white; cursor: pointer; display: flex;
-    align-items: center; justify-content: center; font-size: 16px;
-  }
-  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .copilot-footer {
-    text-align: center; margin-top: 8px; font-size: 11px; color: #6b7280;
-  }
-  .copilot-footer a { color: #dc2626; font-weight: 600; cursor: pointer; }
-</style>
-</head>
-<body>
+  // greetings/thanks fallback
+  if (normalized.match(/^(hi|hello|hey|howdy|greetings|sup|yo)/)) return botResponses['hi'];
+  if (normalized.match(/(thank|thanks|thx)/)) return { response: "You’re welcome! 😊 Anything else?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] };
 
-<button class="chat-launcher" id="launcher" onclick="toggleChat()">💬</button>
+  // keyword → resource mapping
+  const km = findKeywordMatch(normalized);
+  if (km) {
+    const lines = km.ids.map(id => {
+      const r = hrResources.find(x => x.id === id);
+      return r ? `• ${r.title}` : null;
+    }).filter(Boolean);
 
-<div class="chat-window" id="chatWindow">
-  <div class="chat-header">
-    <div class="fizz-avatar">🥤</div>
-    <div class="header-info">
-      <h3>Fizz</h3>
-      <p>Your HR buddy • Online</p>
-    </div>
-    <button class="header-btn" onclick="openCopilot()">✨ Copilot</button>
-    <button class="close-btn" onclick="toggleChat()">✕</button>
-  </div>
-  <div class="messages" id="messages"></div>
-  <div class="input-area">
-    <div class="input-row">
-      <input type="text" id="userInput" placeholder="Ask Fizz anything..." onkeypress="if(event.key==='Enter') sendMessage()">
-      <button class="send-btn" onclick="sendMessage()">➤</button>
-    </div>
-    <div class="copilot-footer">
-      Need a deeper answer? <a onclick="openCopilot()">Open full HR Copilot →</a>
-    </div>
-  </div>
-</div>
+    const body = lines.length
+      ? `${km.intro}\n\n${lines.join('\n')}\n\nWant me to open one?`
+      : `${km.intro}\n\nWant me to open HR Copilot for the most accurate answer?`;
 
-<script>
-  // ====== CONFIGURE YOUR COPILOT URL HERE ======
-  const COPILOT_URL = 'https://copilot.microsoft.com/';
+    return {
+      response: body,
+      quickReplies: lines.length
+        ? km.ids.slice(0, 4).map(id => {
+            const r = hrResources.find(x => x.id === id);
+            return r ? `Open: ${r.title}` : null;
+          }).filter(Boolean).concat(['Find a resource','Open full chat'])
+        : ['Open full chat','Find a resource','Talk to HR'],
+      resourceIds: km.ids
+    };
+  }
 
-  // ====== HR RESOURCES (edit these to match your real data) ======
-  const hrResources = [
-    { id: 1, title: 'I9 & ICE Inspection Guide', topic: 'Policies', icon: '📋', url: null, status: 'pending' },
-    { id: 2, title: 'FMLA & Leaves Training', topic: 'Policies', icon: '📋', url: '#fmla', status: 'live' },
-    { id: 3, title: 'Kronos Attendance Tracking (KAT)', topic: 'Policies', icon: '📋', url: null, status: 'pending' },
-    { id: 6, title: 'Performance Management Guide', topic: 'Performance', icon: '📈', url: '#perf', status: 'live' },
-    { id: 7, title: 'Onboarding Guide', topic: 'Onboarding', icon: '🚀', url: '#onboard', status: 'live' },
-    { id: 11, title: 'Career Roadmaps Hub', topic: 'Career', icon: '📈', url: '#career', status: 'live' },
-    { id: 12, title: 'Development Plan Workbook', topic: 'Career', icon: '📈', url: '#idp', status: 'live' },
-    { id: 14, title: 'Mentoring Tool', topic: 'Career', icon: '🤝', url: '#mentor', status: 'live' },
-    { id: 21, title: 'Recognition Toolkit', topic: 'Recognition', icon: '🏆', url: '#recog', status: 'live' },
-    { id: 24, title: 'Interview Guide', topic: 'Recruiting', icon: '🎯', url: '#interview', status: 'live' },
-    { id: 26, title: 'Military Hiring Toolkit', topic: 'Recruiting', icon: '🎯', url: '#military', status: 'live' },
-    { id: 28, title: 'Career Fair Checklist', topic: 'Recruiting', icon: '🎯', url: '#fair', status: 'live' },
-  ];
+  // token search
+  const matches = tokenSearch(normalized);
+  if (matches.length) {
+    return {
+      response: `I found ${matches.length} resource${matches.length > 1 ? 's' : ''}:\n\n` + matches.map(r => `• ${r.title}`).join('\n') + `\n\nWant me to open one?`,
+      quickReplies: matches.map(r => `Open: ${r.title}`).concat(['Find a resource','Open full chat']),
+      resourceIds: matches.map(r => r.id)
+    };
+  }
 
-  // ====== KEYWORD → RESOURCE MAPPING ======
-  const keywordMap = [
-    { keywords: ['fmla','leave','maternity','paternity','parental'], ids: [2], intro: "Here's the FMLA & Leaves training:" },
-    { keywords: ['i9','i-9','ice','immigration'], ids: [1], intro: "I9 & ICE Inspection guidance (in development):" },
-    { keywords: ['kronos','kat','attendance'], ids: [3], intro: "Kronos Attendance Tracking — deploys June/July 2026:" },
-    { keywords: ['performance','review'], ids: [6], intro: "For performance management:" },
-    { keywords: ['onboarding','new hire','orientation'], ids: [7], intro: "Welcome aboard! 🚀 Our Onboarding Guide:" },
-    { keywords: ['career','growth','development','grow'], ids: [11,12,14], intro: "Love the growth mindset! 📈 Try these:" },
-    { keywords: ['mentor','mentoring'], ids: [14], intro: "Our Mentoring Tool:" },
-    { keywords: ['idp','workbook','development plan'], ids: [12], intro: "The Development Plan Workbook:" },
-    { keywords: ['recognition','kudos','shout out','shoutout'], ids: [21], intro: "Our Recognition Toolkit:" },
-    { keywords: ['interview','interviewing'], ids: [24], intro: "Interview Guide is right here:" },
-    { keywords: ['military','veteran'], ids: [26], intro: "Military Hiring Toolkit:" },
-    { keywords: ['career fair','job fair'], ids: [28], intro: "The Career Fair Checklist:" },
-    { keywords: ['recruit','recruiting','hiring','talent'], ids: [24,26,28], intro: "Talent Acquisition resources:" },
-    { keywords: ['benefit','benefits','401k','pto','vacation','health insurance','healthy reyes'], ids: [], intro: "Benefits live in the **Employee Center** on SharePoint and the **Healthy Reyes** portal. For specifics, our HR Copilot can answer in real time:" },
-  ];
-
-  // ====== CONVERSATIONAL RESPONSES ======
-  const botResponses = {
-    'hi': { response: "Hey there! 👋 I'm Fizz, your HR buddy! What can I help you with?", quickReplies: ['Find a resource','Benefits info','Talk to HR','Just saying hi!'] },
-    'hello': { response: "Hello! 🥤 Welcome to the RCCB HR SearchBar! What brings you here today?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-    'hey': { response: "Hey hey! 🎉 How can I help?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-    'just saying hi!': { response: "Aww, that's nice! 😊 I'm here whenever you need me.", quickReplies: ['Tell me a joke','What can you help with?','Bye!'] },
-    'what can you help with?': { response: "Tons of things! I can help you find HR resources, point you to benefits info, route you to the HR team, or hand off to our full HR Copilot for deeper questions.", quickReplies: ['Find a resource','Talk to HR','Open full chat'] },
-    'find a resource': { response: "Perfect! 📚 What category interests you?", quickReplies: ['Onboarding','Benefits','Career Development','Policies','Recruiting'] },
-    'onboarding': { response: "Onboarding it is! Here's our top resource:", quickReplies: ['Find another','Talk to HR'], resourceIds: [7] },
-    'benefits': { response: "Benefits live in the **Employee Center** on SharePoint and **Healthy Reyes** portal. Want a deeper answer?", quickReplies: ['Open full chat','Talk to HR'], showCopilotCTA: true },
-    'benefits info': { response: "Benefits live in the **Employee Center** and **Healthy Reyes** portal. Want specifics?", quickReplies: ['Open full chat','Talk to HR'], showCopilotCTA: true },
-    'career development': { response: "Love the growth mindset! 📈 Here are our top picks:", quickReplies: ['Career Roadmaps','Mentoring','Find another'], resourceIds: [11,12,14] },
-    'career roadmaps': { response: "Here's the Career Roadmaps hub:", quickReplies: ['Mentoring','Find another'], resourceIds: [11] },
-    'mentoring': { response: "Our Mentoring Tool helps structure mentoring relationships:", quickReplies: ['Career Roadmaps','Find another'], resourceIds: [14] },
-    'policies': { response: "Here are our Policies & Compliance resources:", quickReplies: ['Find another','Talk to HR'], resourceIds: [1,2,3] },
-    'recruiting': { response: "Talent Acquisition resources coming up:", quickReplies: ['Find another','Talk to HR'], resourceIds: [24,26,28] },
-    'talk to hr': { response: "I'll route you to the right person! 📧 Email **HRsupport@rccb.com** or open our HR Copilot for instant help.", quickReplies: ['Open full chat','Find a resource'], showCopilotCTA: true },
-    'tell me a joke': { response: "Why did the HR manager bring a ladder to work?\n\n...To reach new *heights* in employee engagement! 🪜😂", quickReplies: ['Another joke!','Back to business','That was terrible 😂'] },
-    'another joke!': { response: "What's an HR professional's favorite type of music?\n\n...*Employee-ectric* beats! ⚡🎵", quickReplies: ['One more!','Okay help me find something',"You're funny 😂"] },
-    'one more!': { response: "Why don't HR managers play hide and seek?\n\nBecause good talent is hard to find! 🔍😄", quickReplies: ['Back to business','Find a resource'] },
-    'that was terrible 😂': { response: "Hey, I tried! 😂 Comedy isn't my *core competency*. Let me redeem myself.", quickReplies: ['Find a resource','Benefits info','Career Development'] },
-    "you're funny 😂": { response: "Aww, thanks! 🥹 Now let's get back to making your work life easier.", quickReplies: ['Find a resource','Talk to HR'] },
-    'back to business': { response: "Back to business! 💼 What can I help with?", quickReplies: ['Find a resource','Benefits info','Career Development'] },
-    'okay help me find something': { response: "Perfect! What are you looking for?", quickReplies: ['Onboarding','Benefits','Career Development','Policies'] },
-    'find another': { response: "Sure! What else?", quickReplies: ['Onboarding','Benefits','Career Development','Policies','Recruiting'] },
-    'open full chat': { response: "Opening HR Copilot for you! ✨", quickReplies: ['Back to Fizz'], openCopilot: true },
-    'back to fizz': { response: "I'm back! 👋 What can I help with?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-    'bye!': { response: "Take care! 👋 I'm always here if you need HR help.", quickReplies: ['Actually, one more thing','Bye Fizz!'] },
-    'bye fizz!': { response: "Bye bye! 🎉 Come back anytime!", quickReplies: ['Start over'] },
-    'actually, one more thing': { response: "Oh! What's up?", quickReplies: ['Find a resource','Talk to HR'] },
-    'start over': { response: "Hey there! 👋 Ready to help. What can I do for you?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-    'thanks': { response: "You're so welcome! 💛 Anything else?", quickReplies: ['Find a resource','Bye!'] },
-    'thank you': { response: "You're welcome! 💛 Happy to help.", quickReplies: ['Find a resource','Bye!'] },
+  return {
+    response: "Hmm, I’m not totally sure 🤔 Want to open HR Copilot for a deeper answer, or try a keyword like “onboarding” or “FMLA”?",
+    quickReplies: ['Open full chat','Find a resource','Talk to HR'],
+    openCopilot: false
   };
+}
 
-  // ====== STATE ======
-  let messageId = 0;
+function findKeywordMatch(query) {
+  for (const entry of keywordMap) {
+    if (entry.keywords.some(kw => query.includes(kw))) return entry;
+  }
+  return null;
+}
 
-  function toggleChat() {
-    const win = document.getElementById('chatWindow');
-    win.classList.toggle('open');
-    if (win.classList.contains('open') && !win.dataset.greeted) {
-      win.dataset.greeted = 'true';
-      addBotMessage("Hey there! 👋 I'm Fizz, your HR buddy! Ready to help you navigate all things HR at RCCB. What can I do for you?", ['Find a resource','Benefits info','Talk to HR','Just saying hi!']);
-    }
+function tokenSearch(query) {
+  const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!tokens.length) return [];
+  return hrResources.filter(r => {
+    const hay = (r.title + ' ' + r.desc + ' ' + r.topic).toLowerCase();
+    return tokens.every(t => hay.includes(t));
+  }).slice(0, 4);
+}
+
+function handleQuickReply(reply) {
+  // If user clicked an "Open: ___" reply, open the resource
+  if (reply.startsWith('Open: ')) {
+    const title = reply.replace('Open: ', '').trim();
+    const r = hrResources.find(x => x.title === title);
+    if (r) openResource(r.url);
+    return;
   }
 
-  function openCopilot() {
-    window.open(COPILOT_URL, '_blank');
-  }
+  // Otherwise treat as a message
+  document.getElementById('chatInput').value = reply;
+  sendMessage(new Event('submit'));
+}
 
-  function addUserMessage(text) {
-    const msgs = document.getElementById('messages');
-    const div = document.createElement('div');
-    div.className = 'message user';
-    div.innerHTML = `<div class="message-bubble">${escapeHtml(text)}</div>`;
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
+function sendMessage(e) {
+  if (e) e.preventDefault();
 
-  function addBotMessage(text, quickReplies = [], resourceIds = [], showCopilotCTA = false) {
-    const msgs = document.getElementById('messages');
-    const wrap = document.createElement('div');
-    wrap.style.display = 'flex';
-    wrap.style.flexDirection = 'column';
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
 
-    const msg = document.createElement('div');
-    msg.className = 'message bot';
-    msg.innerHTML = `
-      <div class="message-avatar">🥤</div>
-      <div class="message-bubble">${escapeHtml(text).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</div>
-    `;
-    wrap.appendChild(msg);
+  chatMessages.push({ id: Date.now(), text, isBot: false });
+  input.value = '';
+  document.getElementById('sendBtn').disabled = true;
 
-    if (resourceIds.length) {
-      const cards = document.createElement('div');
-      cards.className = 'resource-cards';
-      resourceIds.forEach(id => {
-        const r = hrResources.find(x => x.id === id);
-        if (!r) return;
-        const card = document.createElement(r.url ? 'a' : 'div');
-        card.className = 'resource-card';
-        if (r.url) { card.href = r.url; card.target = '_blank'; }
-        else { card.onclick = openCopilot; }
-        card.innerHTML = `
-          <div class="resource-icon">${r.icon}</div>
-          <div class="resource-info">
-            <div class="resource-title">${r.title} ${r.status === 'pending' ? '<span class="resource-badge">Soon</span>' : ''}</div>
-            <div class="resource-topic">${r.topic}</div>
-          </div>
-          <div style="color:#9ca3af">↗</div>
-        `;
-        cards.appendChild(card);
-      });
-      wrap.appendChild(cards);
-    }
+  isTyping = true;
+  renderChatMessages();
 
-    if (showCopilotCTA) {
-      const cta = document.createElement('div');
-      cta.className = 'copilot-cta';
-      cta.onclick = openCopilot;
-      cta.innerHTML = `
-        <div style="font-size:20px">✨</div>
-        <div class="copilot-cta-text">
-          <strong>Need a deeper answer?</strong>
-          <span>Open the full HR Copilot →</span>
-        </div>
-      `;
-      wrap.appendChild(cta);
-    }
-
-    if (quickReplies.length) {
-      const qr = document.createElement('div');
-      qr.className = 'quick-replies';
-      quickReplies.forEach(reply => {
-        const btn = document.createElement('button');
-        btn.className = 'quick-reply';
-        btn.textContent = reply;
-        btn.onclick = () => handleUserInput(reply);
-        qr.appendChild(btn);
-      });
-      wrap.appendChild(qr);
-    }
-
-    msgs.appendChild(wrap);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-
-  function escapeHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  function findKeywordMatch(query) {
-    const q = query.toLowerCase();
-    for (const entry of keywordMap) {
-      if (entry.keywords.some(kw => q.includes(kw))) return entry;
-    }
-    return null;
-  }
-
-  function tokenSearch(query) {
-    const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
-    if (!tokens.length) return [];
-    return hrResources.filter(r => {
-      const hay = (r.title + ' ' + r.topic).toLowerCase();
-      return tokens.every(t => hay.includes(t));
-    }).slice(0, 4);
-  }
-
-  function handleUserInput(text) {
-    if (!text.trim()) return;
-    addUserMessage(text);
-    setTimeout(() => respond(text), 400);
-  }
-
-  function respond(text) {
-    const key = text.toLowerCase().trim();
-
-    // 1. Direct conversational match
-    if (botResponses[key]) {
-      const r = botResponses[key];
-      if (r.openCopilot) openCopilot();
-      addBotMessage(r.response, r.quickReplies || [], r.resourceIds || [], r.showCopilotCTA);
-      return;
-    }
-
-    // 2. Keyword → resource match
-    const km = findKeywordMatch(text);
-    if (km) {
-      addBotMessage(km.intro, ['Find another','Open full chat','Talk to HR'], km.ids, km.ids.length === 0);
-      return;
-    }
-
-    // 3. Token search across resources
-    const matches = tokenSearch(text);
-    if (matches.length) {
-      addBotMessage(`I found ${matches.length} resource${matches.length>1?'s':''} for you:`, ['Find another','Open full chat'], matches.map(m=>m.id));
-      return;
-    }
-
-    // 4. Fallback to Copilot
-    addBotMessage(
-      "Hmm, I'm not quite sure about that one 🤔 For more complex questions, the full HR Copilot can dig deeper:",
-      ['Open full chat','Find a resource','Talk to HR'],
-      [],
-      true
-    );
-  }
-
-  function sendMessage() {
-    const input = document.getElementById('userInput');
-    handleUserInput(input.value);
-    input.value = '';
-  }
-</script>
-</body>
-</html>
-
-  function getBotResponse(msg) {
-    const normalized = msg.toLowerCase().trim();
-    if (botResponses[normalized]) return botResponses[normalized];
-    for (const key of Object.keys(botResponses)) {
-      if (normalized.includes(key)) return botResponses[key];
-    }
-    if (normalized.match(/^(hi|hello|hey|howdy|greetings|sup|yo)/)) return botResponses['hi'];
-    if (normalized.match(/(bye|goodbye|see you|later|cya)/)) return botResponses['bye!'];
-    if (normalized.match(/(thank|thanks|thx)/)) return { response: "You're welcome! 😊 Anything else I can help with?", quickReplies: ['Find a resource', 'Nope, all good!', 'Bye!'] };
-    return botResponses['default'];
-  }
-
-  function initChatInput() {
-    const input = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-
-    input.addEventListener('input', () => {
-      sendBtn.disabled = !input.value.trim();
+  setTimeout(() => {
+    const r = getBotResponse(text);
+    if (r.openCopilot) openCopilot();
+    chatMessages.push({
+      id: Date.now() + 1,
+      text: r.response,
+      isBot: true,
+      quickReplies: r.quickReplies || []
     });
-    sendBtn.disabled = true;
+    isTyping = false;
+    renderChatMessages();
+  }, 650);
+}
+
+function renderChatMessages() {
+  const container = document.getElementById('chatMessages');
+
+  let html = chatMessages.map(msg => `
+    <div class="chat-message">
+      <div class="chat-message-row ${msg.isBot ? '' : 'user'}">
+        ${msg.isBot ? `<div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>` : ''}
+        <div class="chat-bubble ${msg.isBot ? 'bot' : 'user'}">${escapeHtml(msg.text)}</div>
+      </div>
+      ${msg.isBot && msg.quickReplies && msg.quickReplies.length ? `
+        <div class="quick-replies">
+          ${msg.quickReplies.map(r => `
+            <button class="quick-reply-btn" onclick="handleQuickReply('${escapeHtml(r).replace(/'/g, "\\'")}')">${escapeHtml(r)}</button>
+          `).join('')}
+        </div>
+      ` : ''}
+    </div>
+  `).join('');
+
+  if (isTyping) {
+    html += `
+      <div class="chat-message">
+        <div class="typing-indicator">
+          <div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>
+          <div class="typing-dots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    `;
   }
 
-  function sendMessage(e) {
-    e.preventDefault();
-    const input = document.getElementById('chatInput');
-    const text = input.value.trim();
-    if (!text) return;
-
-    if (text.toLowerCase().includes('open hr copilot') || text.toLowerCase().includes('open full chat')) {
-      openCopilot();
-    }
-
-    chatMessages.push({ id: Date.now(), text, isBot: false });
-    input.value = '';
-    document.getElementById('sendBtn').disabled = true;
-    renderChatMessages();
-
-    isTyping = true;
-    renderChatMessages();
+  container.innerHTML = html;
+  container.scrollTop = container.scrollHeight;
+}
+``
 
     setTimeout(() => {
       const { response, quickReplies } = getBotResponse(text);
