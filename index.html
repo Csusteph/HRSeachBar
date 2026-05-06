@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RCCB HR SearchBar — Reyes Coca-Cola Bottling</title>
 
-  <!-- Reyes Coca-Cola brand-true typography: Montserrat is the closest free Google Font match to Coca-Cola's TCCC Unity brand typeface -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,7 +13,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Strict Reyes Coca-Cola brand palette: red / white / black */
       --coke-red: #F40009;
       --coke-red-deep: #C8000A;
       --coke-red-darker: #8B0008;
@@ -42,34 +40,24 @@
       min-height: 100vh;
       background: var(--white);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ========================================================
-       HERO SECTION
-       ======================================================== */
-    .hero-container {
-      padding: 14px;
-    }
+    .hero-container { padding: 14px; }
 
     .hero {
       position: relative;
       min-height: 540px;
       border-radius: 20px;
       overflow: hidden;
-      background:
-        radial-gradient(ellipse at 50% 0%, #FF1A1F 0%, var(--coke-red) 40%, var(--coke-red-deep) 80%, var(--coke-red-darker) 100%);
+      background: radial-gradient(ellipse at 50% 0%, #FF1A1F 0%, var(--coke-red) 40%, var(--coke-red-deep) 80%, var(--coke-red-darker) 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 90px 40px 80px;
-      box-shadow:
-        0 20px 50px rgba(244,0,9,0.22),
-        inset 0 0 0 1px rgba(255,255,255,0.06);
+      box-shadow: 0 20px 50px rgba(244,0,9,0.22), inset 0 0 0 1px rgba(255,255,255,0.06);
     }
 
-    /* Subtle depth at edges */
     .hero::before {
       content: '';
       position: absolute;
@@ -87,14 +75,10 @@
       z-index: 2;
     }
 
-    /* COCA-COLA DYNAMIC RIBBON DEVICE — iconic white swoosh at bottom */
     .ribbon-device {
       position: absolute;
-      left: -5%;
-      right: -5%;
-      bottom: 0;
-      width: 110%;
-      height: 180px;
+      left: -5%; right: -5%; bottom: 0;
+      width: 110%; height: 180px;
       pointer-events: none;
       z-index: 3;
     }
@@ -110,7 +94,6 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      font-family: 'Montserrat', sans-serif;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.28em;
@@ -122,15 +105,9 @@
       border-radius: 2px;
     }
 
-    .eyebrow-bar {
-      width: 22px;
-      height: 1.5px;
-      background: var(--white);
-      opacity: 0.85;
-    }
+    .eyebrow-bar { width: 22px; height: 1.5px; background: var(--white); opacity: 0.85; }
 
     .main-title {
-      font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: clamp(48px, 9vw, 104px);
       color: var(--white);
@@ -140,9 +117,7 @@
       margin-bottom: 20px;
     }
 
-    .main-title .line {
-      display: block;
-    }
+    .main-title .line { display: block; }
 
     .main-title .accent-line {
       position: relative;
@@ -152,16 +127,13 @@
     .main-title .accent-line::after {
       content: '';
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -10px;
+      left: 0; right: 0; bottom: -10px;
       height: 4px;
       background: var(--white);
       border-radius: 2px;
     }
 
     .tagline {
-      font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-size: clamp(16px, 1.8vw, 19px);
       color: rgba(255,255,255,0.92);
@@ -172,7 +144,6 @@
       margin-right: auto;
     }
 
-    /* Search bar */
     .search-wrap {
       display: flex;
       align-items: center;
@@ -188,15 +159,10 @@
     }
 
     .search-wrap:focus-within {
-      box-shadow:
-        0 0 0 4px rgba(255,255,255,0.25),
-        0 16px 44px rgba(0,0,0,0.32);
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.25), 0 16px 44px rgba(0,0,0,0.32);
     }
 
-    .search-icon {
-      flex-shrink: 0;
-      color: var(--coke-red);
-    }
+    .search-icon { flex-shrink: 0; color: var(--coke-red); }
 
     .search-wrap input {
       flex: 1;
@@ -223,8 +189,7 @@
 
     .cursor {
       display: inline-block;
-      width: 2px;
-      height: 16px;
+      width: 2px; height: 16px;
       background: var(--coke-red);
       margin-left: 2px;
       vertical-align: middle;
@@ -246,28 +211,33 @@
       transition: all 0.2s;
     }
 
-    .search-btn:hover {
-      background: var(--coke-red);
-      transform: translateY(-1px);
-    }
-
+    .search-btn:hover { background: var(--coke-red); transform: translateY(-1px); }
     .search-btn:active { transform: scale(0.97); }
 
-    /* Powered-by footer strip */
+    .search-clear {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray-400);
+      font-size: 18px;
+      line-height: 1;
+      padding: 2px 4px;
+      display: none;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .search-clear:hover { color: var(--coke-red); }
+    .search-clear.visible { display: block; }
+
     .logo-row {
       display: inline-flex;
       align-items: center;
       gap: 14px;
     }
 
-    .logo-row .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.55);
-    }
+    .logo-row .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.55); }
 
     .logo-row span {
-      font-family: 'Montserrat', sans-serif;
       font-size: 11px;
       font-weight: 700;
       color: rgba(255,255,255,0.8);
@@ -304,7 +274,6 @@
       box-shadow: 0 10px 24px rgba(0,0,0,0.28);
     }
 
-    /* Bottle cap divider */
     .cap-divider {
       position: relative;
       max-width: 1100px;
@@ -317,28 +286,17 @@
       z-index: 10;
     }
 
-    .cap-line {
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
-    }
+    .cap-line { flex: 1; height: 1px; background: var(--gray-200); }
 
     .bottle-cap {
-      width: 64px;
-      height: 64px;
+      width: 64px; height: 64px;
       flex-shrink: 0;
       animation: spinSlow 24s linear infinite;
       filter: drop-shadow(0 6px 14px rgba(244,0,9,0.32));
     }
 
-    @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    /* ========================================================
-       FILTERS SECTION  ("Browse by Category")
-       ======================================================== */
     .filters-section {
       max-width: 1100px;
       margin: 44px auto 0;
@@ -356,17 +314,12 @@
       border-bottom: 1px solid var(--gray-100);
     }
 
-    .section-title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .section-title-group { display: flex; flex-direction: column; gap: 6px; }
 
     .section-kicker {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-family: 'Montserrat', sans-serif;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.24em;
@@ -374,15 +327,9 @@
       color: var(--coke-red);
     }
 
-    .section-kicker::before {
-      content: '';
-      width: 18px;
-      height: 2px;
-      background: var(--coke-red);
-    }
+    .section-kicker::before { content: ''; width: 18px; height: 2px; background: var(--coke-red); }
 
     .section-title {
-      font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: clamp(26px, 3.5vw, 36px);
       color: var(--black);
@@ -391,22 +338,9 @@
       text-transform: uppercase;
     }
 
-    .section-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--gray-600);
-      letter-spacing: 0.01em;
-    }
+    .section-subtitle { font-weight: 500; font-size: 14px; color: var(--gray-600); }
 
-    .results-count {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gray-600);
-      white-space: nowrap;
-      padding-bottom: 4px;
-    }
+    .results-count { font-size: 13px; font-weight: 500; color: var(--gray-600); white-space: nowrap; padding-bottom: 4px; }
 
     .results-count strong {
       display: inline-block;
@@ -420,11 +354,39 @@
       letter-spacing: 0.04em;
     }
 
-    .filters-row {
-      display: flex;
-      flex-wrap: wrap;
+    .search-context {
+      display: none;
+      align-items: center;
       gap: 10px;
+      margin-bottom: 16px;
+      padding: 10px 16px;
+      background: var(--red-tint);
+      border-radius: 2px;
+      border-left: 3px solid var(--coke-red);
     }
+
+    .search-context.visible { display: flex; }
+
+    .search-context span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--coke-red-darker);
+      flex: 1;
+    }
+
+    .search-context button {
+      background: none;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--coke-red);
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .filters-row { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .filter-chip {
       display: inline-flex;
@@ -444,12 +406,7 @@
       color: var(--black);
     }
 
-    .filter-chip:hover {
-      border-color: var(--black);
-      color: var(--black);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
-    }
+    .filter-chip:hover { border-color: var(--black); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
     .filter-chip.active {
       background: var(--coke-red);
@@ -460,9 +417,6 @@
 
     .filter-chip .icon { font-size: 13px; }
 
-    /* ========================================================
-       CARDS GRID
-       ======================================================== */
     .cards-section {
       max-width: 1100px;
       margin: 0 auto;
@@ -475,11 +429,7 @@
       gap: 20px;
     }
 
-    .flip-wrap {
-      perspective: 1200px;
-      height: 260px;
-      cursor: pointer;
-    }
+    .flip-wrap { perspective: 1200px; height: 260px; cursor: pointer; }
 
     .flip-inner {
       position: relative;
@@ -510,13 +460,13 @@
 
     .flip-wrap:hover .flip-front {
       border-color: var(--coke-red);
-      box-shadow: 0 16px 40px rgba(244, 0, 9, 0.16);
+      box-shadow: 0 16px 40px rgba(244,0,9,0.16);
       transform: translateY(-4px);
     }
 
     .flip-wrap.coming-soon:hover .flip-front {
       border-color: var(--black);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
     }
 
     .flip-back {
@@ -558,12 +508,9 @@
       transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
     }
 
-    .flip-wrap:hover .book-icon-wrap {
-      transform: scale(1.1) rotate(-4deg);
-    }
+    .flip-wrap:hover .book-icon-wrap { transform: scale(1.1) rotate(-4deg); }
 
     .front-tag {
-      font-family: 'Montserrat', sans-serif;
       font-size: 9.5px;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -574,7 +521,6 @@
     }
 
     .front-title {
-      font-family: 'Montserrat', sans-serif;
       font-size: 15.5px;
       font-weight: 700;
       color: var(--black);
@@ -601,11 +547,18 @@
       z-index: 2;
     }
 
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
     .flip-hint {
       margin-top: auto;
       padding-top: 12px;
       padding-left: 12px;
-      font-family: 'Montserrat', sans-serif;
       font-size: 10.5px;
       font-weight: 700;
       letter-spacing: 0.16em;
@@ -621,11 +574,7 @@
 
     .flip-wrap:hover .flip-hint { color: var(--coke-red); }
 
-    .flip-hint .arrow {
-      display: inline-block;
-      transition: transform 0.25s;
-    }
-
+    .flip-hint .arrow { display: inline-block; transition: transform 0.25s; }
     .flip-wrap:hover .flip-hint .arrow { transform: rotate(-15deg) translateX(2px); }
 
     .coming-soon-badge {
@@ -635,7 +584,6 @@
       background: var(--black);
       color: var(--white);
       border-radius: 2px;
-      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.14em;
@@ -656,17 +604,15 @@
     }
 
     .back-label {
-      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.2em;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255,255,255,0.7);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
     .back-title {
-      font-family: 'Montserrat', sans-serif;
       font-size: 16px;
       font-weight: 800;
       color: var(--white);
@@ -678,16 +624,12 @@
     .back-desc {
       font-size: 12.5px;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.92);
+      color: rgba(255,255,255,0.92);
       line-height: 1.6;
       flex: 1;
     }
 
-    .back-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
+    .back-actions { display: flex; gap: 10px; margin-top: 16px; }
 
     .btn-open {
       flex: 1;
@@ -711,22 +653,10 @@
       letter-spacing: 0.14em;
     }
 
-    .btn-open:hover {
-      background: var(--black);
-      color: var(--white);
-      transform: scale(1.02);
-    }
+    .btn-open:hover { background: var(--black); color: var(--white); transform: scale(1.02); }
 
-    .btn-open.amber-btn {
-      color: var(--gray-600);
-      opacity: 0.7;
-      cursor: default;
-    }
-    .btn-open.amber-btn:hover {
-      background: var(--white);
-      color: var(--gray-600);
-      transform: none;
-    }
+    .btn-open.amber-btn { color: var(--gray-600); opacity: 0.7; cursor: default; }
+    .btn-open.amber-btn:hover { background: var(--white); color: var(--gray-600); transform: none; }
 
     .btn-back {
       padding: 11px 16px;
@@ -738,77 +668,54 @@
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      border: 1.5px solid rgba(255,255,255,0.45);
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .btn-back:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: var(--white);
-    }
+    .btn-back:hover { background: rgba(255,255,255,0.15); border-color: var(--white); }
 
-    /* ========================================================
-       FOOTER
-       ======================================================== */
+    .no-results { text-align: center; padding: 64px 24px; }
+    .no-results .icon { font-size: 56px; margin-bottom: 16px; }
+    .no-results h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .no-results p { font-weight: 600; color: var(--gray-600); font-size: 15px; }
+    .no-results .suggest-btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 12px 28px;
+      background: var(--coke-red);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .no-results .suggest-btn:hover { background: var(--black); transform: translateY(-2px); }
+
     .footer {
-      position: relative;
       text-align: center;
       padding: 48px 24px 36px;
       background: var(--black);
       color: var(--white);
-      overflow: hidden;
     }
 
-    .footer-bar {
-      width: 48px;
-      height: 3px;
-      background: var(--coke-red);
-      margin: 0 auto 18px;
-    }
+    .footer-bar { width: 48px; height: 3px; background: var(--coke-red); margin: 0 auto 18px; }
 
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 18px;
-    }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-bottom: 18px; }
 
-    .footer-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
+    .footer-name { font-size: 22px; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; }
 
-    .footer-sub {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      color: rgba(255,255,255,0.55);
-      text-transform: uppercase;
-    }
+    .footer-sub { font-size: 11px; font-weight: 700; letter-spacing: 0.28em; color: rgba(255,255,255,0.55); text-transform: uppercase; }
 
-    .footer p {
-      color: rgba(255,255,255,0.5);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
+    .footer p { color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 500; }
 
-    /* ========================================================
-       AI BOT (Fizz)
-       ======================================================== */
-    .ai-bot-container {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 1000;
-    }
+    /* ========= FIZZ BOT ========= */
+    .ai-bot-container { position: fixed; bottom: 28px; right: 28px; z-index: 1000; }
 
     .ai-bot-tooltip {
       position: absolute;
@@ -841,10 +748,8 @@
     }
 
     .ai-bot-tooltip-avatar {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
       border-radius: 4px;
       display: flex;
       align-items: center;
@@ -853,39 +758,13 @@
       overflow: hidden;
     }
 
-    .ai-bot-tooltip-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.005em;
-    }
+    .ai-bot-tooltip-title { font-size: 14px; font-weight: 800; color: var(--white); line-height: 1.1; }
+    .ai-bot-tooltip-subtitle { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.78); text-transform: uppercase; margin-top: 3px; }
 
-    .ai-bot-tooltip-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.78);
-      text-transform: uppercase;
-      margin-top: 3px;
-    }
-
-    .ai-bot-tooltip-content {
-      padding: 14px 16px 16px;
-    }
-
-    .ai-bot-tooltip-content p {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--black);
-      margin-bottom: 12px;
-      line-height: 1.55;
-    }
+    .ai-bot-tooltip-content { padding: 14px 16px 16px; }
+    .ai-bot-tooltip-content p { font-size: 12.5px; font-weight: 500; color: var(--black); margin-bottom: 12px; line-height: 1.55; }
 
     .ai-bot-tooltip-cta {
-      font-family: 'Montserrat', sans-serif;
       font-size: 10.5px;
       font-weight: 800;
       letter-spacing: 0.16em;
@@ -898,10 +777,8 @@
 
     .ai-bot-tooltip-arrow {
       position: absolute;
-      bottom: -8px;
-      right: 48px;
-      width: 16px;
-      height: 16px;
+      bottom: -8px; right: 48px;
+      width: 16px; height: 16px;
       background: var(--white);
       transform: rotate(45deg);
       border-right: 1px solid var(--gray-200);
@@ -909,8 +786,7 @@
     }
 
     .ai-bot-button {
-      width: 82px;
-      height: 102px;
+      width: 82px; height: 102px;
       border-radius: 42px;
       background:
         radial-gradient(circle at 30% 25%, rgba(255,255,255,0.22) 0%, transparent 45%),
@@ -922,52 +798,36 @@
       justify-content: center;
       position: relative;
       transition: all 0.3s;
-      box-shadow:
-        0 12px 40px rgba(244, 0, 9, 0.38),
-        inset 0 2px 4px rgba(255,255,255,0.2);
+      box-shadow: 0 12px 40px rgba(244,0,9,0.38), inset 0 2px 4px rgba(255,255,255,0.2);
     }
 
     .ai-bot-button:hover {
       transform: scale(1.06);
-      box-shadow:
-        0 18px 50px rgba(244, 0, 9, 0.48),
-        0 0 0 4px rgba(244, 0, 9, 0.16),
-        inset 0 2px 4px rgba(255,255,255,0.2);
+      box-shadow: 0 18px 50px rgba(244,0,9,0.48), 0 0 0 4px rgba(244,0,9,0.16), inset 0 2px 4px rgba(255,255,255,0.2);
     }
 
     .ai-bot-ping {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       border-radius: 42px;
-      background: rgba(244, 0, 9, 0.22);
-      animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+      background: rgba(244,0,9,0.22);
+      animation: ping 2.5s cubic-bezier(0,0,0.2,1) infinite;
     }
 
     .ai-bot-ring {
-      position: absolute;
-      inset: -8px;
+      position: absolute; inset: -8px;
       border-radius: 46px;
-      border: 2px solid rgba(244, 0, 9, 0.2);
+      border: 2px solid rgba(244,0,9,0.2);
       animation: pulse 2s ease-in-out infinite;
     }
 
-    .ai-bot-character {
-      position: relative;
-      z-index: 10;
-      transition: transform 0.3s;
-    }
-
-    .ai-bot-button:hover .ai-bot-character {
-      transform: scale(1.08) rotate(-3deg);
-    }
+    .ai-bot-character { position: relative; z-index: 10; transition: transform 0.3s; }
+    .ai-bot-button:hover .ai-bot-character { transform: scale(1.08) rotate(-3deg); }
 
     .ai-bot-label {
       position: absolute;
-      bottom: -32px;
-      left: 50%;
+      bottom: -32px; left: 50%;
       transform: translateX(-50%);
       white-space: nowrap;
-      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.2em;
@@ -975,21 +835,16 @@
       text-transform: uppercase;
     }
 
-    /* ========================================================
-       CHAT WINDOW
-       ======================================================== */
+    /* ========= CHAT WINDOW ========= */
     .chat-window {
       position: fixed;
-      bottom: 146px;
-      right: 28px;
-      width: 380px;
+      bottom: 146px; right: 28px;
+      width: 400px;
       max-width: calc(100vw - 48px);
-      height: 540px;
+      height: 580px;
       background: var(--white);
       border-radius: 8px;
-      box-shadow:
-        0 28px 70px rgba(0,0,0,0.25),
-        0 12px 28px rgba(244,0,9,0.14);
+      box-shadow: 0 28px 70px rgba(0,0,0,0.25), 0 12px 28px rgba(244,0,9,0.14);
       overflow: hidden;
       display: none;
       flex-direction: column;
@@ -1010,20 +865,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-shrink: 0;
     }
 
-    .chat-header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .chat-header-left { display: flex; align-items: center; gap: 12px; }
 
     .chat-avatar {
       position: relative;
-      width: 52px;
-      height: 52px;
+      width: 52px; height: 52px;
       background: rgba(255,255,255,0.14);
-      backdrop-filter: blur(10px);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -1034,29 +884,22 @@
 
     .chat-avatar .online-dot {
       position: absolute;
-      bottom: -2px;
-      right: -2px;
-      width: 14px;
-      height: 14px;
+      bottom: -2px; right: -2px;
+      width: 14px; height: 14px;
       background: #10B981;
       border-radius: 50%;
       border: 2px solid white;
     }
 
     .chat-header-info h3 {
-      font-family: 'Montserrat', sans-serif;
       font-size: 16px;
       font-weight: 800;
       color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 8px;
       line-height: 1.1;
       letter-spacing: -0.005em;
     }
 
     .chat-header-info p {
-      font-family: 'Montserrat', sans-serif;
       font-size: 10.5px;
       font-weight: 700;
       letter-spacing: 0.18em;
@@ -1065,14 +908,10 @@
       margin-top: 3px;
     }
 
-    .chat-header-actions {
-      display: flex;
-      gap: 8px;
-    }
+    .chat-header-actions { display: flex; gap: 8px; }
 
     .chat-header-btn {
-      width: 34px;
-      height: 34px;
+      width: 34px; height: 34px;
       background: rgba(255,255,255,0.16);
       border: none;
       border-radius: 4px;
@@ -1091,9 +930,12 @@
       overflow-y: auto;
       padding: 16px;
       background: var(--off-white);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .chat-message { margin-bottom: 16px; }
+    .chat-message-group { margin-bottom: 14px; }
 
     .chat-message-row {
       display: flex;
@@ -1104,8 +946,7 @@
     .chat-message-row.user { justify-content: flex-end; }
 
     .chat-message-avatar {
-      width: 34px;
-      height: 34px;
+      width: 34px; height: 34px;
       background: var(--red-tint);
       border-radius: 4px;
       display: flex;
@@ -1117,10 +958,9 @@
     }
 
     .chat-bubble {
-      max-width: 75%;
+      max-width: 76%;
       padding: 11px 15px;
       border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 500;
       line-height: 1.55;
@@ -1143,2048 +983,92 @@
       font-weight: 600;
     }
 
-    .quick-replies {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .chat-resource-cards {
       margin-top: 8px;
       margin-left: 42px;
-    }
-
-    .quick-reply-btn {
-      padding: 6px 12px;
-      background: white;
-      border: 1.5px solid var(--coke-red);
-      border-radius: 2px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--coke-red);
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.02em;
-    }
-
-    .quick-reply-btn:hover {
-      background: var(--coke-red);
-      color: white;
-    }
-
-    .typing-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .typing-dots {
-      display: flex;
-      gap: 4px;
-      padding: 12px 16px;
-      background: white;
-      border-radius: 10px;
-      border-top-left-radius: 2px;
-      border: 1px solid var(--gray-200);
-    }
-
-    .typing-dots span {
-      width: 8px;
-      height: 8px;
-      background: var(--coke-red);
-      border-radius: 50%;
-      animation: bounce 1.4s infinite;
-    }
-
-    .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
-
-    .chat-input-area {
-      padding: 14px 16px;
-      border-top: 1px solid var(--gray-200);
-      background: white;
-    }
-
-    .chat-input-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .chat-input {
-      flex: 1;
-      padding: 11px 16px;
-      background: var(--off-white);
-      border: 1px solid var(--gray-200);
-      border-radius: 2px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--black);
-      outline: none;
-      transition: box-shadow 0.2s, border-color 0.2s;
-    }
-
-    .chat-input:focus {
-      border-color: var(--coke-red);
-      box-shadow: 0 0 0 3px rgba(244,0,9,0.12);
-    }
-
-    .chat-send-btn {
-      width: 42px;
-      height: 42px;
-      background: var(--coke-red);
-      border: none;
-      border-radius: 2px;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(244,0,9,0.28);
-    }
-
-    .chat-send-btn:hover:not(:disabled) {
-      background: var(--black);
-      transform: scale(1.03);
-    }
-    .chat-send-btn:disabled { opacity: 0.45; cursor: default; }
-
-    .chat-footer-link { text-align: center; margin-top: 8px; }
-
-    .chat-footer-link button {
-      background: none;
-      border: none;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--gray-400);
-      cursor: pointer;
-      transition: color 0.2s;
-      text-transform: uppercase;
-    }
-
-    .chat-footer-link button:hover { color: var(--coke-red); }
-
-    /* ========================================================
-       MODAL
-       ======================================================== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal {
-      background: var(--white);
-      border-radius: 6px;
-      width: 90%;
-      max-width: 700px;
-      max-height: 90vh;
-      overflow: hidden;
-      transform: scale(0.95);
-      transition: transform 0.3s;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-    }
-
-    .modal-overlay.active .modal { transform: scale(1); }
-
-    .modal-header {
-      background: var(--coke-red);
-      padding: 22px 26px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .modal-header-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.22);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
-
-    .modal-header h2 {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--white);
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.005em;
-      margin-bottom: 3px;
-    }
-
-    .modal-header p {
-      font-family: 'Montserrat', sans-serif;
-      color: rgba(255,255,255,0.85);
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .modal-close {
-      width: 38px;
-      height: 38px;
-      background: rgba(255,255,255,0.18);
-      border: none;
-      border-radius: 4px;
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .modal-close:hover { background: rgba(255,255,255,0.32); }
-
-    .modal-body { height: 600px; }
-    .modal-body iframe { width: 100%; height: 100%; border: none; }
-
-    /* ========================================================
-       NO RESULTS
-       ======================================================== */
-    .no-results {
-      text-align: center;
-      padding: 64px 24px;
-    }
-
-    .no-results .icon { font-size: 56px; margin-bottom: 16px; }
-    .no-results p {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      color: var(--gray-600);
-      font-size: 16px;
-    }
-
-    /* ========================================================
-       ANIMATIONS
-       ======================================================== */
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    @keyframes ping {
-      75%, 100% {
-        transform: scale(1.5);
-        opacity: 0;
-      }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-in { animation: fadeInUp 0.5s cubic-bezier(.4,0,.2,1) both; }
-
-    /* ========================================================
-       SCROLLBAR
-       ======================================================== */
-    ::-webkit-scrollbar { width: 10px; height: 10px; }
-    ::-webkit-scrollbar-track { background: var(--gray-50); }
-    ::-webkit-scrollbar-thumb {
-      background: var(--gray-200);
-      border-radius: 2px;
-    }
-    ::-webkit-scrollbar-thumb:hover { background: var(--coke-red); }
-
-    /* ========================================================
-       RESPONSIVE
-       ======================================================== */
-    @media (max-width: 768px) {
-      .hero { padding: 60px 22px 50px; min-height: 460px; }
-      .request-btn { position: absolute; top: 16px; right: 16px; padding: 9px 14px; font-size: 10px; }
-      .section-header { flex-direction: column; align-items: flex-start; gap: 6px; }
-      .chat-window { width: calc(100vw - 32px); right: 16px; bottom: 130px; height: 480px; }
-      .ribbon-device { height: 120px; }
-      .cap-divider { margin-top: -24px; }
-      .bottle-cap { width: 52px; height: 52px; }
-      .main-title { font-size: 52px; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ============= HERO SECTION ============= -->
-  <div class="hero-container">
-    <div class="hero">
-      <canvas id="bubbles"></canvas>
-
-      <!-- DYNAMIC RIBBON DEVICE — Coca-Cola's iconic white swoosh -->
-      <svg class="ribbon-device" viewBox="0 0 1200 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="ribbonShade" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="rgba(0,0,0,0.06)"/>
-            <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
-          </linearGradient>
-        </defs>
-        <!-- Back ribbon (softer) -->
-        <path d="M0,150 C150,115 300,165 480,140 C660,115 840,165 1020,140 C1110,125 1170,140 1200,138 L1200,180 L0,180 Z"
-              fill="rgba(255,255,255,0.18)"/>
-        <!-- Main ribbon -->
-        <path d="M0,115 C150,78 300,140 480,105 C660,70 840,140 1020,105 C1110,88 1170,105 1200,100 L1200,180 L0,180 Z"
-              fill="#ffffff"/>
-        <!-- Shadow stroke on ribbon -->
-        <path d="M0,115 C150,78 300,140 480,105 C660,70 840,140 1020,105 C1110,88 1170,105 1200,100"
-              fill="none" stroke="url(#ribbonShade)" stroke-width="2.5"/>
-      </svg>
-
-      <button class="request-btn" onclick="openModal()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="12" y1="5" x2="12" y2="19"/>
-          <line x1="5" y1="12" x2="19" y2="12"/>
-        </svg>
-        Request Resource
-      </button>
-
-      <div class="hero-content">
-        <div class="eyebrow">
-          <span class="eyebrow-bar"></span>
-          Reyes Coca-Cola Bottling
-          <span class="eyebrow-bar"></span>
-        </div>
-
-        <h1 class="main-title">
-          <span class="line">HR Resource</span>
-          <span class="line"><span class="accent-line">Center</span></span>
-        </h1>
-        <p class="tagline">Your refreshing one-stop shop for all things HR.</p>
-
-        <div class="search-wrap">
-          <svg class="search-icon" width="18" height="18" viewBox="0 0 16 16" fill="none">
-            <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="2"/>
-            <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <input type="text" id="searchInput" placeholder="">
-          <span class="typewriter-text" id="typewriterText"></span>
-          <button class="search-btn" onclick="document.getElementById('searchInput').focus()">Search</button>
-        </div>
-
-        <div class="logo-row">
-          <div class="dot"></div>
-          <span>Powered by RCCB Human Resources</span>
-          <div class="dot"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============= BOTTLE CAP DIVIDER ============= -->
-  <div class="cap-divider">
-    <div class="cap-line"></div>
-    <svg class="bottle-cap" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="capGrad" cx="50%" cy="35%" r="60%">
-          <stop offset="0%" stop-color="#FF1A1F"/>
-          <stop offset="60%" stop-color="#F40009"/>
-          <stop offset="100%" stop-color="#8B0008"/>
-        </radialGradient>
-      </defs>
-      <circle cx="50" cy="50" r="46" fill="url(#capGrad)"/>
-      <g fill="url(#capGrad)" stroke="rgba(0,0,0,0.2)" stroke-width="0.5">
-        <circle cx="50" cy="6" r="3"/><circle cx="65" cy="9" r="3"/>
-        <circle cx="78" cy="17" r="3"/><circle cx="88" cy="29" r="3"/>
-        <circle cx="93" cy="44" r="3"/><circle cx="93" cy="59" r="3"/>
-        <circle cx="88" cy="74" r="3"/><circle cx="78" cy="86" r="3"/>
-        <circle cx="65" cy="93" r="3"/><circle cx="50" cy="96" r="3"/>
-        <circle cx="35" cy="93" r="3"/><circle cx="22" cy="86" r="3"/>
-        <circle cx="12" cy="74" r="3"/><circle cx="7" cy="59" r="3"/>
-        <circle cx="7" cy="44" r="3"/><circle cx="12" cy="29" r="3"/>
-        <circle cx="22" cy="17" r="3"/><circle cx="35" cy="9" r="3"/>
-      </g>
-      <ellipse cx="40" cy="35" rx="20" ry="10" fill="rgba(255,255,255,0.18)"/>
-      <text x="50" y="57" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="18" font-weight="900" fill="white" letter-spacing="0.5">RCCB</text>
-    </svg>
-    <div class="cap-line"></div>
-  </div>
-
-  <!-- ============= FILTERS SECTION ============= -->
-  <div class="filters-section">
-    <div class="section-header">
-      <div class="section-title-group">
-        <div class="section-kicker">Pick Your Flavor</div>
-        <h2 class="section-title">Browse by Category</h2>
-        <p class="section-subtitle">Filter resources by category or use the Search Bar above to search for a topic</p>
-      </div>
-      <p class="results-count"><strong id="resultsCount">28</strong>resources available</p>
-    </div>
-    <div class="filters-row" id="filterChips"></div>
-  </div>
-
-  <!-- ============= CARDS GRID ============= -->
-  <div class="cards-section">
-    <div class="cards-grid" id="cardsGrid"></div>
-    <div class="no-results" id="noResults" style="display: none;">
-      <div class="icon">🔍</div>
-      <p>No resources match that search.</p>
-    </div>
-  </div>
-
-  <!-- ============= FOOTER ============= -->
-  <footer class="footer">
-    <div class="footer-bar"></div>
-    <div class="footer-brand">
-      <div class="footer-name">Reyes Coca-Cola Bottling</div>
-      <div class="footer-sub">Human Resources</div>
-    </div>
-    <p>© 2026 Reyes Coca-Cola Bottling. All rights reserved.</p>
-  </footer>
-
-  <!-- ============= AI BOT (Fizz) ============= -->
-  <div class="ai-bot-container" id="aiBotContainer">
-    <div class="ai-bot-tooltip">
-      <div class="ai-bot-tooltip-header">
-        <div class="ai-bot-tooltip-avatar" id="tooltipAvatar"></div>
-        <div>
-          <div class="ai-bot-tooltip-title">Hey, I'm Fizz!</div>
-          <div class="ai-bot-tooltip-subtitle">Your HR Buddy</div>
-        </div>
-      </div>
-      <div class="ai-bot-tooltip-content">
-        <p>Need help finding a resource? Have an HR question? Let's chat!</p>
-        <div class="ai-bot-tooltip-cta">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          Click to start chatting
-        </div>
-      </div>
-      <div class="ai-bot-tooltip-arrow"></div>
-    </div>
-
-    <button class="ai-bot-button" onclick="toggleChat()">
-      <div class="ai-bot-ping" id="botPing"></div>
-      <div class="ai-bot-ring" id="botRing"></div>
-      <div class="ai-bot-character" id="botCharacter"></div>
-    </button>
-    <div class="ai-bot-label" id="botLabel">Ask Fizz</div>
-  </div>
-
-  <!-- ============= CHAT WINDOW ============= -->
-  <div class="chat-window" id="chatWindow">
-    <div class="chat-header">
-      <div class="chat-header-left">
-        <div class="chat-avatar">
-          <div id="chatAvatar"></div>
-          <div class="online-dot"></div>
-        </div>
-        <div class="chat-header-info">
-          <h3>Fizz</h3>
-          <p>HR Buddy · Online</p>
-        </div>
-      </div>
-      <div class="chat-header-actions">
-        <button class="chat-header-btn" onclick="openCopilot()" title="Open full Copilot">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-            <polyline points="15 3 21 3 21 9"/>
-            <line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </button>
-        <button class="chat-header-btn" onclick="toggleChat()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input-area">
-      <form class="chat-input-row" onsubmit="sendMessage(event)">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
-        <button type="submit" class="chat-send-btn" id="sendBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
-      </form>
-      <div class="chat-footer-link">
-        <button onclick="openCopilot()">Open full HR Copilot →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============= REQUEST MODAL ============= -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div class="modal-header-left">
-          <div class="modal-header-icon">+</div>
-          <div>
-            <h2>Request a Resource</h2>
-            <p>Submit your request</p>
-          </div>
-        </div>
-        <button class="modal-close" onclick="closeModal()">×</button>
-      </div>
-      <div class="modal-body">
-        <iframe src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Cxkb__jtnUWCNwVFSXrfetn1EJbfFG9IlaNb-VnxdmRUQUFKQjlKNTZEOUJOVElEQzQ0MDdET0ZKMC4u&embed=true" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-
-<script>
-  // ========== DATA ==========
-  const hrResources = [
-    { id: 1, title: "I9 and ICE Inspections", topic: "Policies & Compliance", desc: "Guidance on I9 documentation and ICE inspection procedures.", url: null, status: "pending" },
-    { id: 2, title: "Leaves / FMLA Training for HR", topic: "Policies & Compliance", desc: "Comprehensive training resource covering leave policies and FMLA requirements.", url: "https://heyzine.com/flip-book/RCCBLeavesToolkit", status: "live" },
-    { id: 3, title: "Kronos Attendance Tracking (KAT)", topic: "Policies & Compliance", desc: "Attendance tracking guide for union employees. Deploying June/July 2026.", url: null, status: "pending" },
-    { id: 4, title: "Reasonable Suspicion", topic: "Policies & Compliance", desc: "Training and reference guide for reasonable suspicion protocols.", url: "https://heyzine.com/flip-book/RCCBReasonableSuspicion", status: "live" },
-    { id: 5, title: "Tax Credit Resources", topic: "Policies & Compliance", desc: "Resources related to available tax credit programs. Currently in development.", url: null, status: "pending" },
-    { id: 6, title: "Performance Management Guide", topic: "Talent Management", desc: "End-to-end guide for managing employee performance and development conversations.", url: "https://heyzine.com/flip-book/RCCBPerformanceGuide", status: "live" },
-    { id: 7, title: "Onboarding Guide", topic: "Onboarding", desc: "Everything a new hire needs for a smooth and successful start at RCCB.", url: "https://heyzine.com/flip-book/baa9b97ca3.html#page/1", status: "live" },
-    { id: 8, title: "YRJ People Leader Page", topic: "Professional Development", desc: "Learning and development hub for people leaders across the Reyes organization.", url: "https://reyesholdings.sharepoint.com/teams/DEMOYRJ/SitePages/LearningTeamHome11.aspx", status: "live" },
-    { id: 9, title: "YRJ Frontline Training", topic: "Professional Development", desc: "Frontline employee training materials and resources.", url: "https://heyzine.com/flip-book/e57d4c81e3.html#page/1", status: "live" },
-    { id: 10, title: "HR Excellence Competency Model", topic: "Professional Development", desc: "Framework defining the core competencies for HR excellence at Reyes.", url: "https://heyzine.com/flip-book/ReyesExcellencemodel.html", status: "live" },
-    { id: 11, title: "Employee Career & Development Guide", topic: "Professional Development", desc: "Career pathing guide helping RCCB employees plan and grow their careers.", url: "https://heyzine.com/flip-book/RCCBEmployeeDevelopmentGuide#page/1", status: "live" },
-    { id: 12, title: "Development Plan Workbook", topic: "Professional Development", desc: "Interactive workbook for building individual development plans.", url: "https://heyzine.com/flip-book/72c6c722b1.html", status: "live" },
-    { id: 13, title: "Career Connect Curriculum Guidebook", topic: "Professional Development", desc: "Curriculum guide for the Career Connect development program.", url: "https://heyzine.com/flip-book/CareerconnectCurriculum#page/1", status: "live" },
-    { id: 14, title: "Mentoring Tool", topic: "Professional Development", desc: "Structured tool for establishing and managing mentoring relationships.", url: "https://heyzine.com/flip-book/RCCBMentoringTool", status: "live" },
-    { id: 15, title: "Accelerate Resources", topic: "Professional Development", desc: "Resources for the Accelerate leadership development program. In development.", url: null, status: "pending" },
-    { id: 16, title: "Merchandiser Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Merchandiser roles at RCCB.", url: "https://heyzine.com/flip-book/MerchandiserCareerRoadmap", status: "live" },
-    { id: 17, title: "Production Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Production roles. Final version coming soon.", url: null, status: "pending" },
-    { id: 18, title: "Transportation Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Transportation roles. Final version coming soon.", url: null, status: "pending" },
-    { id: 19, title: "Warehouse Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Warehouse roles. Final version coming soon.", url: null, status: "pending" },
-    { id: 20, title: "Mandatory Compliance Training", topic: "Professional Development", desc: "Required compliance training materials available in SharePoint documents.", url: "#", status: "live" },
-    { id: 21, title: "Recognition Toolkit", topic: "Engagement & Recognition", desc: "Manager's guide to building a meaningful recognition culture at RCCB.", url: "https://heyzine.com/flip-book/RCCBRecognitionToolkit", status: "live" },
-    { id: 22, title: "Service Awards", topic: "Engagement & Recognition", desc: "Resources and materials for the RCCB employee service awards program.", url: "https://reyesholdings.sharepoint.com/:f:/s/rc-rccb/IgCM8wvj79hORq_3b2vMcO-0AWu-N6psGZkce_sylCGINNo?e=LfDlJA", status: "live" },
-    { id: 23, title: "RCCB Awards (GPTW, Fortune, Brandon Hall)", topic: "Engagement & Recognition", desc: "Showcase of RCCB's award recognitions. Resource currently in development.", url: null, status: "pending" },
-    { id: 24, title: "Internal Interview Guide", topic: "Talent Acquisition", desc: "Step-by-step guide for conducting structured internal interviews.", url: "https://heyzine.com/flip-book/1dea1e4827.html#page/1", status: "live" },
-    { id: 25, title: "Build Your Own Interview Guide", topic: "Talent Acquisition", desc: "Customizable interview guide template for hiring managers.", url: "https://acrobat.adobe.com/id/urn:aaid:sc:US:80f61a10-90c6-426f-8fa9-e069289d1e2f", status: "live" },
-    { id: 26, title: "Military Hiring Toolkit", topic: "Talent Acquisition", desc: "Resources and best practices for recruiting military talent.", url: "https://heyzine.com/flip-book/RCCBMilitary", status: "live" },
-    { id: 27, title: "Campus Recruitment Toolkit", topic: "Talent Acquisition", desc: "Toolkit for campus recruiting events, outreach, and hiring programs.", url: "https://heyzine.com/flip-book/RCCBcampustoolkit", status: "live" },
-    { id: 28, title: "Career Fair Checklist", topic: "Talent Acquisition", desc: "Complete checklist and prep guide for career fair events.", url: "https://reyesholdings.sharepoint.com/teams/RecruitmentResources/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources%2FCareer%20Fair%20Checklist%20%28Rev%202025%29%2Epdf&parent=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources", status: "live" },
-  ];
-
-  const filterChipsData = [
-    { filter: 'All', label: 'All', icon: '✦' },
-    { filter: 'Policies & Compliance', label: 'Policies', icon: '📋' },
-    { filter: 'Talent Management', label: 'Talent Mgmt', icon: '📊' },
-    { filter: 'Onboarding', label: 'Onboarding', icon: '👋' },
-    { filter: 'Professional Development', label: 'Development', icon: '📈' },
-    { filter: 'Engagement & Recognition', label: 'Recognition', icon: '🏆' },
-    { filter: 'Talent Acquisition', label: ' Talent Acquisition', icon: '🔍' },
-  ];
-
-  // All tags use red/black/white brand palette only
-  const tagStyles = {
-    "Policies & Compliance":    { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
-    "Talent Management":        { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
-    "Onboarding":               { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
-    "Professional Development": { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
-    "Engagement & Recognition": { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
-    "Talent Acquisition":       { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
-  };
-
-  const topicIcons = {
-    "Policies & Compliance": "📋",
-    "Talent Management": "📊",
-    "Onboarding": "👋",
-    "Professional Development": "📈",
-    "Engagement & Recognition": "🏆",
-    "Talent Acquisition": "🔍",
-  };
-
-  // ========== STATE ==========
-  let currentFilter = 'All';
-  let searchQuery = '';
-  let chatMessages = [
-    {
-      id: 1,
-      text: "Hey there! 👋 I'm Fizz, your HR buddy. I'm here to help you find resources, answer questions, or just chat. What can I help you with today?",
-      isBot: true,
-      quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!']
-    }
-  ];
-  let isTyping = false;
-  let isChatOpen = false;
-
-  // ========== FIZZ CHARACTER SVG ==========
-  function getFizzSVG(size = 80) {
-    return `
-      <svg width="${size}" height="${size}" viewBox="0 0 60 120" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
-        <defs>
-          <linearGradient id="bottleBody" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#1a0505"/>
-            <stop offset="15%" stop-color="#3d1111"/>
-            <stop offset="50%" stop-color="#4a1515"/>
-            <stop offset="85%" stop-color="#3d1111"/>
-            <stop offset="100%" stop-color="#1a0505"/>
-          </linearGradient>
-          <linearGradient id="glassShine" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
-            <stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
-            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-          </linearGradient>
-          <linearGradient id="capColor" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FF4444"/>
-            <stop offset="50%" stop-color="#F40009"/>
-            <stop offset="100%" stop-color="#8B0008"/>
-          </linearGradient>
-        </defs>
-        <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#bottleBody)"/>
-        <path d="M17 40 C14 48 13 60 12 72 C11 84 12 96 14 105" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="30" cy="70" rx="6" ry="28" fill="url(#glassShine)" opacity="0.3"/>
-        <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#capColor)"/>
-        <rect x="24" y="11" width="12" height="2" rx="1" fill="rgba(255,255,255,0.4)"/>
-        <rect x="15" y="58" width="30" height="18" rx="1.5" fill="white" opacity="0.97"/>
-        <rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/>
-        <path d="M18 67 Q24 63 30 67 Q36 71 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
-        <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
-        <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="26" cy="40.5" r="0.8" fill="white"/>
-        <circle cx="36" cy="40.5" r="0.8" fill="white"/>
-        <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <circle cx="20" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
-        <circle cx="40" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
-        <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="13" cy="40" rx="4" ry="6" fill="#444"/>
-        <ellipse cx="13" cy="40" rx="2.8" ry="4.5" fill="#F40009"/>
-        <ellipse cx="47" cy="40" rx="4" ry="6" fill="#444"/>
-        <ellipse cx="47" cy="40" rx="2.8" ry="4.5" fill="#F40009"/>
-        <path d="M13 46 Q13 54 18 56 L24 56" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="26" cy="56" rx="3" ry="2.5" fill="#444"/>
-        <circle cx="22" cy="90" r="1.5" fill="rgba(255,255,255,0.4)">
-          <animate attributeName="cy" values="95;82;95" dur="2.5s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="35" cy="98" r="1" fill="rgba(255,255,255,0.35)">
-          <animate attributeName="cy" values="100;85;100" dur="3s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.35;0.1;0.35" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="40" cy="92" r="0.8" fill="rgba(255,255,255,0.3)">
-          <animate attributeName="cy" values="95;80;95" dur="2.2s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.3;0.08;0.3" dur="2.2s" repeatCount="indefinite"/>
-        </circle>
-        <g transform="translate(42, 12)">
-          <circle cx="6" cy="6" r="7" fill="#10B981"/>
-          <path d="M3 4.5 L9 4.5 L9 7.5 L7 7.5 L5.5 9 L5.5 7.5 L3 7.5 Z" fill="white"/>
-        </g>
-      </svg>
-    `;
-  }
-
-  function getMiniFizzSVG(size = 32) {
-    return `
-      <svg width="${size}" height="${size}" viewBox="0 0 60 120">
-        <defs>
-          <linearGradient id="miniBody-${size}" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#1a0505"/>
-            <stop offset="50%" stop-color="#4a1515"/>
-            <stop offset="100%" stop-color="#1a0505"/>
-          </linearGradient>
-          <linearGradient id="miniCap-${size}" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FF4444"/>
-            <stop offset="100%" stop-color="#8B0008"/>
-          </linearGradient>
-        </defs>
-        <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#miniBody-${size})"/>
-        <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#miniCap-${size})"/>
-        <rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/>
-        <path d="M18 67 Q30 61 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
-        <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
-        <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="26" cy="40.5" r="0.8" fill="white"/>
-        <circle cx="36" cy="40.5" r="0.8" fill="white"/>
-        <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none"/>
-        <ellipse cx="13" cy="40" rx="3" ry="5" fill="#F40009"/>
-        <ellipse cx="47" cy="40" rx="3" ry="5" fill="#F40009"/>
-      </svg>
-    `;
-  }
-
-  // ========== INIT ==========
-  document.addEventListener('DOMContentLoaded', function() {
-    initBubbles();
-    initTypewriter();
-    renderFilterChips();
-    renderCards();
-    initFizzCharacters();
-    initSearch();
-    initChatInput();
-    renderChatMessages();
-  });
-
-  function initFizzCharacters() {
-    document.getElementById('botCharacter').innerHTML = getFizzSVG(80);
-    document.getElementById('tooltipAvatar').innerHTML = getMiniFizzSVG(40);
-    document.getElementById('chatAvatar').innerHTML = getMiniFizzSVG(44);
-  }
-
-  // ========== BUBBLES ==========
-  function initBubbles() {
-    const canvas = document.getElementById('bubbles');
-    const hero = canvas.parentElement;
-    const ctx = canvas.getContext('2d');
-
-    function resize() {
-      canvas.width = hero.offsetWidth;
-      canvas.height = hero.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const bubbles = Array.from({length: 48}, () => ({
-      x: Math.random() * canvas.width,
-      y: canvas.height + Math.random() * canvas.height,
-      r: 3 + Math.random() * 22,
-      speed: 0.3 + Math.random() * 1.3,
-      opacity: 0.05 + Math.random() * 0.2,
-      wobble: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.008 + Math.random() * 0.025
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      bubbles.forEach(b => {
-        b.y -= b.speed;
-        b.wobble += b.wobbleSpeed;
-        const xOff = Math.sin(b.wobble) * 2;
-        if (b.y + b.r < 0) {
-          b.y = canvas.height + b.r;
-          b.x = Math.random() * canvas.width;
-        }
-        ctx.beginPath();
-        ctx.arc(b.x + xOff, b.y, b.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255,255,255,${b.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(b.x + xOff - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.22, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${b.opacity * 0.9})`;
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
-  }
-
-  // ========== TYPEWRITER ==========
-  function initTypewriter() {
-    const phrases = ['HR resources', 'reasonable suspicion', 'career roadmaps', 'development plan', 'mentoring tool', 'service awards', 'career fair', 'recognition toolkit'];
-    const input = document.getElementById('searchInput');
-    const typewriter = document.getElementById('typewriterText');
-    let pi = 0, ci = 0, deleting = false;
-
-    function type() {
-      if (document.activeElement === input || input.value) {
-        typewriter.innerHTML = '';
-        return;
-      }
-      const phrase = phrases[pi];
-      if (!deleting) {
-        ci++;
-        typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
-        if (ci === phrase.length) {
-          deleting = true;
-          setTimeout(type, 2000);
-          return;
-        }
-        setTimeout(type, 90);
-      } else {
-        ci--;
-        typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
-        if (ci === 0) {
-          deleting = false;
-          pi = (pi + 1) % phrases.length;
-          setTimeout(type, 500);
-          return;
-        }
-        setTimeout(type, 50);
-      }
-    }
-    setTimeout(type, 1000);
-
-    input.addEventListener('focus', () => typewriter.innerHTML = '');
-    input.addEventListener('blur', () => {
-      if (!input.value) setTimeout(type, 500);
-    });
-  }
-
-  // ========== SEARCH ==========
-  function initSearch() {
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      searchQuery = e.target.value;
-      renderCards();
-    });
-  }
-
-  // ========== FILTER CHIPS ==========
-  function renderFilterChips() {
-    const container = document.getElementById('filterChips');
-    container.innerHTML = filterChipsData.map(chip => `
-      <button class="filter-chip ${currentFilter === chip.filter ? 'active' : ''}" data-filter="${chip.filter}">
-        <span class="icon">${chip.icon}</span>
-        ${chip.label}
-      </button>
-    `).join('');
-
-    container.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-chip');
-      if (btn) {
-        currentFilter = btn.dataset.filter;
-        renderFilterChips();
-        renderCards();
-      }
-    });
-  }
-
-  // ========== CARDS ==========
-  function renderCards() {
-    const grid = document.getElementById('cardsGrid');
-    const noResults = document.getElementById('noResults');
-
- let filtered = hrResources;
-
-// Filter by topic
-if (currentFilter !== 'All') {
-  filtered = filtered.filter(r => r.topic === currentFilter);
-}
-
-// Token-based search: every word in the query must appear somewhere
-// in the card's title, description, or topic — order doesn't matter.
-if (searchQuery) {
-  const tokens = searchQuery
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(t => t.length > 0);
-
-  filtered = filtered.filter(r => {
-    const haystack = (r.title + ' ' + r.desc + ' ' + r.topic).toLowerCase();
-    return tokens.every(token => haystack.includes(token));
-  });
-}
-
-    document.getElementById('resultsCount').textContent = filtered.length;
-
-    if (filtered.length === 0) {
-      grid.innerHTML = '';
-      noResults.style.display = 'block';
-      return;
-    }
-
-    noResults.style.display = 'none';
-    grid.innerHTML = filtered.map((resource, index) => {
-      const style = tagStyles[resource.topic] || { bg: '#eee', color: '#333', accent: '#666' };
-      const icon = topicIcons[resource.topic] || '📄';
-      const isLive = resource.status === 'live';
-
-      const openButton = isLive
-        ? `<a href="${resource.url || '#'}" target="_blank" rel="noopener noreferrer" class="btn-open" onclick="event.stopPropagation()">Open →</a>`
-        : `<button class="btn-open amber-btn" disabled>Coming soon</button>`;
-
-      return `
-        <div class="flip-wrap fade-in ${!isLive ? 'coming-soon' : ''}" style="animation-delay: ${index * 0.04}s" data-id="${resource.id}">
-          <div class="flip-inner">
-            <div class="flip-front" onclick="flipCard(${resource.id})">
-              <div class="color-bar" style="background-color: ${style.accent}"></div>
-              <div class="front-top">
-                <div class="book-icon-wrap" style="background: ${style.bg}">${icon}</div>
-                <span class="front-tag" style="background: ${style.bg}; color: ${style.color}">${resource.topic}</span>
-              </div>
-              <div class="front-title">${resource.title}</div>
-              <div class="front-desc">${resource.desc}</div>
-              ${isLive
-                ? `<div class="flip-hint"><span class="arrow">↩</span> Click to flip</div>`
-                : `<div class="coming-soon-badge"><span class="cs-dot"></span>Coming Soon</div>`}
-            </div>
-            <div class="flip-back" style="background-color: ${isLive ? style.accent : '#111111'}">
-              <div class="back-label">${isLive ? 'HR Resource' : 'In Development'}</div>
-              <div class="back-title">${resource.title}</div>
-              <div class="back-desc">${resource.desc} ${isLive ? 'Click "Open" to launch the full resource.' : 'This resource is currently being developed and will be available soon.'}</div>
-              <div class="back-actions">
-                ${openButton}
-                <button class="btn-back" onclick="event.stopPropagation(); unflipCard(${resource.id})">↩ Back</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  function flipCard(id) {
-    const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
-    if (card) card.classList.add('flipped');
-  }
-
-  function unflipCard(id) {
-    const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
-    if (card) card.classList.remove('flipped');
-  }
-
-  // ========== MODAL ==========
-  function openModal() {
-    document.getElementById('modalOverlay').classList.add('active');
-  }
-
-  function closeModal(event) {
-    if (!event || event.target === document.getElementById('modalOverlay')) {
-      document.getElementById('modalOverlay').classList.remove('active');
-    }
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // ========== CHAT ==========
-  function toggleChat() {
-    isChatOpen = !isChatOpen;
-    const chatWindow = document.getElementById('chatWindow');
-    const container = document.getElementById('aiBotContainer');
-    const ping = document.getElementById('botPing');
-    const ring = document.getElementById('botRing');
-    const label = document.getElementById('botLabel');
-
-    if (isChatOpen) {
-      chatWindow.classList.add('open');
-      container.classList.add('chat-open');
-      ping.style.display = 'none';
-      ring.style.display = 'none';
-      label.textContent = 'Chatting';
-      label.style.color = '#F40009';
-      document.getElementById('chatInput').focus();
-    } else {
-      chatWindow.classList.remove('open');
-      container.classList.remove('chat-open');
-      ping.style.display = 'block';
-      ring.style.display = 'block';
-      label.textContent = 'Ask Fizz';
-      label.style.color = '';
-    }
-  }
-
-  function openCopilot() {
-    window.open('https://m365.cloud.microsoft/chat/?titleId=T_0ec4de2d-d8ee-6d64-fdb5-689d4cb47bfb&source=embedded-builder', '_blank');
-  }
-
-  const botResponses = {
-    'hi': { response: "Hey there! 👋 I'm Fizz, your HR buddy! I'm here to help you find resources, answer questions, or just chat. What can I help you with today?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!'] },
-    'hello': { response: "Hello! 🥤 Welcome to the RCCB HR SearchBar! I'm Fizz. What brings you here today?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!'] },
-    'hey': { response: "Hey hey! 🎉 Great to see you! I'm Fizz, your friendly HR assistant. How can I help?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR'] },
-    'just saying hi!': { response: "Aww, that's nice! 😊 I'm here whenever you need me — whether it's finding HR docs, answering questions, or just vibing.", quickReplies: ['Tell me a joke', 'What can you help with?', 'Bye!'] },
-    'find a resource': { response: "Perfect! 📚 I can help you find all sorts of HR goodies. What kind of resource are you looking for?", quickReplies: ['Onboarding', 'Benefits', 'Career Development', 'Policies'] },
-    'benefits info': { response: "Great question! 💪 For benefits, check out the **Employee Center** on SharePoint, or our **Healthy Reyes** portal. What do you want to know about?", quickReplies: ['Health insurance', 'PTO/Vacation', 'Talk to HR team'] },
-    'career development': { response: "Love the growth mindset! 📈 We have tons of career resources: **Career Roadmaps**, **Development Plan Workbook**, **Mentoring Tools**, and more. What area interests you?", quickReplies: ['Career Roadmaps', 'Mentoring', 'Training programs'] },
-    'tell me a joke': { response: "Okay, here's one! 😄\n\nWhy did the HR manager bring a ladder to work?\n\n...To reach new *heights* in employee engagement! 🪜😂", quickReplies: ['Another joke!', 'Back to business', 'That was terrible 😂'] },
-    'another joke!': { response: "Alright, one more! 🤣\n\nWhat's an HR professional's favorite type of music?\n\n...*Employee-ectric* beats! ⚡🎵", quickReplies: ['Okay help me find something', 'One more!', "You're funny 😂"] },
-    'that was terrible 😂': { response: "Hey, I tried! 😂 Comedy isn't my *core competency* — but HR definitely is. Let me redeem myself. What can I help you with?", quickReplies: ['Find a resource', 'Benefits info', 'Career Development'] },
-    'bye!': { response: "Take care! 👋 I'm always here if you need HR help. Have an amazing day!", quickReplies: ['Actually, one more thing', 'Bye Fizz!'] },
-    'bye fizz!': { response: "Bye bye! 🎉 Come back anytime!", quickReplies: ['Start over'] },
-    'start over': { response: "Hey there! 👋 I'm Fizz, your HR buddy! Ready to help you navigate all things HR at RCCB. What can I do for you?", quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!'] },
-    'default': { response: "Hmm, I'm not quite sure about that one 🤔 For more complex questions, try our full HR Copilot assistant, or let me help you find a resource!", quickReplies: ['Open full chat', 'Find a resource', 'Talk to HR'] }
-  };
-
-  function getBotResponse(msg) {
-    const normalized = msg.toLowerCase().trim();
-    if (botResponses[normalized]) return botResponses[normalized];
-    for (const key of Object.keys(botResponses)) {
-      if (normalized.includes(key)) return botResponses[key];
-    }
-    if (normalized.match(/^(hi|hello|hey|howdy|greetings|sup|yo)/)) return botResponses['hi'];
-    if (normalized.match(/(bye|goodbye|see you|later|cya)/)) return botResponses['bye!'];
-    if (normalized.match(/(thank|thanks|thx)/)) return { response: "You're welcome! 😊 Anything else I can help with?", quickReplies: ['Find a resource', 'Nope, all good!', 'Bye!'] };
-    return botResponses['default'];
-  }
-
-  function initChatInput() {
-    const input = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-
-    input.addEventListener('input', () => {
-      sendBtn.disabled = !input.value.trim();
-    });
-    sendBtn.disabled = true;
-  }
-
-  function sendMessage(e) {
-    e.preventDefault();
-    const input = document.getElementById('chatInput');
-    const text = input.value.trim();
-    if (!text) return;
-
-    if (text.toLowerCase().includes('open hr copilot') || text.toLowerCase().includes('open full chat')) {
-      openCopilot();
-    }
-
-    chatMessages.push({ id: Date.now(), text, isBot: false });
-    input.value = '';
-    document.getElementById('sendBtn').disabled = true;
-    renderChatMessages();
-
-    isTyping = true;
-    renderChatMessages();
-
-    setTimeout(() => {
-      const { response, quickReplies } = getBotResponse(text);
-      chatMessages.push({ id: Date.now() + 1, text: response, isBot: true, quickReplies });
-      isTyping = false;
-      renderChatMessages();
-    }, 800 + Math.random() * 700);
-  }
-
-  function handleQuickReply(reply) {
-    document.getElementById('chatInput').value = reply;
-    sendMessage(new Event('submit'));
-  }
-
-  function renderChatMessages() {
-    const container = document.getElementById('chatMessages');
-    let html = chatMessages.map(msg => `
-      <div class="chat-message">
-        <div class="chat-message-row ${msg.isBot ? '' : 'user'}">
-          ${msg.isBot ? `<div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>` : ''}
-          <div class="chat-bubble ${msg.isBot ? 'bot' : 'user'}">${msg.text}</div>
-        </div>
-        ${msg.isBot && msg.quickReplies && msg.quickReplies.length > 0 ? `
-          <div class="quick-replies">
-            ${msg.quickReplies.map(r => `<button class="quick-reply-btn" onclick="handleQuickReply('${r.replace(/'/g, "\\'")}')">${r}</button>`).join('')}
-          </div>
-        ` : ''}
-      </div>
-    `).join('');
-
-    if (isTyping) {
-      html += `
-        <div class="chat-message">
-          <div class="typing-indicator">
-            <div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>
-            <div class="typing-dots">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    container.innerHTML = html;
-    container.scrollTop = container.scrollHeight;
-  }
-</script>
-      font-weight: 500;
-      font-size: clamp(16px, 1.8vw, 19px);
-      color: rgba(255,255,255,0.92);
-      letter-spacing: 0.01em;
-      margin-bottom: 40px;
-      max-width: 540px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Search bar */
-    .search-wrap {
-      display: flex;
-      align-items: center;
-      background: var(--white);
-      border-radius: 2px;
-      padding: 8px 8px 8px 22px;
-      max-width: 560px;
-      margin: 0 auto 36px;
-      gap: 12px;
-      position: relative;
-      box-shadow: 0 16px 44px rgba(0,0,0,0.28);
-      border: 2px solid var(--white);
-    }
-
-    .search-wrap:focus-within {
-      box-shadow:
-        0 0 0 4px rgba(255,255,255,0.25),
-        0 16px 44px rgba(0,0,0,0.32);
-    }
-
-    .search-icon {
-      flex-shrink: 0;
-      color: var(--coke-red);
-    }
-
-    .search-wrap input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--black);
-      background: transparent;
-    }
-
-    .search-wrap input::placeholder { color: var(--gray-400); }
-
-    .typewriter-text {
-      position: absolute;
-      left: 62px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--gray-400);
-      pointer-events: none;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 16px;
-      background: var(--coke-red);
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink 0.8s step-end infinite;
-    }
-
-    .search-btn {
-      background: var(--black);
-      color: var(--white);
-      border: none;
-      border-radius: 2px;
-      padding: 14px 32px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s;
-    }
-
-    .search-btn:hover {
-      background: var(--coke-red);
-      transform: translateY(-1px);
-    }
-
-    .search-btn:active { transform: scale(0.97); }
-
-    /* Powered-by footer strip */
-    .logo-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .logo-row .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.55);
-    }
-
-    .logo-row span {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.8);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
-
-    .request-btn {
-      position: absolute;
-      top: 22px; right: 22px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      color: var(--coke-red);
-      border: none;
-      border-radius: 2px;
-      padding: 11px 18px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s;
-      z-index: 20;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-    }
-
-    .request-btn:hover {
-      background: var(--black);
-      color: var(--white);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
-    }
-
-    /* Bottle cap divider */
-    .cap-divider {
-      position: relative;
-      max-width: 1100px;
-      margin: -36px auto 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      padding: 0 16px;
-      z-index: 10;
-    }
-
-    .cap-line {
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
-    }
-
-    .bottle-cap {
-      width: 64px;
-      height: 64px;
-      flex-shrink: 0;
-      animation: spinSlow 24s linear infinite;
-      filter: drop-shadow(0 6px 14px rgba(244,0,9,0.32));
-    }
-
-    @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    /* ========================================================
-       FILTERS SECTION  ("Browse by Category")
-       ======================================================== */
-    .filters-section {
-      max-width: 1100px;
-      margin: 44px auto 0;
-      padding: 0 20px 24px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--gray-100);
-    }
-
-    .section-title-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
 
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--coke-red);
-    }
-
-    .section-kicker::before {
-      content: '';
-      width: 18px;
-      height: 2px;
-      background: var(--coke-red);
-    }
-
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(26px, 3.5vw, 36px);
-      color: var(--black);
-      line-height: 1;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-    }
-
-    .section-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--gray-600);
-      letter-spacing: 0.01em;
-    }
-
-    .results-count {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gray-600);
-      white-space: nowrap;
-      padding-bottom: 4px;
-    }
-
-    .results-count strong {
-      display: inline-block;
-      color: var(--white);
-      background: var(--coke-red);
-      font-weight: 800;
-      font-size: 13px;
-      padding: 3px 9px;
-      border-radius: 2px;
-      margin-right: 6px;
-      letter-spacing: 0.04em;
-    }
-
-    .filters-row {
+    .chat-resource-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 10px 12px;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: all 0.15s;
     }
 
-    .filter-chip {
-      display: inline-flex;
+    .chat-resource-card:hover {
+      border-color: var(--coke-red);
+      box-shadow: 0 2px 10px rgba(244,0,9,0.14);
+      transform: translateX(2px);
+    }
+
+    .chat-resource-icon {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      background: var(--red-tint);
+      display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 10px 18px;
-      border-radius: 2px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .chat-resource-info { flex: 1; min-width: 0; }
+
+    .chat-resource-title {
+      font-size: 12.5px;
       font-weight: 700;
+      color: var(--black);
+      line-height: 1.2;
+    }
+
+    .chat-resource-topic {
+      font-size: 10.5px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    .chat-resource-badge {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 2px;
+      background: #111;
+      color: white;
+      font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 1.5px solid var(--gray-200);
-      background: var(--white);
-      color: var(--black);
+      margin-left: 6px;
     }
 
-    .filter-chip:hover {
-      border-color: var(--black);
-      color: var(--black);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
-    }
+    .chat-resource-arrow { color: var(--gray-400); font-size: 12px; flex-shrink: 0; }
 
-    .filter-chip.active {
-      background: var(--coke-red);
-      border-color: var(--coke-red);
-      color: var(--white);
-      box-shadow: 0 8px 18px rgba(244,0,9,0.28);
-    }
-
-    .filter-chip .icon { font-size: 13px; }
-
-    /* ========================================================
-       CARDS GRID
-       ======================================================== */
-    .cards-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 16px 20px 80px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
-    }
-
-    .flip-wrap {
-      perspective: 1200px;
-      height: 260px;
-      cursor: pointer;
-    }
-
-    .flip-inner {
-      position: relative;
-      width: 100%; height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
-    }
-
-    .flip-wrap.flipped .flip-inner { transform: rotateY(180deg); }
-
-    .flip-front, .flip-back {
-      position: absolute;
-      width: 100%; height: 100%;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .flip-front {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      display: flex;
-      flex-direction: column;
-      padding: 22px 22px 18px;
-      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
-    }
-
-    .flip-wrap:hover .flip-front {
-      border-color: var(--coke-red);
-      box-shadow: 0 16px 40px rgba(244, 0, 9, 0.16);
-      transform: translateY(-4px);
-    }
-
-    .flip-wrap.coming-soon:hover .flip-front {
-      border-color: var(--black);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
-    }
-
-    .flip-back {
-      transform: rotateY(180deg);
-      display: flex;
-      flex-direction: column;
-      padding: 22px;
-    }
-
-    .color-bar {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 5px;
-      transition: width 0.3s;
-      z-index: 2;
-    }
-
-    .flip-wrap:hover .color-bar { width: 8px; }
-
-    .front-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      gap: 10px;
-      padding-left: 12px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .book-icon-wrap {
-      width: 52px; height: 58px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
-    }
-
-    .flip-wrap:hover .book-icon-wrap {
-      transform: scale(1.1) rotate(-4deg);
-    }
-
-    .front-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 9.5px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      padding: 5px 10px;
-      border-radius: 2px;
-      white-space: nowrap;
-      text-transform: uppercase;
-    }
-
-    .front-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15.5px;
-      font-weight: 700;
-      color: var(--black);
-      line-height: 1.3;
-      margin-bottom: 8px;
-      padding-left: 12px;
-      position: relative;
-      z-index: 2;
-      letter-spacing: -0.005em;
-    }
-
-    .front-desc {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--gray-600);
-      line-height: 1.55;
-      flex: 1;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      padding-left: 12px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .flip-hint {
-      margin-top: auto;
-      padding-top: 12px;
-      padding-left: 12px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gray-400);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-      position: relative;
-      z-index: 2;
-    }
-
-    .flip-wrap:hover .flip-hint { color: var(--coke-red); }
-
-    .flip-hint .arrow {
-      display: inline-block;
-      transition: transform 0.25s;
-    }
-
-    .flip-wrap:hover .flip-hint .arrow { transform: rotate(-15deg) translateX(2px); }
-
-    .coming-soon-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--black);
-      color: var(--white);
-      border-radius: 2px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      padding: 5px 12px;
-      margin-top: auto;
-      margin-left: 12px;
-      width: fit-content;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 2;
-    }
-
-    .cs-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--coke-red);
-      animation: pulse 1.6s ease-in-out infinite;
-    }
-
-    .back-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      color: rgba(255, 255, 255, 0.7);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .back-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 10px;
-      letter-spacing: -0.005em;
-    }
-
-    .back-desc {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.92);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .back-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .btn-open {
-      flex: 1;
-      padding: 11px 0;
-      border-radius: 2px;
-      background: var(--white);
-      color: var(--black);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .btn-open:hover {
-      background: var(--black);
-      color: var(--white);
-      transform: scale(1.02);
-    }
-
-    .btn-open.amber-btn {
-      color: var(--gray-600);
-      opacity: 0.7;
-      cursor: default;
-    }
-    .btn-open.amber-btn:hover {
-      background: var(--white);
-      color: var(--gray-600);
-      transform: none;
-    }
-
-    .btn-back {
-      padding: 11px 16px;
-      border-radius: 2px;
-      background: transparent;
-      color: var(--white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-back:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: var(--white);
-    }
-
-    /* ========================================================
-       FOOTER
-       ======================================================== */
-    .footer {
-      position: relative;
-      text-align: center;
-      padding: 48px 24px 36px;
-      background: var(--black);
-      color: var(--white);
-      overflow: hidden;
-    }
-
-    .footer-bar {
-      width: 48px;
-      height: 3px;
-      background: var(--coke-red);
-      margin: 0 auto 18px;
-    }
-
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 18px;
-    }
-
-    .footer-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-
-    .footer-sub {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      color: rgba(255,255,255,0.55);
-      text-transform: uppercase;
-    }
-
-    .footer p {
-      color: rgba(255,255,255,0.5);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-
-    /* ========================================================
-       AI BOT (Fizz)
-       ======================================================== */
-    .ai-bot-container {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 1000;
-    }
-
-    .ai-bot-tooltip {
-      position: absolute;
-      bottom: calc(100% + 22px);
-      right: 0;
-      width: 270px;
-      background: var(--white);
-      border-radius: 4px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--gray-200);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(8px) scale(0.95);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-
-    .ai-bot-container:not(.chat-open):hover .ai-bot-tooltip {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
-    .ai-bot-tooltip-header {
-      background: linear-gradient(135deg, var(--coke-red) 0%, var(--coke-red-deep) 100%);
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .ai-bot-tooltip-avatar {
-      width: 48px;
-      height: 48px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255,255,255,0.22);
-      overflow: hidden;
-    }
-
-    .ai-bot-tooltip-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.005em;
-    }
-
-    .ai-bot-tooltip-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.78);
-      text-transform: uppercase;
-      margin-top: 3px;
-    }
-
-    .ai-bot-tooltip-content {
-      padding: 14px 16px 16px;
-    }
-
-    .ai-bot-tooltip-content p {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--black);
-      margin-bottom: 12px;
-      line-height: 1.55;
-    }
-
-    .ai-bot-tooltip-cta {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      color: var(--coke-red);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-transform: uppercase;
-    }
-
-    .ai-bot-tooltip-arrow {
-      position: absolute;
-      bottom: -8px;
-      right: 48px;
-      width: 16px;
-      height: 16px;
-      background: var(--white);
-      transform: rotate(45deg);
-      border-right: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-    }
-
-    .ai-bot-button {
-      width: 82px;
-      height: 102px;
-      border-radius: 42px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.22) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, var(--coke-red) 0%, var(--coke-red-darker) 100%);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: all 0.3s;
-      box-shadow:
-        0 12px 40px rgba(244, 0, 9, 0.38),
-        inset 0 2px 4px rgba(255,255,255,0.2);
-    }
-
-    .ai-bot-button:hover {
-      transform: scale(1.06);
-      box-shadow:
-        0 18px 50px rgba(244, 0, 9, 0.48),
-        0 0 0 4px rgba(244, 0, 9, 0.16),
-        inset 0 2px 4px rgba(255,255,255,0.2);
-    }
-
-    .ai-bot-ping {
-      position: absolute;
-      inset: 0;
-      border-radius: 42px;
-      background: rgba(244, 0, 9, 0.22);
-      animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-
-    .ai-bot-ring {
-      position: absolute;
-      inset: -8px;
-      border-radius: 46px;
-      border: 2px solid rgba(244, 0, 9, 0.2);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .ai-bot-character {
-      position: relative;
-      z-index: 10;
-      transition: transform 0.3s;
-    }
-
-    .ai-bot-button:hover .ai-bot-character {
-      transform: scale(1.08) rotate(-3deg);
-    }
-
-    .ai-bot-label {
-      position: absolute;
-      bottom: -32px;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      color: var(--black);
-      text-transform: uppercase;
-    }
-
-    /* ========================================================
-       CHAT WINDOW
-       ======================================================== */
-    .chat-window {
-      position: fixed;
-      bottom: 146px;
-      right: 28px;
-      width: 380px;
-      max-width: calc(100vw - 48px);
-      height: 540px;
-      background: var(--white);
+    .chat-copilot-cta {
+      margin-top: 8px;
+      margin-left: 42px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, var(--coke-red), var(--coke-red-deep));
       border-radius: 8px;
-      box-shadow:
-        0 28px 70px rgba(0,0,0,0.25),
-        0 12px 28px rgba(244,0,9,0.14);
-      overflow: hidden;
-      display: none;
-      flex-direction: column;
-      z-index: 1001;
-      animation: slideIn 0.35s cubic-bezier(.34,1.56,.64,1);
-    }
-
-    .chat-window.open { display: flex; }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(24px) scale(0.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .chat-header {
-      background: linear-gradient(135deg, var(--coke-red) 0%, var(--coke-red-deep) 100%);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .chat-header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .chat-avatar {
-      position: relative;
-      width: 52px;
-      height: 52px;
-      background: rgba(255,255,255,0.14);
-      backdrop-filter: blur(10px);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255,255,255,0.22);
-      overflow: hidden;
-    }
-
-    .chat-avatar .online-dot {
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      width: 14px;
-      height: 14px;
-      background: #10B981;
-      border-radius: 50%;
-      border: 2px solid white;
-    }
-
-    .chat-header-info h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      line-height: 1.1;
-      letter-spacing: -0.005em;
-    }
-
-    .chat-header-info p {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: rgba(255,255,255,0.8);
-      text-transform: uppercase;
-      margin-top: 3px;
-    }
-
-    .chat-header-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .chat-header-btn {
-      width: 34px;
-      height: 34px;
-      background: rgba(255,255,255,0.16);
-      border: none;
-      border-radius: 4px;
       color: white;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
+      gap: 10px;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
 
-    .chat-header-btn:hover { background: rgba(255,255,255,0.28); }
+    .chat-copilot-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,0,9,0.3); }
 
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      background: var(--off-white);
-    }
-
-    .chat-message { margin-bottom: 16px; }
-
-    .chat-message-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .chat-message-row.user { justify-content: flex-end; }
-
-    .chat-message-avatar {
-      width: 34px;
-      height: 34px;
-      background: var(--red-tint);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(244,0,9,0.15);
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-
-    .chat-bubble {
-      max-width: 75%;
-      padding: 11px 15px;
-      border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.55;
-      white-space: pre-wrap;
-    }
-
-    .chat-bubble.bot {
-      background: white;
-      color: var(--black);
-      border: 1px solid var(--gray-200);
-      border-top-left-radius: 2px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    .chat-bubble.user {
-      background: var(--coke-red);
-      color: white;
-      border-top-right-radius: 2px;
-      box-shadow: 0 4px 12px rgba(244,0,9,0.22);
-      font-weight: 600;
-    }
+    .chat-copilot-cta-text strong { font-size: 12.5px; font-weight: 800; display: block; }
+    .chat-copilot-cta-text span { font-size: 11px; opacity: 0.9; }
 
     .quick-replies {
       display: flex;
@@ -3205,19 +1089,11 @@ if (searchQuery) {
       color: var(--coke-red);
       cursor: pointer;
       transition: all 0.2s;
-      letter-spacing: 0.02em;
     }
 
-    .quick-reply-btn:hover {
-      background: var(--coke-red);
-      color: white;
-    }
+    .quick-reply-btn:hover { background: var(--coke-red); color: white; }
 
-    .typing-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .typing-indicator { display: flex; align-items: center; gap: 8px; }
 
     .typing-dots {
       display: flex;
@@ -3230,8 +1106,7 @@ if (searchQuery) {
     }
 
     .typing-dots span {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       background: var(--coke-red);
       border-radius: 50%;
       animation: bounce 1.4s infinite;
@@ -3244,12 +1119,10 @@ if (searchQuery) {
       padding: 14px 16px;
       border-top: 1px solid var(--gray-200);
       background: white;
+      flex-shrink: 0;
     }
 
-    .chat-input-row {
-      display: flex;
-      gap: 8px;
-    }
+    .chat-input-row { display: flex; gap: 8px; }
 
     .chat-input {
       flex: 1;
@@ -3265,14 +1138,10 @@ if (searchQuery) {
       transition: box-shadow 0.2s, border-color 0.2s;
     }
 
-    .chat-input:focus {
-      border-color: var(--coke-red);
-      box-shadow: 0 0 0 3px rgba(244,0,9,0.12);
-    }
+    .chat-input:focus { border-color: var(--coke-red); box-shadow: 0 0 0 3px rgba(244,0,9,0.12); }
 
     .chat-send-btn {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       background: var(--coke-red);
       border: none;
       border-radius: 2px;
@@ -3285,10 +1154,7 @@ if (searchQuery) {
       box-shadow: 0 4px 12px rgba(244,0,9,0.28);
     }
 
-    .chat-send-btn:hover:not(:disabled) {
-      background: var(--black);
-      transform: scale(1.03);
-    }
+    .chat-send-btn:hover:not(:disabled) { background: var(--black); transform: scale(1.03); }
     .chat-send-btn:disabled { opacity: 0.45; cursor: default; }
 
     .chat-footer-link { text-align: center; margin-top: 8px; }
@@ -3308,13 +1174,10 @@ if (searchQuery) {
 
     .chat-footer-link button:hover { color: var(--coke-red); }
 
-    /* ========================================================
-       MODAL
-       ======================================================== */
+    /* ========= MODAL ========= */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
@@ -3325,17 +1188,12 @@ if (searchQuery) {
       transition: opacity 0.3s;
     }
 
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
     .modal {
       background: var(--white);
       border-radius: 6px;
-      width: 90%;
-      max-width: 700px;
-      max-height: 90vh;
+      width: 90%; max-width: 700px; max-height: 90vh;
       overflow: hidden;
       transform: scale(0.95);
       transition: transform 0.3s;
@@ -3352,54 +1210,26 @@ if (searchQuery) {
       justify-content: space-between;
     }
 
-    .modal-header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .modal-header-left { display: flex; align-items: center; gap: 16px; }
 
     .modal-header-icon {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       background: rgba(255,255,255,0.22);
       border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 20px;
     }
 
-    .modal-header h2 {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--white);
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.005em;
-      margin-bottom: 3px;
-    }
-
-    .modal-header p {
-      font-family: 'Montserrat', sans-serif;
-      color: rgba(255,255,255,0.85);
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
+    .modal-header h2 { font-size: 18px; font-weight: 800; color: white; margin-bottom: 3px; }
+    .modal-header p { font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; color: rgba(255,255,255,0.85); text-transform: uppercase; }
 
     .modal-close {
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       background: rgba(255,255,255,0.18);
-      border: none;
-      border-radius: 4px;
-      color: white;
-      font-size: 22px;
+      border: none; border-radius: 4px;
+      color: white; font-size: 22px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
     }
 
@@ -3408,73 +1238,25 @@ if (searchQuery) {
     .modal-body { height: 600px; }
     .modal-body iframe { width: 100%; height: 100%; border: none; }
 
-    /* ========================================================
-       NO RESULTS
-       ======================================================== */
-    .no-results {
-      text-align: center;
-      padding: 64px 24px;
-    }
-
-    .no-results .icon { font-size: 56px; margin-bottom: 16px; }
-    .no-results p {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      color: var(--gray-600);
-      font-size: 16px;
-    }
-
-    /* ========================================================
-       ANIMATIONS
-       ======================================================== */
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    @keyframes ping {
-      75%, 100% {
-        transform: scale(1.5);
-        opacity: 0;
-      }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ========= ANIMATIONS ========= */
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @keyframes ping { 75%, 100% { transform: scale(1.5); opacity: 0; } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
     .fade-in { animation: fadeInUp 0.5s cubic-bezier(.4,0,.2,1) both; }
 
-    /* ========================================================
-       SCROLLBAR
-       ======================================================== */
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: var(--gray-50); }
-    ::-webkit-scrollbar-thumb {
-      background: var(--gray-200);
-      border-radius: 2px;
-    }
+    ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--coke-red); }
 
-    /* ========================================================
-       RESPONSIVE
-       ======================================================== */
     @media (max-width: 768px) {
       .hero { padding: 60px 22px 50px; min-height: 460px; }
-      .request-btn { position: absolute; top: 16px; right: 16px; padding: 9px 14px; font-size: 10px; }
+      .request-btn { top: 16px; right: 16px; padding: 9px 14px; font-size: 10px; }
       .section-header { flex-direction: column; align-items: flex-start; gap: 6px; }
-      .chat-window { width: calc(100vw - 32px); right: 16px; bottom: 130px; height: 480px; }
+      .chat-window { width: calc(100vw - 32px); right: 16px; bottom: 130px; height: 500px; }
       .ribbon-device { height: 120px; }
       .cap-divider { margin-top: -24px; }
       .bottle-cap { width: 52px; height: 52px; }
@@ -3484,12 +1266,10 @@ if (searchQuery) {
 </head>
 <body>
 
-  <!-- ============= HERO SECTION ============= -->
   <div class="hero-container">
     <div class="hero">
       <canvas id="bubbles"></canvas>
 
-      <!-- DYNAMIC RIBBON DEVICE — Coca-Cola's iconic white swoosh -->
       <svg class="ribbon-device" viewBox="0 0 1200 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="ribbonShade" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -3497,21 +1277,14 @@ if (searchQuery) {
             <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
           </linearGradient>
         </defs>
-        <!-- Back ribbon (softer) -->
-        <path d="M0,150 C150,115 300,165 480,140 C660,115 840,165 1020,140 C1110,125 1170,140 1200,138 L1200,180 L0,180 Z"
-              fill="rgba(255,255,255,0.18)"/>
-        <!-- Main ribbon -->
-        <path d="M0,115 C150,78 300,140 480,105 C660,70 840,140 1020,105 C1110,88 1170,105 1200,100 L1200,180 L0,180 Z"
-              fill="#ffffff"/>
-        <!-- Shadow stroke on ribbon -->
-        <path d="M0,115 C150,78 300,140 480,105 C660,70 840,140 1020,105 C1110,88 1170,105 1200,100"
-              fill="none" stroke="url(#ribbonShade)" stroke-width="2.5"/>
+        <path d="M0,150 C150,115 300,165 480,140 C660,115 840,165 1020,140 C1110,125 1170,140 1200,138 L1200,180 L0,180 Z" fill="rgba(255,255,255,0.18)"/>
+        <path d="M0,115 C150,78 300,140 480,105 C660,70 840,140 1020,105 C1110,88 1170,105 1200,100 L1200,180 L0,180 Z" fill="#ffffff"/>
+        <path d="M0,115 C150,78 300,140 480,105 C660,70 840,140 1020,105 C1110,88 1170,105 1200,100" fill="none" stroke="url(#ribbonShade)" stroke-width="2.5"/>
       </svg>
 
       <button class="request-btn" onclick="openModal()">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="12" y1="5" x2="12" y2="19"/>
-          <line x1="5" y1="12" x2="19" y2="12"/>
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
         Request Resource
       </button>
@@ -3534,8 +1307,9 @@ if (searchQuery) {
             <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="2"/>
             <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
-          <input type="text" id="searchInput" placeholder="">
+          <input type="text" id="searchInput" placeholder="" autocomplete="off">
           <span class="typewriter-text" id="typewriterText"></span>
+          <button class="search-clear" id="searchClear" title="Clear search">×</button>
           <button class="search-btn" onclick="document.getElementById('searchInput').focus()">Search</button>
         </div>
 
@@ -3548,7 +1322,6 @@ if (searchQuery) {
     </div>
   </div>
 
-  <!-- ============= BOTTLE CAP DIVIDER ============= -->
   <div class="cap-divider">
     <div class="cap-line"></div>
     <svg class="bottle-cap" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -3561,15 +1334,12 @@ if (searchQuery) {
       </defs>
       <circle cx="50" cy="50" r="46" fill="url(#capGrad)"/>
       <g fill="url(#capGrad)" stroke="rgba(0,0,0,0.2)" stroke-width="0.5">
-        <circle cx="50" cy="6" r="3"/><circle cx="65" cy="9" r="3"/>
-        <circle cx="78" cy="17" r="3"/><circle cx="88" cy="29" r="3"/>
-        <circle cx="93" cy="44" r="3"/><circle cx="93" cy="59" r="3"/>
-        <circle cx="88" cy="74" r="3"/><circle cx="78" cy="86" r="3"/>
-        <circle cx="65" cy="93" r="3"/><circle cx="50" cy="96" r="3"/>
-        <circle cx="35" cy="93" r="3"/><circle cx="22" cy="86" r="3"/>
-        <circle cx="12" cy="74" r="3"/><circle cx="7" cy="59" r="3"/>
-        <circle cx="7" cy="44" r="3"/><circle cx="12" cy="29" r="3"/>
-        <circle cx="22" cy="17" r="3"/><circle cx="35" cy="9" r="3"/>
+        <circle cx="50" cy="6" r="3"/><circle cx="65" cy="9" r="3"/><circle cx="78" cy="17" r="3"/>
+        <circle cx="88" cy="29" r="3"/><circle cx="93" cy="44" r="3"/><circle cx="93" cy="59" r="3"/>
+        <circle cx="88" cy="74" r="3"/><circle cx="78" cy="86" r="3"/><circle cx="65" cy="93" r="3"/>
+        <circle cx="50" cy="96" r="3"/><circle cx="35" cy="93" r="3"/><circle cx="22" cy="86" r="3"/>
+        <circle cx="12" cy="74" r="3"/><circle cx="7" cy="59" r="3"/><circle cx="7" cy="44" r="3"/>
+        <circle cx="12" cy="29" r="3"/><circle cx="22" cy="17" r="3"/><circle cx="35" cy="9" r="3"/>
       </g>
       <ellipse cx="40" cy="35" rx="20" ry="10" fill="rgba(255,255,255,0.18)"/>
       <text x="50" y="57" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="18" font-weight="900" fill="white" letter-spacing="0.5">RCCB</text>
@@ -3577,29 +1347,32 @@ if (searchQuery) {
     <div class="cap-line"></div>
   </div>
 
-  <!-- ============= FILTERS SECTION ============= -->
   <div class="filters-section">
     <div class="section-header">
       <div class="section-title-group">
         <div class="section-kicker">Pick Your Flavor</div>
         <h2 class="section-title">Browse by Category</h2>
-        <p class="section-subtitle">Filter resources by category or use the Search Bar above to search for a topic</p>
+        <p class="section-subtitle">Filter resources by category or use the Search Bar above to search for any topic</p>
       </div>
       <p class="results-count"><strong id="resultsCount">28</strong>resources available</p>
+    </div>
+    <div class="search-context" id="searchContext">
+      <span id="searchContextText"></span>
+      <button onclick="clearSearch()">Clear ×</button>
     </div>
     <div class="filters-row" id="filterChips"></div>
   </div>
 
-  <!-- ============= CARDS GRID ============= -->
   <div class="cards-section">
     <div class="cards-grid" id="cardsGrid"></div>
     <div class="no-results" id="noResults" style="display: none;">
       <div class="icon">🔍</div>
-      <p>No resources match that search.</p>
+      <h3>No exact matches found</h3>
+      <p id="noResultsMsg">Try a different keyword or browse by category.</p>
+      <button class="suggest-btn" onclick="clearSearch()">Clear Search & Browse All</button>
     </div>
   </div>
 
-  <!-- ============= FOOTER ============= -->
   <footer class="footer">
     <div class="footer-bar"></div>
     <div class="footer-brand">
@@ -3609,7 +1382,7 @@ if (searchQuery) {
     <p>© 2026 Reyes Coca-Cola Bottling. All rights reserved.</p>
   </footer>
 
-  <!-- ============= AI BOT (Fizz) ============= -->
+  <!-- FIZZ BOT -->
   <div class="ai-bot-container" id="aiBotContainer">
     <div class="ai-bot-tooltip">
       <div class="ai-bot-tooltip-header">
@@ -3620,7 +1393,7 @@ if (searchQuery) {
         </div>
       </div>
       <div class="ai-bot-tooltip-content">
-        <p>Need help finding a resource? Have an HR question? Let's chat!</p>
+        <p>Need help finding a resource or have an HR question? I can actually help now!</p>
         <div class="ai-bot-tooltip-cta">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -3639,7 +1412,7 @@ if (searchQuery) {
     <div class="ai-bot-label" id="botLabel">Ask Fizz</div>
   </div>
 
-  <!-- ============= CHAT WINDOW ============= -->
+  <!-- CHAT WINDOW -->
   <div class="chat-window" id="chatWindow">
     <div class="chat-header">
       <div class="chat-header-left">
@@ -3653,7 +1426,7 @@ if (searchQuery) {
         </div>
       </div>
       <div class="chat-header-actions">
-        <button class="chat-header-btn" onclick="openCopilot()" title="Open full Copilot">
+        <button class="chat-header-btn" onclick="openCopilot()" title="Open full HR Copilot">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
             <polyline points="15 3 21 3 21 9"/>
@@ -3662,8 +1435,7 @@ if (searchQuery) {
         </button>
         <button class="chat-header-btn" onclick="toggleChat()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
       </div>
@@ -3671,7 +1443,7 @@ if (searchQuery) {
     <div class="chat-messages" id="chatMessages"></div>
     <div class="chat-input-area">
       <form class="chat-input-row" onsubmit="sendMessage(event)">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything HR...">
         <button type="submit" class="chat-send-btn" id="sendBtn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <line x1="22" y1="2" x2="11" y2="13"/>
@@ -3685,7 +1457,7 @@ if (searchQuery) {
     </div>
   </div>
 
-  <!-- ============= REQUEST MODAL ============= -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -3705,632 +1477,882 @@ if (searchQuery) {
   </div>
 
 <script>
-  // ========== DATA ==========
-  const hrResources = [
-    { id: 1, title: "I9 and ICE Inspections", topic: "Policies & Compliance", desc: "Guidance on I9 documentation and ICE inspection procedures.", url: null, status: "pending" },
-    { id: 2, title: "Leaves / FMLA Training for HR", topic: "Policies & Compliance", desc: "Comprehensive training resource covering leave policies and FMLA requirements.", url: "https://heyzine.com/flip-book/RCCBLeavesToolkit", status: "live" },
-    { id: 3, title: "Kronos Attendance Tracking (KAT)", topic: "Policies & Compliance", desc: "Attendance tracking guide for union employees. Deploying June/July 2026.", url: null, status: "pending" },
-    { id: 4, title: "Reasonable Suspicion", topic: "Policies & Compliance", desc: "Training and reference guide for reasonable suspicion protocols.", url: "https://heyzine.com/flip-book/RCCBReasonableSuspicion", status: "live" },
-    { id: 5, title: "Tax Credit Resources", topic: "Policies & Compliance", desc: "Resources related to available tax credit programs. Currently in development.", url: null, status: "pending" },
-    { id: 6, title: "Performance Management Guide", topic: "Talent Management", desc: "End-to-end guide for managing employee performance and development conversations.", url: "https://heyzine.com/flip-book/RCCBPerformanceGuide", status: "live" },
-    { id: 7, title: "Onboarding Guide", topic: "Onboarding", desc: "Everything a new hire needs for a smooth and successful start at RCCB.", url: "https://heyzine.com/flip-book/baa9b97ca3.html#page/1", status: "live" },
-    { id: 8, title: "YRJ People Leader Page", topic: "Professional Development", desc: "Learning and development hub for people leaders across the Reyes organization.", url: "https://reyesholdings.sharepoint.com/teams/DEMOYRJ/SitePages/LearningTeamHome11.aspx", status: "live" },
-    { id: 9, title: "YRJ Frontline Training", topic: "Professional Development", desc: "Frontline employee training materials and resources.", url: "https://heyzine.com/flip-book/e57d4c81e3.html#page/1", status: "live" },
-    { id: 10, title: "HR Excellence Competency Model", topic: "Professional Development", desc: "Framework defining the core competencies for HR excellence at Reyes.", url: "https://heyzine.com/flip-book/ReyesExcellencemodel.html", status: "live" },
-    { id: 11, title: "Employee Career & Development Guide", topic: "Professional Development", desc: "Career pathing guide helping RCCB employees plan and grow their careers.", url: "https://heyzine.com/flip-book/RCCBEmployeeDevelopmentGuide#page/1", status: "live" },
-    { id: 12, title: "Development Plan Workbook", topic: "Professional Development", desc: "Interactive workbook for building individual development plans.", url: "https://heyzine.com/flip-book/72c6c722b1.html", status: "live" },
-    { id: 13, title: "Career Connect Curriculum Guidebook", topic: "Professional Development", desc: "Curriculum guide for the Career Connect development program.", url: "https://heyzine.com/flip-book/CareerconnectCurriculum#page/1", status: "live" },
-    { id: 14, title: "Mentoring Tool", topic: "Professional Development", desc: "Structured tool for establishing and managing mentoring relationships.", url: "https://heyzine.com/flip-book/RCCBMentoringTool", status: "live" },
-    { id: 15, title: "Accelerate Resources", topic: "Professional Development", desc: "Resources for the Accelerate leadership development program. In development.", url: null, status: "pending" },
-    { id: 16, title: "Merchandiser Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Merchandiser roles at RCCB.", url: "https://heyzine.com/flip-book/MerchandiserCareerRoadmap", status: "live" },
-    { id: 17, title: "Production Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Production roles. Final version coming soon.", url: null, status: "pending" },
-    { id: 18, title: "Transportation Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Transportation roles. Final version coming soon.", url: null, status: "pending" },
-    { id: 19, title: "Warehouse Career Roadmap", topic: "Professional Development", desc: "Career progression roadmap for Warehouse roles. Final version coming soon.", url: null, status: "pending" },
-    { id: 20, title: "Mandatory Compliance Training", topic: "Professional Development", desc: "Required compliance training materials available in SharePoint documents.", url: "#", status: "live" },
-    { id: 21, title: "Recognition Toolkit", topic: "Engagement & Recognition", desc: "Manager's guide to building a meaningful recognition culture at RCCB.", url: "https://heyzine.com/flip-book/RCCBRecognitionToolkit", status: "live" },
-    { id: 22, title: "Service Awards", topic: "Engagement & Recognition", desc: "Resources and materials for the RCCB employee service awards program.", url: "https://reyesholdings.sharepoint.com/:f:/s/rc-rccb/IgCM8wvj79hORq_3b2vMcO-0AWu-N6psGZkce_sylCGINNo?e=LfDlJA", status: "live" },
-    { id: 23, title: "RCCB Awards (GPTW, Fortune, Brandon Hall)", topic: "Engagement & Recognition", desc: "Showcase of RCCB's award recognitions. Resource currently in development.", url: null, status: "pending" },
-    { id: 24, title: "Internal Interview Guide", topic: "Talent Acquisition", desc: "Step-by-step guide for conducting structured internal interviews.", url: "https://heyzine.com/flip-book/1dea1e4827.html#page/1", status: "live" },
-    { id: 25, title: "Build Your Own Interview Guide", topic: "Talent Acquisition", desc: "Customizable interview guide template for hiring managers.", url: "https://acrobat.adobe.com/id/urn:aaid:sc:US:80f61a10-90c6-426f-8fa9-e069289d1e2f", status: "live" },
-    { id: 26, title: "Military Hiring Toolkit", topic: "Talent Acquisition", desc: "Resources and best practices for recruiting military talent.", url: "https://heyzine.com/flip-book/RCCBMilitary", status: "live" },
-    { id: 27, title: "Campus Recruitment Toolkit", topic: "Talent Acquisition", desc: "Toolkit for campus recruiting events, outreach, and hiring programs.", url: "https://heyzine.com/flip-book/RCCBcampustoolkit", status: "live" },
-    { id: 28, title: "Career Fair Checklist", topic: "Talent Acquisition", desc: "Complete checklist and prep guide for career fair events.", url: "https://reyesholdings.sharepoint.com/teams/RecruitmentResources/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources%2FCareer%20Fair%20Checklist%20%28Rev%202025%29%2Epdf&parent=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources", status: "live" },
-  ];
+// =============================================
+//  DATA — HR RESOURCES
+// =============================================
+const hrResources = [
+  { id: 1, title: "I9 and ICE Inspections", topic: "Policies & Compliance",
+    desc: "Guidance on I9 documentation and ICE inspection procedures.",
+    tags: ["immigration","audit","work authorization","eligibility","employment verification","federal compliance","documentation","i-9","i9"],
+    url: null, status: "pending" },
 
-  const filterChipsData = [
-    { filter: 'All', label: 'All', icon: '✦' },
-    { filter: 'Policies & Compliance', label: 'Policies', icon: '📋' },
-    { filter: 'Talent Management', label: 'Talent Mgmt', icon: '📊' },
-    { filter: 'Onboarding', label: 'Onboarding', icon: '👋' },
-    { filter: 'Professional Development', label: 'Development', icon: '📈' },
-    { filter: 'Engagement & Recognition', label: 'Recognition', icon: '🏆' },
-    { filter: 'Talent Acquisition', label: ' Talent Acquisition', icon: '🔍' },
-  ];
+  { id: 2, title: "Leaves / FMLA Training for HR", topic: "Policies & Compliance",
+    desc: "Comprehensive training resource covering all leave policies including FMLA, California leaves, maternity, paternity, baby bonding, disability, military leave, domestic violence leave, CFRA, PDL, CPSL, paid family leave, bereavement, jury duty, and other protected absences.",
+    tags: ["fmla","family medical leave act","leave","loa","leave of absence","maternity leave","paternity leave","parental leave","baby bonding","baby","pregnancy","pregnancy disability","pdl","cfra","california family rights act","california leave","paid family leave","pfl","state disability","sdi","disability leave","short term disability","long term disability","medical leave","sick leave","serious health condition","intermittent leave","continuous leave","reduced schedule leave","domestic violence leave","domestic violence","sexual assault leave","stalking leave","crime victim leave","military leave","userra","bereavement","jury duty","school activities leave","time off","pto","absence","attendance","leave request","leave approval","leave extension","return to work","fitness for duty","leave coordinator","hr leave training","leave policy"],
+    url: "https://heyzine.com/flip-book/RCCBLeavesToolkit", status: "live" },
 
-  // All tags use red/black/white brand palette only
-  const tagStyles = {
-    "Policies & Compliance":    { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
-    "Talent Management":        { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
-    "Onboarding":               { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
-    "Professional Development": { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
-    "Engagement & Recognition": { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
-    "Talent Acquisition":       { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
-  };
+  { id: 3, title: "Kronos Attendance Tracking (KAT)", topic: "Policies & Compliance",
+    desc: "Attendance tracking guide for union employees. Deploying June/July 2026.",
+    tags: ["timekeeping","clock in","punch","time clock","hours tracking","shift tracking","kat","union timekeeping","kronos","attendance tracking"],
+    url: null, status: "pending" },
 
-  const topicIcons = {
-    "Policies & Compliance": "📋",
-    "Talent Management": "📊",
-    "Onboarding": "👋",
-    "Professional Development": "📈",
-    "Engagement & Recognition": "🏆",
-    "Talent Acquisition": "🔍",
-  };
+  { id: 4, title: "Reasonable Suspicion", topic: "Policies & Compliance",
+    desc: "Training and reference guide for reasonable suspicion protocols.",
+    tags: ["drug testing","substance abuse","impairment","alcohol","fitness for duty","safety","workplace drugs","drug test","drug free","reasonable suspicion","dui","intoxicated"],
+    url: "https://heyzine.com/flip-book/RCCBReasonableSuspicion", status: "live" },
 
-  // ========== STATE ==========
-  let currentFilter = 'All';
-  let searchQuery = '';
-  let chatMessages = [
-    {
-      id: 1,
-      text: "Hey there! 👋 I'm Fizz, your HR buddy. I'm here to help you find resources, answer questions, or just chat. What can I help you with today?",
-      isBot: true,
-      quickReplies: ['Find a resource', 'Benefits info', 'Talk to HR', 'Just saying hi!']
-    }
-  ];
-  let isTyping = false;
-  let isChatOpen = false;
+  { id: 5, title: "Tax Credit Resources", topic: "Policies & Compliance",
+    desc: "Resources related to available tax credit programs. Currently in development.",
+    tags: ["wotc","work opportunity","hiring incentives","government credits","tax incentives","payroll credits","tax credit"],
+    url: null, status: "pending" },
 
-  // ========== FIZZ CHARACTER SVG ==========
-  function getFizzSVG(size = 80) {
-    return `
-      <svg width="${size}" height="${size}" viewBox="0 0 60 120" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
-        <defs>
-          <linearGradient id="bottleBody" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#1a0505"/>
-            <stop offset="15%" stop-color="#3d1111"/>
-            <stop offset="50%" stop-color="#4a1515"/>
-            <stop offset="85%" stop-color="#3d1111"/>
-            <stop offset="100%" stop-color="#1a0505"/>
-          </linearGradient>
-          <linearGradient id="glassShine" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
-            <stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
-            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-          </linearGradient>
-          <linearGradient id="capColor" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FF4444"/>
-            <stop offset="50%" stop-color="#F40009"/>
-            <stop offset="100%" stop-color="#8B0008"/>
-          </linearGradient>
-        </defs>
-        <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#bottleBody)"/>
-        <path d="M17 40 C14 48 13 60 12 72 C11 84 12 96 14 105" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="30" cy="70" rx="6" ry="28" fill="url(#glassShine)" opacity="0.3"/>
-        <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#capColor)"/>
-        <rect x="24" y="11" width="12" height="2" rx="1" fill="rgba(255,255,255,0.4)"/>
-        <rect x="15" y="58" width="30" height="18" rx="1.5" fill="white" opacity="0.97"/>
-        <rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/>
-        <path d="M18 67 Q24 63 30 67 Q36 71 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
-        <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
-        <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="26" cy="40.5" r="0.8" fill="white"/>
-        <circle cx="36" cy="40.5" r="0.8" fill="white"/>
-        <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <circle cx="20" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
-        <circle cx="40" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
-        <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="13" cy="40" rx="4" ry="6" fill="#444"/>
-        <ellipse cx="13" cy="40" rx="2.8" ry="4.5" fill="#F40009"/>
-        <ellipse cx="47" cy="40" rx="4" ry="6" fill="#444"/>
-        <ellipse cx="47" cy="40" rx="2.8" ry="4.5" fill="#F40009"/>
-        <path d="M13 46 Q13 54 18 56 L24 56" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="26" cy="56" rx="3" ry="2.5" fill="#444"/>
-        <circle cx="22" cy="90" r="1.5" fill="rgba(255,255,255,0.4)">
-          <animate attributeName="cy" values="95;82;95" dur="2.5s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="35" cy="98" r="1" fill="rgba(255,255,255,0.35)">
-          <animate attributeName="cy" values="100;85;100" dur="3s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.35;0.1;0.35" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="40" cy="92" r="0.8" fill="rgba(255,255,255,0.3)">
-          <animate attributeName="cy" values="95;80;95" dur="2.2s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.3;0.08;0.3" dur="2.2s" repeatCount="indefinite"/>
-        </circle>
-        <g transform="translate(42, 12)">
-          <circle cx="6" cy="6" r="7" fill="#10B981"/>
-          <path d="M3 4.5 L9 4.5 L9 7.5 L7 7.5 L5.5 9 L5.5 7.5 L3 7.5 Z" fill="white"/>
-        </g>
-      </svg>
-    `;
-  }
+  { id: 6, title: "Performance Management Guide", topic: "Talent Management",
+    desc: "End-to-end guide for managing employee performance and development conversations.",
+    tags: ["reviews","feedback","goal setting","coaching","performance reviews","evaluations","pip","performance improvement","write up","corrective action","annual review","performance management","discipline","disciplinary","counseling","warning"],
+    url: "https://heyzine.com/flip-book/RCCBPerformanceGuide", status: "live" },
 
-  function getMiniFizzSVG(size = 32) {
-    return `
-      <svg width="${size}" height="${size}" viewBox="0 0 60 120">
-        <defs>
-          <linearGradient id="miniBody-${size}" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#1a0505"/>
-            <stop offset="50%" stop-color="#4a1515"/>
-            <stop offset="100%" stop-color="#1a0505"/>
-          </linearGradient>
-          <linearGradient id="miniCap-${size}" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#FF4444"/>
-            <stop offset="100%" stop-color="#8B0008"/>
-          </linearGradient>
-        </defs>
-        <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#miniBody-${size})"/>
-        <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#miniCap-${size})"/>
-        <rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/>
-        <path d="M18 67 Q30 61 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
-        <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
-        <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
-        <circle cx="26" cy="40.5" r="0.8" fill="white"/>
-        <circle cx="36" cy="40.5" r="0.8" fill="white"/>
-        <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none"/>
-        <ellipse cx="13" cy="40" rx="3" ry="5" fill="#F40009"/>
-        <ellipse cx="47" cy="40" rx="3" ry="5" fill="#F40009"/>
-      </svg>
-    `;
-  }
+  { id: 7, title: "Onboarding Guide", topic: "Onboarding",
+    desc: "Everything a new hire needs for a smooth and successful start at RCCB.",
+    tags: ["new hire","orientation","first day","new employee","paperwork","welcome","induction","day one","onboard","starting","onboarding","joining"],
+    url: "https://heyzine.com/flip-book/baa9b97ca3.html#page/1", status: "live" },
 
-  // ========== INIT ==========
-  document.addEventListener('DOMContentLoaded', function() {
-    initBubbles();
-    initTypewriter();
-    renderFilterChips();
-    renderCards();
-    initFizzCharacters();
-    initSearch();
-    initChatInput();
-    renderChatMessages();
-  });
+  { id: 8, title: "YRJ People Leader Page", topic: "Professional Development",
+    desc: "Learning and development hub for people leaders across the Reyes organization.",
+    tags: ["leadership development","manager training","supervisor learning","leader resources","yrj","leadership academy","people manager","managing people","people leader"],
+    url: "https://reyesholdings.sharepoint.com/teams/DEMOYRJ/SitePages/LearningTeamHome11.aspx", status: "live" },
 
-  function initFizzCharacters() {
-    document.getElementById('botCharacter').innerHTML = getFizzSVG(80);
-    document.getElementById('tooltipAvatar').innerHTML = getMiniFizzSVG(40);
-    document.getElementById('chatAvatar').innerHTML = getMiniFizzSVG(44);
-  }
+  { id: 9, title: "YRJ Frontline Training", topic: "Professional Development",
+    desc: "Frontline employee training materials and resources.",
+    tags: ["hourly training","associate training","employee development","frontline workers","plant training","warehouse training","yrj frontline","frontline training"],
+    url: "https://heyzine.com/flip-book/e57d4c81e3.html#page/1", status: "live" },
 
-  // ========== BUBBLES ==========
-  function initBubbles() {
-    const canvas = document.getElementById('bubbles');
-    const hero = canvas.parentElement;
-    const ctx = canvas.getContext('2d');
+  { id: 10, title: "HR Excellence Competency Model", topic: "Professional Development",
+    desc: "Framework defining the core competencies for HR excellence at Reyes.",
+    tags: ["competencies","skills framework","hr skills","capabilities","professional standards","hr development","competency model","hr competency"],
+    url: "https://heyzine.com/flip-book/ReyesExcellencemodel.html", status: "live" },
 
-    function resize() {
-      canvas.width = hero.offsetWidth;
-      canvas.height = hero.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
+  { id: 11, title: "Employee Career & Development Guide", topic: "Professional Development",
+    desc: "Career pathing guide helping RCCB employees plan and grow their careers.",
+    tags: ["career planning","career path","growth","advancement","promotion","career development","career ladder","career guide","career"],
+    url: "https://heyzine.com/flip-book/RCCBEmployeeDevelopmentGuide#page/1", status: "live" },
 
-    const bubbles = Array.from({length: 48}, () => ({
-      x: Math.random() * canvas.width,
-      y: canvas.height + Math.random() * canvas.height,
-      r: 3 + Math.random() * 22,
-      speed: 0.3 + Math.random() * 1.3,
-      opacity: 0.05 + Math.random() * 0.2,
-      wobble: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.008 + Math.random() * 0.025
-    }));
+  { id: 12, title: "Development Plan Workbook", topic: "Professional Development",
+    desc: "Interactive workbook for building individual development plans.",
+    tags: ["idp","individual development plan","goal planning","growth plan","development goals","learning plan","workbook","development plan"],
+    url: "https://heyzine.com/flip-book/72c6c722b1.html", status: "live" },
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      bubbles.forEach(b => {
-        b.y -= b.speed;
-        b.wobble += b.wobbleSpeed;
-        const xOff = Math.sin(b.wobble) * 2;
-        if (b.y + b.r < 0) {
-          b.y = canvas.height + b.r;
-          b.x = Math.random() * canvas.width;
-        }
-        ctx.beginPath();
-        ctx.arc(b.x + xOff, b.y, b.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255,255,255,${b.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(b.x + xOff - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.22, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${b.opacity * 0.9})`;
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
-  }
+  { id: 13, title: "Career Connect Curriculum Guidebook", topic: "Professional Development",
+    desc: "Curriculum guide for the Career Connect development program.",
+    tags: ["learning curriculum","training program","course catalog","learning paths","professional courses","career connect","curriculum"],
+    url: "https://heyzine.com/flip-book/CareerconnectCurriculum#page/1", status: "live" },
 
-  // ========== TYPEWRITER ==========
-  function initTypewriter() {
-    const phrases = ['HR resources', 'reasonable suspicion', 'career roadmaps', 'development plan', 'mentoring tool', 'service awards', 'career fair', 'recognition toolkit'];
-    const input = document.getElementById('searchInput');
-    const typewriter = document.getElementById('typewriterText');
-    let pi = 0, ci = 0, deleting = false;
+  { id: 14, title: "Mentoring Tool", topic: "Professional Development",
+    desc: "Structured tool for establishing and managing mentoring relationships.",
+    tags: ["mentor","mentee","coaching","sponsorship","mentorship program","career guidance","advisor","mentoring"],
+    url: "https://heyzine.com/flip-book/RCCBMentoringTool", status: "live" },
 
-    function type() {
-      if (document.activeElement === input || input.value) {
-        typewriter.innerHTML = '';
-        return;
-      }
-      const phrase = phrases[pi];
-      if (!deleting) {
-        ci++;
-        typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
-        if (ci === phrase.length) {
-          deleting = true;
-          setTimeout(type, 2000);
-          return;
-        }
-        setTimeout(type, 90);
-      } else {
-        ci--;
-        typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
-        if (ci === 0) {
-          deleting = false;
-          pi = (pi + 1) % phrases.length;
-          setTimeout(type, 500);
-          return;
-        }
-        setTimeout(type, 50);
-      }
-    }
-    setTimeout(type, 1000);
+  { id: 15, title: "Accelerate Resources", topic: "Professional Development",
+    desc: "Resources for the Accelerate leadership development program. In development.",
+    tags: ["high potential","hipo","leadership pipeline","succession","talent acceleration","fast track","accelerate program","accelerate"],
+    url: null, status: "pending" },
 
-    input.addEventListener('focus', () => typewriter.innerHTML = '');
-    input.addEventListener('blur', () => {
-      if (!input.value) setTimeout(type, 500);
-    });
-  }
+  { id: 16, title: "Merchandiser Career Roadmap", topic: "Professional Development",
+    desc: "Career progression roadmap for Merchandiser roles at RCCB.",
+    tags: ["sales","retail","store representative","merchandising career","route sales career growth","merchandiser","merchandising"],
+    url: "https://heyzine.com/flip-book/MerchandiserCareerRoadmap", status: "live" },
 
-  // ========== SEARCH ==========
-  function initSearch() {
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      searchQuery = e.target.value;
-      renderCards();
-    });
-  }
+  { id: 17, title: "Production Career Roadmap", topic: "Professional Development",
+    desc: "Career progression roadmap for Production roles. Final version coming soon.",
+    tags: ["manufacturing","plant operations","production career","operator advancement","factory career","production","plant"],
+    url: null, status: "pending" },
 
-  // ========== FILTER CHIPS ==========
-  function renderFilterChips() {
-    const container = document.getElementById('filterChips');
-    container.innerHTML = filterChipsData.map(chip => `
-      <button class="filter-chip ${currentFilter === chip.filter ? 'active' : ''}" data-filter="${chip.filter}">
-        <span class="icon">${chip.icon}</span>
-        ${chip.label}
-      </button>
-    `).join('');
+  { id: 18, title: "Transportation Career Roadmap", topic: "Professional Development",
+    desc: "Career progression roadmap for Transportation roles. Final version coming soon.",
+    tags: ["driver","cdl","fleet","trucking","delivery driver career","transportation advancement","transport","truck driver"],
+    url: null, status: "pending" },
 
-    container.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-chip');
-      if (btn) {
-        currentFilter = btn.dataset.filter;
-        renderFilterChips();
-        renderCards();
-      }
-    });
-  }
+  { id: 19, title: "Warehouse Career Roadmap", topic: "Professional Development",
+    desc: "Career progression roadmap for Warehouse roles. Final version coming soon.",
+    tags: ["distribution","logistics","warehouse worker","forklift","picker","packer","warehouse career growth","warehouse"],
+    url: null, status: "pending" },
 
-  // ========== CARDS ==========
-  function renderCards() {
-    const grid = document.getElementById('cardsGrid');
-    const noResults = document.getElementById('noResults');
+  { id: 20, title: "Mandatory Compliance Training", topic: "Professional Development",
+    desc: "Required compliance training materials available in SharePoint documents.",
+    tags: ["required training","annual training","ethics training","harassment","cybersecurity","compliance courses","mandatory courses","annual compliance","mandatory training"],
+    url: "#", status: "live" },
 
- let filtered = hrResources;
+  { id: 21, title: "Recognition Toolkit", topic: "Engagement & Recognition",
+    desc: "Manager's guide to building a meaningful recognition culture at RCCB.",
+    tags: ["employee appreciation","rewards","kudos","shoutouts","recognition program","appreciation","thank you","employee rewards","recognize","recognition"],
+    url: "https://heyzine.com/flip-book/RCCBRecognitionToolkit", status: "live" },
 
-// Filter by topic
-if (currentFilter !== 'All') {
-  filtered = filtered.filter(r => r.topic === currentFilter);
-}
+  { id: 22, title: "Service Awards", topic: "Engagement & Recognition",
+    desc: "Resources and materials for the RCCB employee service awards program.",
+    tags: ["anniversary","tenure","milestone","years of service","employee milestones","longevity awards","recognition gifts","service award","service awards"],
+    url: "https://reyesholdings.sharepoint.com/:f:/s/rc-rccb/IgCM8wvj79hORq_3b2vMcO-0AWu-N6psGZkce_sylCGINNo?e=LfDlJA", status: "live" },
 
-// Token-based search: every word in the query must appear somewhere
-// in the card's title, description, or topic — order doesn't matter.
-if (searchQuery) {
-  const tokens = searchQuery
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(t => t.length > 0);
+  { id: 23, title: "RCCB Awards (GPTW, Fortune, Brandon Hall)", topic: "Engagement & Recognition",
+    desc: "Showcase of RCCB's award recognitions. Resource currently in development.",
+    tags: ["great place to work","gptw","fortune","brandon hall","company awards","employer awards","accolades"],
+    url: null, status: "pending" },
 
-  filtered = filtered.filter(r => {
-    const haystack = (r.title + ' ' + r.desc + ' ' + r.topic).toLowerCase();
-    return tokens.every(token => haystack.includes(token));
-  });
-}
+  { id: 24, title: "Internal Interview Guide", topic: "Talent Acquisition",
+    desc: "Step-by-step guide for conducting structured internal interviews.",
+    tags: ["promotion interview","internal hiring","interview process","hiring manager guide","structured interview","interview questions","interview guide"],
+    url: "https://heyzine.com/flip-book/1dea1e4827.html#page/1", status: "live" },
 
-    document.getElementById('resultsCount').textContent = filtered.length;
+  { id: 25, title: "Build Your Own Interview Guide", topic: "Talent Acquisition",
+    desc: "Customizable interview guide template for hiring managers.",
+    tags: ["interview questions","interview template","custom interview","interview builder","hiring questions","behavioral interview","custom guide","interview"],
+    url: "https://acrobat.adobe.com/id/urn:aaid:sc:US:80f61a10-90c6-426f-8fa9-e069289d1e2f", status: "live" },
 
-    if (filtered.length === 0) {
-      grid.innerHTML = '';
-      noResults.style.display = 'block';
-      return;
-    }
+  { id: 26, title: "Military Hiring Toolkit", topic: "Talent Acquisition",
+    desc: "Resources and best practices for recruiting military talent.",
+    tags: ["veterans","military veterans","armed forces","veteran hiring","military recruiting","transitioning service members","military","vet","veteran"],
+    url: "https://heyzine.com/flip-book/RCCBMilitary", status: "live" },
 
-    noResults.style.display = 'none';
-    grid.innerHTML = filtered.map((resource, index) => {
-      const style = tagStyles[resource.topic] || { bg: '#eee', color: '#333', accent: '#666' };
-      const icon = topicIcons[resource.topic] || '📄';
-      const isLive = resource.status === 'live';
+  { id: 27, title: "Campus Recruitment Toolkit", topic: "Talent Acquisition",
+    desc: "Toolkit for campus recruiting events, outreach, and hiring programs.",
+    tags: ["college recruiting","university hiring","student recruiting","intern recruiting","campus events","school recruiting","campus","college","university","campus recruitment"],
+    url: "https://heyzine.com/flip-book/RCCBcampustoolkit", status: "live" },
 
-      const openButton = isLive
-        ? `<a href="${resource.url || '#'}" target="_blank" rel="noopener noreferrer" class="btn-open" onclick="event.stopPropagation()">Open →</a>`
-        : `<button class="btn-open amber-btn" disabled>Coming soon</button>`;
-
-      return `
-        <div class="flip-wrap fade-in ${!isLive ? 'coming-soon' : ''}" style="animation-delay: ${index * 0.04}s" data-id="${resource.id}">
-          <div class="flip-inner">
-            <div class="flip-front" onclick="flipCard(${resource.id})">
-              <div class="color-bar" style="background-color: ${style.accent}"></div>
-              <div class="front-top">
-                <div class="book-icon-wrap" style="background: ${style.bg}">${icon}</div>
-                <span class="front-tag" style="background: ${style.bg}; color: ${style.color}">${resource.topic}</span>
-              </div>
-              <div class="front-title">${resource.title}</div>
-              <div class="front-desc">${resource.desc}</div>
-              ${isLive
-                ? `<div class="flip-hint"><span class="arrow">↩</span> Click to flip</div>`
-                : `<div class="coming-soon-badge"><span class="cs-dot"></span>Coming Soon</div>`}
-            </div>
-            <div class="flip-back" style="background-color: ${isLive ? style.accent : '#111111'}">
-              <div class="back-label">${isLive ? 'HR Resource' : 'In Development'}</div>
-              <div class="back-title">${resource.title}</div>
-              <div class="back-desc">${resource.desc} ${isLive ? 'Click "Open" to launch the full resource.' : 'This resource is currently being developed and will be available soon.'}</div>
-              <div class="back-actions">
-                ${openButton}
-                <button class="btn-back" onclick="event.stopPropagation(); unflipCard(${resource.id})">↩ Back</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  function flipCard(id) {
-    const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
-    if (card) card.classList.add('flipped');
-  }
-
-  function unflipCard(id) {
-    const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
-    if (card) card.classList.remove('flipped');
-  }
-
-  // ========== MODAL ==========
-  function openModal() {
-    document.getElementById('modalOverlay').classList.add('active');
-  }
-
-  function closeModal(event) {
-    if (!event || event.target === document.getElementById('modalOverlay')) {
-      document.getElementById('modalOverlay').classList.remove('active');
-    }
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // ========== CHAT (CLEAN + SMART, SINGLE VERSION) ==========
-
-// Uses your existing hrResources array (the one powering the cards grid)
-const keywordMap = [
-  { keywords: ['fmla','leave','maternity','paternity','parental'], ids: [2], intro: "Here’s the FMLA & Leaves resource:" },
-  { keywords: ['i9','i-9','ice','immigration'], ids: [1], intro: "I9 & ICE Inspection guidance (in development):" },
-  { keywords: ['kronos','kat','attendance'], ids: [3], intro: "Kronos Attendance Tracking (KAT):" },
-  { keywords: ['performance','review'], ids: [6], intro: "Performance Management Guide:" },
-  { keywords: ['onboarding','new hire','orientation'], ids: [7], intro: "Welcome aboard! Here’s our Onboarding Guide:" },
-  { keywords: ['career','growth','development','idp'], ids: [11,12,14], intro: "Love the growth mindset—try these:" },
-  { keywords: ['mentor','mentoring'], ids: [14], intro: "Here’s the Mentoring Tool:" },
-  { keywords: ['recognition','kudos','service award','service awards'], ids: [21,22,23], intro: "Recognition & Awards resources:" },
-  { keywords: ['interview','interviewing'], ids: [24,25], intro: "Interview resources:" },
-  { keywords: ['military','veteran'], ids: [26], intro: "Military Hiring Toolkit:" },
-  { keywords: ['career fair','job fair'], ids: [28], intro: "Career Fair Checklist:" },
-  { keywords: ['recruit','recruiting','hiring','talent'], ids: [24,26,27,28], intro: "Talent Acquisition resources:" },
-  { keywords: ['benefit','benefits','401k','pto','vacation','health insurance','healthy reyes'], ids: [], intro: "Benefits live in the Employee Center + Healthy Reyes. Open HR Copilot for specifics:" }
+  { id: 28, title: "Career Fair Checklist", topic: "Talent Acquisition",
+    desc: "Complete checklist and prep guide for career fair events.",
+    tags: ["university","college","job fair","campus event","student recruiting","recruiting event prep","fair logistics","booth setup","career fair","job fair checklist"],
+    url: "https://reyesholdings.sharepoint.com/teams/RecruitmentResources/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources%2FCareer%20Fair%20Checklist%20%28Rev%202025%29%2Epdf&parent=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources", status: "live" },
 ];
 
-const botResponses = {
-  'hi': { response: "Hey there! 👋 I’m Fizz, your HR buddy. What can I help you find?", quickReplies: ['Find a resource','Benefits info','Talk to HR','Just saying hi!'] },
-  'hello': { response: "Hello! 🥤 What can I help you with today?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-  'hey': { response: "Hey hey! 🎉 What can I do for you?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-  'just saying hi!': { response: "Hi friend! 😊 I’m here whenever you need HR help.", quickReplies: ['Find a resource','Benefits info','Talk to HR'] },
-  'find a resource': { response: "Sure! What are you looking for?", quickReplies: ['Onboarding','Policies','Recruiting','Recognition','Development'] },
-  'benefits info': { response: "Benefits live in the Employee Center + Healthy Reyes portal. Want a deeper answer?", quickReplies: ['Open full chat','Find a resource','Talk to HR'], openCopilot: true },
-  'talk to hr': { response: "If you need a person—email HR support or open HR Copilot for fast answers.", quickReplies: ['Open full chat','Find a resource'], openCopilot: true }
+// =============================================
+//  UI CONFIG
+// =============================================
+const filterChipsData = [
+  { filter: 'All', label: 'All', icon: '✦' },
+  { filter: 'Policies & Compliance', label: 'Policies', icon: '📋' },
+  { filter: 'Talent Management', label: 'Talent Mgmt', icon: '📊' },
+  { filter: 'Onboarding', label: 'Onboarding', icon: '👋' },
+  { filter: 'Professional Development', label: 'Development', icon: '📈' },
+  { filter: 'Engagement & Recognition', label: 'Recognition', icon: '🏆' },
+  { filter: 'Talent Acquisition', label: 'Talent Acquisition', icon: '🔍' },
+];
+
+const tagStyles = {
+  "Policies & Compliance":    { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
+  "Talent Management":        { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
+  "Onboarding":               { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
+  "Professional Development": { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
+  "Engagement & Recognition": { bg: "#FDECEC", color: "#8B0008", accent: "#F40009" },
+  "Talent Acquisition":       { bg: "#F0F0F0", color: "#111111", accent: "#111111" },
 };
+
+const topicIcons = {
+  "Policies & Compliance": "📋",
+  "Talent Management": "📊",
+  "Onboarding": "👋",
+  "Professional Development": "📈",
+  "Engagement & Recognition": "🏆",
+  "Talent Acquisition": "🔍",
+};
+
+// =============================================
+//  STATE
+// =============================================
+let currentFilter = 'All';
+let searchQuery = '';
+let isChatOpen = false;
+// Chat history in Claude API format: [{role:'user'|'assistant', content:'...'}]
+let apiChatHistory = [];
+// Rendered chat items for the UI (includes resource IDs, quick replies etc.)
+let uiChatHistory = [];
+let isTyping = false;
+
+// =============================================
+//  SYSTEM PROMPT FOR FIZZ — Claude API
+// =============================================
+const FIZZ_SYSTEM_PROMPT = `You are Fizz, a friendly and knowledgeable HR assistant chatbot for Reyes Coca-Cola Bottling (RCCB). You help employees and HR staff find the right HR resources, answer HR questions, and guide people to the right tools.
+
+You have access to the following HR resources. Each resource has an ID, title, topic, description, URL (null if coming soon), and status (live or pending).
+
+RESOURCE CATALOG:
+${JSON.stringify(hrResources.map(r => ({
+  id: r.id,
+  title: r.title,
+  topic: r.topic,
+  desc: r.desc,
+  tags: r.tags,
+  url: r.url,
+  status: r.status
+})), null, 2)}
+
+INSTRUCTIONS:
+1. Always respond in a warm, helpful, and conversational tone. You are Fizz — enthusiastic, knowledgeable, and on brand for Coca-Cola.
+2. When a user asks about ANY type of leave — maternity, paternity, baby bonding, FMLA, CFRA, pregnancy disability (PDL), California Paid Family Leave (PFL), domestic violence leave, military leave, medical leave, disability, sick leave, bereavement, jury duty, or any other absence — ALWAYS point them to resource ID 2 (Leaves / FMLA Training for HR). This is the comprehensive leaves resource that covers ALL leave types.
+3. When recommending resources, pick the most relevant ones (usually 1-3 max).
+4. Always respond with valid JSON in this exact format — nothing else, no markdown, no preamble:
+{
+  "message": "Your conversational response to the user (use \\n for line breaks)",
+  "resourceIds": [array of resource IDs to show, or empty array []],
+  "quickReplies": ["Up to 4 short follow-up suggestions"],
+  "showCopilot": false
+}
+
+5. Set "showCopilot" to true only when the question is about benefits, 401k, payroll, health insurance, or topics genuinely not covered by your resources.
+6. For resources with status "pending", still recommend them but mention they are coming soon.
+7. If someone asks something unclear, ask a clarifying question in the "message" field.
+8. NEVER respond with anything other than the JSON object. No extra text.
+9. Keep messages concise but warm — 1-3 sentences typically. Use emoji sparingly for personality.
+10. If the user types a greeting (hi, hello, hey), respond warmly and ask how you can help.
+
+CALIFORNIA-SPECIFIC LEAVE KNOWLEDGE:
+California has additional leave protections beyond federal FMLA, including:
+- CFRA (California Family Rights Act) — up to 12 weeks for family/medical reasons
+- PDL (Pregnancy Disability Leave) — up to 4 months for pregnancy-related conditions
+- California Paid Family Leave (PFL) — paid benefits for bonding or caring for family
+- Domestic Violence, Sexual Assault, Stalking Leave — protected time off for victims
+- CPSL (COVID-19 Supplemental Paid Sick Leave) — may apply historically
+- Bereavement Leave — California now requires up to 5 days
+- Jury Duty Leave
+All of these are covered in Resource #2, the Leaves/FMLA Toolkit.`;
+
+// =============================================
+//  FIZZ CHARACTER SVG
+// =============================================
+function getFizzSVG(size = 80) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 60 120" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
+    <defs>
+      <linearGradient id="bottleBody" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#1a0505"/><stop offset="15%" stop-color="#3d1111"/>
+        <stop offset="50%" stop-color="#4a1515"/><stop offset="85%" stop-color="#3d1111"/>
+        <stop offset="100%" stop-color="#1a0505"/>
+      </linearGradient>
+      <linearGradient id="glassShine" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </linearGradient>
+      <linearGradient id="capColor" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FF4444"/><stop offset="50%" stop-color="#F40009"/>
+        <stop offset="100%" stop-color="#8B0008"/>
+      </linearGradient>
+    </defs>
+    <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#bottleBody)"/>
+    <path d="M17 40 C14 48 13 60 12 72 C11 84 12 96 14 105" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="30" cy="70" rx="6" ry="28" fill="url(#glassShine)" opacity="0.3"/>
+    <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#capColor)"/>
+    <rect x="24" y="11" width="12" height="2" rx="1" fill="rgba(255,255,255,0.4)"/>
+    <rect x="15" y="58" width="30" height="18" rx="1.5" fill="white" opacity="0.97"/>
+    <rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/>
+    <path d="M18 67 Q24 63 30 67 Q36 71 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
+    <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
+    <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
+    <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
+    <circle cx="26" cy="40.5" r="0.8" fill="white"/>
+    <circle cx="36" cy="40.5" r="0.8" fill="white"/>
+    <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="20" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
+    <circle cx="40" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/>
+    <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="13" cy="40" rx="4" ry="6" fill="#444"/>
+    <ellipse cx="13" cy="40" rx="2.8" ry="4.5" fill="#F40009"/>
+    <ellipse cx="47" cy="40" rx="4" ry="6" fill="#444"/>
+    <ellipse cx="47" cy="40" rx="2.8" ry="4.5" fill="#F40009"/>
+    <path d="M13 46 Q13 54 18 56 L24 56" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="26" cy="56" rx="3" ry="2.5" fill="#444"/>
+    <circle cx="22" cy="90" r="1.5" fill="rgba(255,255,255,0.4)">
+      <animate attributeName="cy" values="95;82;95" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="35" cy="98" r="1" fill="rgba(255,255,255,0.35)">
+      <animate attributeName="cy" values="100;85;100" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.35;0.1;0.35" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <g transform="translate(42, 12)">
+      <circle cx="6" cy="6" r="7" fill="#10B981"/>
+      <path d="M3 4.5 L9 4.5 L9 7.5 L7 7.5 L5.5 9 L5.5 7.5 L3 7.5 Z" fill="white"/>
+    </g>
+  </svg>`;
+}
+
+function getMiniFizzSVG(size = 32) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 60 120">
+    <defs>
+      <linearGradient id="mb${size}" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#1a0505"/><stop offset="50%" stop-color="#4a1515"/>
+        <stop offset="100%" stop-color="#1a0505"/>
+      </linearGradient>
+      <linearGradient id="mc${size}" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FF4444"/><stop offset="100%" stop-color="#8B0008"/>
+      </linearGradient>
+    </defs>
+    <path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#mb${size})"/>
+    <rect x="23" y="10" width="14" height="9" rx="2" fill="url(#mc${size})"/>
+    <rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/>
+    <path d="M18 67 Q30 61 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/>
+    <ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/>
+    <circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/>
+    <circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/>
+    <circle cx="26" cy="40.5" r="0.8" fill="white"/>
+    <circle cx="36" cy="40.5" r="0.8" fill="white"/>
+    <path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none"/>
+    <ellipse cx="13" cy="40" rx="3" ry="5" fill="#F40009"/>
+    <ellipse cx="47" cy="40" rx="3" ry="5" fill="#F40009"/>
+  </svg>`;
+}
+
+// =============================================
+//  INIT
+// =============================================
+document.addEventListener('DOMContentLoaded', function () {
+  initBubbles();
+  initTypewriter();
+  renderFilterChips();
+  renderCards();
+  initFizzCharacters();
+  initSearch();
+  document.getElementById('sendBtn').disabled = true;
+  document.getElementById('chatInput').addEventListener('input', e => {
+    document.getElementById('sendBtn').disabled = !e.target.value.trim();
+  });
+});
+
+function initFizzCharacters() {
+  document.getElementById('botCharacter').innerHTML = getFizzSVG(80);
+  document.getElementById('tooltipAvatar').innerHTML = getMiniFizzSVG(40);
+  document.getElementById('chatAvatar').innerHTML = getMiniFizzSVG(44);
+}
+
+// =============================================
+//  BUBBLES
+// =============================================
+function initBubbles() {
+  const canvas = document.getElementById('bubbles');
+  const hero = canvas.parentElement;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const bubbles = Array.from({ length: 48 }, () => ({
+    x: Math.random() * canvas.width,
+    y: canvas.height + Math.random() * canvas.height,
+    r: 3 + Math.random() * 22,
+    speed: 0.3 + Math.random() * 1.3,
+    opacity: 0.05 + Math.random() * 0.2,
+    wobble: Math.random() * Math.PI * 2,
+    wobbleSpeed: 0.008 + Math.random() * 0.025
+  }));
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    bubbles.forEach(b => {
+      b.y -= b.speed;
+      b.wobble += b.wobbleSpeed;
+      const xOff = Math.sin(b.wobble) * 2;
+      if (b.y + b.r < 0) { b.y = canvas.height + b.r; b.x = Math.random() * canvas.width; }
+      ctx.beginPath();
+      ctx.arc(b.x + xOff, b.y, b.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,255,255,${b.opacity})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(b.x + xOff - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.22, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${b.opacity * 0.9})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// =============================================
+//  TYPEWRITER
+// =============================================
+function initTypewriter() {
+  const phrases = ['HR resources', 'reasonable suspicion', 'career roadmaps', 'development plan', 'mentoring tool', 'service awards', 'career fair', 'recognition toolkit', 'FMLA leave', 'onboarding guide', 'maternity leave', 'interview guide'];
+  const input = document.getElementById('searchInput');
+  const typewriter = document.getElementById('typewriterText');
+  let pi = 0, ci = 0, deleting = false;
+
+  function type() {
+    if (document.activeElement === input || input.value) { typewriter.innerHTML = ''; return; }
+    const phrase = phrases[pi];
+    if (!deleting) {
+      ci++;
+      typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 2000); return; }
+      setTimeout(type, 90);
+    } else {
+      ci--;
+      typewriter.innerHTML = phrase.slice(0, ci) + '<span class="cursor"></span>';
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 500); return; }
+      setTimeout(type, 50);
+    }
+  }
+  setTimeout(type, 1000);
+  input.addEventListener('focus', () => typewriter.innerHTML = '');
+  input.addEventListener('blur', () => { if (!input.value) setTimeout(type, 500); });
+}
+
+// =============================================
+//  SEARCH
+// =============================================
+function initSearch() {
+  const input = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('searchClear');
+
+  input.addEventListener('input', e => {
+    searchQuery = e.target.value;
+    clearBtn.classList.toggle('visible', searchQuery.length > 0);
+    renderCards();
+    updateSearchContext();
+  });
+
+  clearBtn.addEventListener('click', clearSearch);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  searchQuery = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  document.getElementById('typewriterText').innerHTML = '';
+  updateSearchContext();
+  renderCards();
+  setTimeout(() => {
+    document.getElementById('searchInput').dispatchEvent(new Event('blur'));
+  }, 100);
+}
+
+function updateSearchContext() {
+  const ctx = document.getElementById('searchContext');
+  const txt = document.getElementById('searchContextText');
+  if (searchQuery.trim()) {
+    ctx.classList.add('visible');
+    txt.textContent = `Searching for "${searchQuery.trim()}"`;
+  } else {
+    ctx.classList.remove('visible');
+  }
+}
+
+// =============================================
+//  FILTER CHIPS
+// =============================================
+function renderFilterChips() {
+  const container = document.getElementById('filterChips');
+  container.innerHTML = filterChipsData.map(chip => `
+    <button class="filter-chip ${currentFilter === chip.filter ? 'active' : ''}" data-filter="${chip.filter}">
+      <span class="icon">${chip.icon}</span>${chip.label}
+    </button>
+  `).join('');
+
+  container.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-chip');
+    if (btn) {
+      currentFilter = btn.dataset.filter;
+      renderFilterChips();
+      renderCards();
+    }
+  });
+}
+
+// =============================================
+//  CARDS
+// =============================================
+function renderCards() {
+  const grid = document.getElementById('cardsGrid');
+  const noResults = document.getElementById('noResults');
+
+  let filtered = hrResources;
+
+  if (currentFilter !== 'All') {
+    filtered = filtered.filter(r => r.topic === currentFilter);
+  }
+
+  if (searchQuery && searchQuery.trim().length > 0) {
+    const tokens = searchQuery.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+
+    filtered = filtered
+      .map(r => {
+        const titleText  = (r.title  || '').toLowerCase();
+        const descText   = (r.desc   || '').toLowerCase();
+        const topicText  = (r.topic  || '').toLowerCase();
+        const tagsText   = (r.tags   || []).join(' ').toLowerCase();
+        const combined   = `${titleText} ${descText} ${topicText} ${tagsText}`;
+
+        if (!tokens.every(token => combined.includes(token))) return null;
+
+        let score = 0;
+        tokens.forEach(token => {
+          if (titleText.includes(token))  score += 10;
+          if (tagsText.includes(token))   score += 5;
+          if (descText.includes(token))   score += 2;
+          if (topicText.includes(token))  score += 1;
+        });
+
+        return { ...r, _score: score };
+      })
+      .filter(r => r !== null)
+      .sort((a, b) => {
+        if (b._score !== a._score) return b._score - a._score;
+        return a.title.localeCompare(b.title);
+      });
+  }
+
+  document.getElementById('resultsCount').textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    noResults.style.display = 'block';
+    document.getElementById('noResultsMsg').textContent =
+      `No results for "${searchQuery}". Try a different keyword or browse by category.`;
+    return;
+  }
+
+  noResults.style.display = 'none';
+
+  grid.innerHTML = filtered.map((resource, index) => {
+    const style  = tagStyles[resource.topic] || { bg: '#eee', color: '#333', accent: '#666' };
+    const icon   = topicIcons[resource.topic] || '📄';
+    const isLive = resource.status === 'live';
+
+    const openButton = isLive
+      ? `<a href="${resource.url || '#'}" target="_blank" rel="noopener noreferrer" class="btn-open" onclick="event.stopPropagation()">Open →</a>`
+      : `<button class="btn-open amber-btn" disabled>Coming soon</button>`;
+
+    return `
+      <div class="flip-wrap fade-in ${!isLive ? 'coming-soon' : ''}" style="animation-delay: ${index * 0.04}s" data-id="${resource.id}">
+        <div class="flip-inner">
+          <div class="flip-front" onclick="flipCard(${resource.id})">
+            <div class="color-bar" style="background-color: ${style.accent}"></div>
+            <div class="front-top">
+              <div class="book-icon-wrap" style="background: ${style.bg}">${icon}</div>
+              <span class="front-tag" style="background: ${style.bg}; color: ${style.color}">${resource.topic}</span>
+            </div>
+            <div class="front-title">${resource.title}</div>
+            <div class="front-desc">${resource.desc}</div>
+            <span class="visually-hidden" aria-hidden="true">${(resource.tags || []).join(' ')}</span>
+            ${isLive
+              ? `<div class="flip-hint"><span class="arrow">↩</span> Click to flip</div>`
+              : `<div class="coming-soon-badge"><span class="cs-dot"></span>Coming Soon</div>`}
+          </div>
+          <div class="flip-back" style="background-color: ${isLive ? style.accent : '#111111'}">
+            <div class="back-label">${isLive ? 'HR Resource' : 'In Development'}</div>
+            <div class="back-title">${resource.title}</div>
+            <div class="back-desc">${resource.desc} ${isLive ? 'Click "Open" to launch the full resource.' : 'This resource is currently being developed and will be available soon.'}</div>
+            <div class="back-actions">
+              ${openButton}
+              <button class="btn-back" onclick="event.stopPropagation(); unflipCard(${resource.id})">↩ Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function flipCard(id) {
+  const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
+  if (card) card.classList.add('flipped');
+}
+
+function unflipCard(id) {
+  const card = document.querySelector(`.flip-wrap[data-id="${id}"]`);
+  if (card) card.classList.remove('flipped');
+}
+
+// =============================================
+//  MODAL
+// =============================================
+function openModal() { document.getElementById('modalOverlay').classList.add('active'); }
+function closeModal(event) {
+  if (!event || event.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('active');
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// =============================================
+//  FIZZ CHAT — CLAUDE API POWERED
+// =============================================
+
+function openCopilot() {
+  window.open('https://m365.cloud.microsoft/chat/?titleId=T_0ec4de2d-d8ee-6d64-fdb5-689d4cb47bfb&source=embedded-builder', '_blank', 'noopener');
+}
 
 function toggleChat() {
   isChatOpen = !isChatOpen;
-
   const chatWindow = document.getElementById('chatWindow');
-  const container = document.getElementById('aiBotContainer');
-  const ping = document.getElementById('botPing');
-  const ring = document.getElementById('botRing');
-  const label = document.getElementById('botLabel');
+  const container  = document.getElementById('aiBotContainer');
+  const ping       = document.getElementById('botPing');
+  const ring       = document.getElementById('botRing');
+  const label      = document.getElementById('botLabel');
 
   if (isChatOpen) {
     chatWindow.classList.add('open');
     container.classList.add('chat-open');
     ping.style.display = 'none';
     ring.style.display = 'none';
-    label.textContent = 'Chatting';
-    label.style.color = '#F40009';
+    label.textContent  = 'Chatting';
+    label.style.color  = '#F40009';
     document.getElementById('chatInput').focus();
+
+    if (uiChatHistory.length === 0) {
+      addBotUIMessage({
+        message: "Hey there! 👋 I'm Fizz — your RCCB HR buddy. Ask me about any leave type (FMLA, maternity, California leaves, domestic violence leave, and more), career development, policies, recruiting tools, or anything else HR. What can I help with?",
+        resourceIds: [],
+        quickReplies: ['FMLA / Leave info', 'Career development', 'Interview guides', 'Recognition tools', 'Recruiting resources'],
+        showCopilot: false
+      });
+    }
   } else {
     chatWindow.classList.remove('open');
     container.classList.remove('chat-open');
-    ping.style.display = 'block';
-    ring.style.display = 'block';
-    label.textContent = 'Ask Fizz';
-    label.style.color = '';
+    ping.style.display  = 'block';
+    ring.style.display  = 'block';
+    label.textContent   = 'Ask Fizz';
+    label.style.color   = '';
   }
 }
 
-function openCopilot() {
-  window.open('https://m365.cloud.microsoft/chat/?titleId=T_0ec4de2d-d8ee-6d64-fdb5-689d4cb47bfb&source=embedded-builder', '_blank', 'noopener');
+// Add a bot message to UI history and re-render
+function addBotUIMessage(parsed) {
+  uiChatHistory.push({ role: 'bot', ...parsed });
+  renderChat();
 }
 
-function openResource(url) {
-  if (url && url !== '#') window.open(url, '_blank', 'noopener');
-  else openCopilot();
+function addUserUIMessage(text) {
+  uiChatHistory.push({ role: 'user', text });
+  renderChat();
 }
 
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, (m) => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-  }[m]));
-}
+// =============================================
+//  CLAUDE API CALL
+// =============================================
+async function callFizzAPI(userMessage) {
+  // Add to API history
+  apiChatHistory.push({ role: 'user', content: userMessage });
 
-function initChatInput() {
-  const input = document.getElementById('chatInput');
-  const sendBtn = document.getElementById('sendBtn');
-
-  input.addEventListener('input', () => {
-    sendBtn.disabled = !input.value.trim();
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: FIZZ_SYSTEM_PROMPT,
+      messages: apiChatHistory
+    })
   });
-  sendBtn.disabled = true;
-}
 
-function getBotResponse(msg) {
-  const normalized = msg.toLowerCase().trim();
-
-  // direct match
-  if (botResponses[normalized]) return botResponses[normalized];
-
-  // partial match
-  for (const key of Object.keys(botResponses)) {
-    if (normalized.includes(key)) return botResponses[key];
+  // Handle HTTP-level errors
+  if (!response.ok) {
+    let errDetail = '';
+    try { const e = await response.json(); errDetail = e.error?.message || ''; } catch(_) {}
+    throw new Error(`HTTP ${response.status}: ${errDetail || response.statusText}`);
   }
 
-  // greetings/thanks fallback
-  if (normalized.match(/^(hi|hello|hey|howdy|greetings|sup|yo)/)) return botResponses['hi'];
-  if (normalized.match(/(thank|thanks|thx)/)) return { response: "You’re welcome! 😊 Anything else?", quickReplies: ['Find a resource','Benefits info','Talk to HR'] };
+  const data = await response.json();
+  console.log('[Fizz] Raw API response:', JSON.stringify(data, null, 2));
 
-  // keyword → resource mapping
-  const km = findKeywordMatch(normalized);
-  if (km) {
-    const lines = km.ids.map(id => {
-      const r = hrResources.find(x => x.id === id);
-      return r ? `• ${r.title}` : null;
-    }).filter(Boolean);
+  // Safely extract all text blocks regardless of what else is in content
+  const contentBlocks = Array.isArray(data.content) ? data.content : [];
+  const rawText = contentBlocks
+    .filter(b => b && b.type === 'text' && typeof b.text === 'string')
+    .map(b => b.text)
+    .join('');
 
-    const body = lines.length
-      ? `${km.intro}\n\n${lines.join('\n')}\n\nWant me to open one?`
-      : `${km.intro}\n\nWant me to open HR Copilot for the most accurate answer?`;
+  console.log('[Fizz] Extracted text:', rawText);
 
-    return {
-      response: body,
-      quickReplies: lines.length
-        ? km.ids.slice(0, 4).map(id => {
-            const r = hrResources.find(x => x.id === id);
-            return r ? `Open: ${r.title}` : null;
-          }).filter(Boolean).concat(['Find a resource','Open full chat'])
-        : ['Open full chat','Find a resource','Talk to HR'],
-      resourceIds: km.ids
+  // ── Try to parse JSON from the text ──
+  let parsed = null;
+
+  if (rawText) {
+    // 1. Direct parse after stripping markdown fences
+    try {
+      const clean = rawText.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch (_) {}
+
+    // 2. Extract first {...} block if the model added any extra prose
+    if (!parsed) {
+      try {
+        const match = rawText.match(/\{[\s\S]*\}/);
+        if (match) parsed = JSON.parse(match[0]);
+      } catch (_) {}
+    }
+
+    // 3. Model responded with plain text (not JSON) — wrap it
+    if (!parsed) {
+      parsed = {
+        message: rawText.trim(),
+        resourceIds: [],
+        quickReplies: ['Find another resource', 'Open HR Copilot'],
+        showCopilot: false
+      };
+    }
+  }
+
+  // 4. Absolute fallback — empty/missing text
+  if (!parsed) {
+    parsed = {
+      message: "I couldn't find a specific answer for that one. Try rephrasing, or open HR Copilot for more help!",
+      resourceIds: [],
+      quickReplies: ['Try again', 'Open HR Copilot', 'FMLA / Leave info', 'Find a resource'],
+      showCopilot: true
     };
   }
 
-  // token search
-  const matches = tokenSearch(normalized);
-  if (matches.length) {
-    return {
-      response: `I found ${matches.length} resource${matches.length > 1 ? 's' : ''}:\n\n` + matches.map(r => `• ${r.title}`).join('\n') + `\n\nWant me to open one?`,
-      quickReplies: matches.map(r => `Open: ${r.title}`).concat(['Find a resource','Open full chat']),
-      resourceIds: matches.map(r => r.id)
-    };
-  }
+  // Validate shape — ensure required fields exist with correct types
+  parsed.message    = typeof parsed.message    === 'string'  ? parsed.message    : String(parsed.message || '');
+  parsed.resourceIds = Array.isArray(parsed.resourceIds)     ? parsed.resourceIds : [];
+  parsed.quickReplies = Array.isArray(parsed.quickReplies)   ? parsed.quickReplies : [];
+  parsed.showCopilot = Boolean(parsed.showCopilot);
 
-  return {
-    response: "Hmm, I’m not totally sure 🤔 Want to open HR Copilot for a deeper answer, or try a keyword like “onboarding” or “FMLA”?",
-    quickReplies: ['Open full chat','Find a resource','Talk to HR'],
-    openCopilot: false
-  };
+  // Filter resourceIds to only valid IDs that actually exist in our catalog
+  parsed.resourceIds = parsed.resourceIds
+    .map(id => Number(id))
+    .filter(id => hrResources.some(r => r.id === id));
+
+  // Store the raw text in API history (for conversation continuity)
+  // Use the text we got, or a JSON stringification of the parsed result
+  const historyContent = rawText || JSON.stringify(parsed);
+  apiChatHistory.push({ role: 'assistant', content: historyContent });
+
+  return parsed;
 }
 
-function findKeywordMatch(query) {
-  for (const entry of keywordMap) {
-    if (entry.keywords.some(kw => query.includes(kw))) return entry;
-  }
-  return null;
-}
+// =============================================
+//  SEND MESSAGE
+// =============================================
+function sendMessage(e) {
+  e.preventDefault();
+  const input = document.getElementById('chatInput');
+  const text  = input.value.trim();
+  if (!text || isTyping) return;
 
-function tokenSearch(query) {
-  const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
-  if (!tokens.length) return [];
-  return hrResources.filter(r => {
-    const hay = (r.title + ' ' + r.desc + ' ' + r.topic).toLowerCase();
-    return tokens.every(t => hay.includes(t));
-  }).slice(0, 4);
+  input.value = '';
+  document.getElementById('sendBtn').disabled = true;
+  processAndRespond(text);
 }
 
 function handleQuickReply(reply) {
-  // If user clicked an "Open: ___" reply, open the resource
-  if (reply.startsWith('Open: ')) {
-    const title = reply.replace('Open: ', '').trim();
-    const r = hrResources.find(x => x.title === title);
-    if (r) openResource(r.url);
-    return;
-  }
-
-  // Otherwise treat as a message
-  document.getElementById('chatInput').value = reply;
-  sendMessage(new Event('submit'));
+  if (reply === 'Open HR Copilot') { openCopilot(); return; }
+  processAndRespond(reply);
 }
 
-function sendMessage(e) {
-  if (e) e.preventDefault();
+async function processAndRespond(userText) {
+  // Show user message
+  addUserUIMessage(userText);
 
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-
-  chatMessages.push({ id: Date.now(), text, isBot: false });
-  input.value = '';
-  document.getElementById('sendBtn').disabled = true;
-
+  // Show typing
   isTyping = true;
-  renderChatMessages();
+  renderChat();
 
-  setTimeout(() => {
-    const r = getBotResponse(text);
-    if (r.openCopilot) openCopilot();
-    chatMessages.push({
-      id: Date.now() + 1,
-      text: r.response,
-      isBot: true,
-      quickReplies: r.quickReplies || []
-    });
+  try {
+    const parsed = await callFizzAPI(userText);
     isTyping = false;
-    renderChatMessages();
-  }, 650);
+
+    // Handle openCopilot flag
+    if (parsed.openCopilot) openCopilot();
+
+    addBotUIMessage(parsed);
+  } catch (err) {
+    isTyping = false;
+    console.error('Fizz API error:', err);
+    addBotUIMessage({
+      message: "Oops, I hit a snag connecting to my brain! 🙈 Try again in a moment, or open HR Copilot for immediate help.",
+      resourceIds: [],
+      quickReplies: ['Try again', 'Open HR Copilot'],
+      showCopilot: true
+    });
+  }
 }
 
-function renderChatMessages() {
+// =============================================
+//  RENDER CHAT UI
+// =============================================
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function renderChat() {
   const container = document.getElementById('chatMessages');
+  let html = '';
 
-  let html = chatMessages.map(msg => `
-    <div class="chat-message">
-      <div class="chat-message-row ${msg.isBot ? '' : 'user'}">
-        ${msg.isBot ? `<div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>` : ''}
-        <div class="chat-bubble ${msg.isBot ? 'bot' : 'user'}">${escapeHtml(msg.text)}</div>
-      </div>
-      ${msg.isBot && msg.quickReplies && msg.quickReplies.length ? `
-        <div class="quick-replies">
-          ${msg.quickReplies.map(r => `
-            <button class="quick-reply-btn" onclick="handleQuickReply('${escapeHtml(r).replace(/'/g, "\\'")}')">${escapeHtml(r)}</button>
-          `).join('')}
+  uiChatHistory.forEach(msg => {
+    if (msg.role === 'user') {
+      html += `
+        <div class="chat-message-group">
+          <div class="chat-message-row user">
+            <div class="chat-bubble user">${escapeHtml(msg.text)}</div>
+          </div>
         </div>
-      ` : ''}
-    </div>
-  `).join('');
+      `;
+    } else {
+      // Format message: bold **text**, line breaks
+      const formatted = escapeHtml(msg.message || '')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
 
+      html += `<div class="chat-message-group">
+        <div class="chat-message-row">
+          <div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>
+          <div class="chat-bubble bot">${formatted}</div>
+        </div>`;
+
+      // Resource cards
+      if (msg.resourceIds && msg.resourceIds.length > 0) {
+        html += `<div class="chat-resource-cards">`;
+        msg.resourceIds.forEach(id => {
+          const r = hrResources.find(x => x.id === id);
+          if (!r) return;
+          const icon  = topicIcons[r.topic] || '📄';
+          const badge = r.status === 'pending' ? `<span class="chat-resource-badge">Coming Soon</span>` : '';
+          const isLiveLink = r.status === 'live' && r.url && r.url !== '#';
+          const href = isLiveLink ? `href="${r.url}" target="_blank" rel="noopener"` : '';
+          const onclick = !isLiveLink && r.status !== 'pending' ? `onclick="openCopilot()"` : '';
+          html += `
+            <a class="chat-resource-card" ${href} ${onclick} style="${!isLiveLink && r.status === 'pending' ? 'opacity:0.75;cursor:default' : ''}">
+              <div class="chat-resource-icon">${icon}</div>
+              <div class="chat-resource-info">
+                <div class="chat-resource-title">${escapeHtml(r.title)}${badge}</div>
+                <div class="chat-resource-topic">${escapeHtml(r.topic)}</div>
+              </div>
+              <span class="chat-resource-arrow">${isLiveLink ? '↗' : '⏳'}</span>
+            </a>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      // Copilot CTA
+      if (msg.showCopilot) {
+        html += `
+          <div class="chat-copilot-cta" onclick="openCopilot()">
+            <div style="font-size:20px">✨</div>
+            <div class="chat-copilot-cta-text">
+              <strong>Need a deeper answer?</strong>
+              <span>Open the full HR Copilot →</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // Quick replies
+      if (msg.quickReplies && msg.quickReplies.length > 0) {
+        html += `<div class="quick-replies">`;
+        msg.quickReplies.forEach(r => {
+          const safe = escapeHtml(r).replace(/'/g, "\\'");
+          html += `<button class="quick-reply-btn" onclick="handleQuickReply('${safe}')">${escapeHtml(r)}</button>`;
+        });
+        html += `</div>`;
+      }
+
+      html += `</div>`;
+    }
+  });
+
+  // Typing indicator
   if (isTyping) {
     html += `
-      <div class="chat-message">
+      <div class="chat-message-group">
         <div class="typing-indicator">
           <div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>
           <div class="typing-dots"><span></span><span></span><span></span></div>
@@ -4341,55 +2363,13 @@ function renderChatMessages() {
 
   container.innerHTML = html;
   container.scrollTop = container.scrollHeight;
+
+  // Re-enable send if not typing
+  if (!isTyping) {
+    const input = document.getElementById('chatInput');
+    document.getElementById('sendBtn').disabled = !input.value.trim();
+  }
 }
-``
-
-    setTimeout(() => {
-      const { response, quickReplies } = getBotResponse(text);
-      chatMessages.push({ id: Date.now() + 1, text: response, isBot: true, quickReplies });
-      isTyping = false;
-      renderChatMessages();
-    }, 800 + Math.random() * 700);
-  }
-
-  function handleQuickReply(reply) {
-    document.getElementById('chatInput').value = reply;
-    sendMessage(new Event('submit'));
-  }
-
-  function renderChatMessages() {
-    const container = document.getElementById('chatMessages');
-    let html = chatMessages.map(msg => `
-      <div class="chat-message">
-        <div class="chat-message-row ${msg.isBot ? '' : 'user'}">
-          ${msg.isBot ? `<div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>` : ''}
-          <div class="chat-bubble ${msg.isBot ? 'bot' : 'user'}">${msg.text}</div>
-        </div>
-        ${msg.isBot && msg.quickReplies && msg.quickReplies.length > 0 ? `
-          <div class="quick-replies">
-            ${msg.quickReplies.map(r => `<button class="quick-reply-btn" onclick="handleQuickReply('${r.replace(/'/g, "\\'")}')">${r}</button>`).join('')}
-          </div>
-        ` : ''}
-      </div>
-    `).join('');
-
-    if (isTyping) {
-      html += `
-        <div class="chat-message">
-          <div class="typing-indicator">
-            <div class="chat-message-avatar">${getMiniFizzSVG(28)}</div>
-            <div class="typing-dots">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    container.innerHTML = html;
-    container.scrollTop = container.scrollHeight;
-  }
 </script>
-
 </body>
 </html>
