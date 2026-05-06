@@ -1904,7 +1904,7 @@
 
   // ========== TYPEWRITER ==========
   function initTypewriter() {
-    const phrases = ['HR resources', 'benefits info', 'career roadmaps', 'vacation policy', 'onboarding docs', 'contact HR', 'career development', 'recognition toolkit'];
+    const phrases = ['HR resources', 'reasonable suspicion', 'career roadmaps', 'development plan', 'mentoring tool', 'service awards', 'career fair', 'recognition toolkit'];
     const input = document.getElementById('searchInput');
     const typewriter = document.getElementById('typewriterText');
     let pi = 0, ci = 0, deleting = false;
@@ -1977,18 +1977,26 @@
     const grid = document.getElementById('cardsGrid');
     const noResults = document.getElementById('noResults');
 
-    let filtered = hrResources;
-    if (currentFilter !== 'All') {
-      filtered = filtered.filter(r => r.topic === currentFilter);
-    }
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
-      filtered = filtered.filter(r =>
-        r.title.toLowerCase().includes(q) ||
-        r.desc.toLowerCase().includes(q) ||
-        r.topic.toLowerCase().includes(q)
-      );
-    }
+ let filtered = hrResources;
+
+// Filter by topic
+if (currentFilter !== 'All') {
+  filtered = filtered.filter(r => r.topic === currentFilter);
+}
+
+// Token-based search: every word in the query must appear somewhere
+// in the card's title, description, or topic — order doesn't matter.
+if (searchQuery) {
+  const tokens = searchQuery
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(t => t.length > 0);
+
+  filtered = filtered.filter(r => {
+    const haystack = (r.title + ' ' + r.desc + ' ' + r.topic).toLowerCase();
+    return tokens.every(token => haystack.includes(token));
+  });
+}
 
     document.getElementById('resultsCount').textContent = filtered.length;
 
