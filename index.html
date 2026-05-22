@@ -832,7 +832,11 @@ function getFizzSVG(size) {
 const SYNONYMS = {
   // Leaves
   'maternity': ['fmla','leave','pdl','cfra','baby bonding','pregnancy','maternity leave'],
+  'mat leave': ['fmla','leave','pdl','cfra','baby bonding','pregnancy','maternity leave'],
+  'mat-leave': ['fmla','leave','pdl','cfra','baby bonding','pregnancy','maternity leave'],
   'paternity': ['fmla','leave','cfra','baby bonding','parental','paternity leave'],
+  'pat leave': ['fmla','leave','cfra','baby bonding','parental','paternity leave'],
+  'parental leave': ['fmla','leave','cfra','baby bonding','parental'],
   'pregnant': ['fmla','leave','pdl','pregnancy','maternity'],
   'pregnancy': ['fmla','leave','pdl','pregnancy','maternity'],
   'baby': ['fmla','leave','baby bonding','parental'],
@@ -1046,9 +1050,17 @@ const STOP_WORDS = new Set([
 // --- INTENT DETECTION ---
 function detectIntent(q) {
   const lower = q.toLowerCase().trim();
-  if (/^\s*(hi|hey|hello|yo|sup|howdy|hiya|good\s+(morning|afternoon|evening))\b/i.test(lower)) return 'greeting';
-  if (/^\s*(thanks|thank\s*you|thx|ty|appreciate|awesome|cool|great|perfect|nice|love\s*it|amazing|helpful|got\s*it)[\s!.,]*$/i.test(lower)) return 'gratitude';
-  if (/^\s*(bye|goodbye|see\s*ya|later|gtg|cya|peace|farewell)[\s!.,]*$/i.test(lower)) return 'farewell';
+
+  // Patterns for "pure" social intents (greetings, thanks, byes)
+  // These only fire if the message is *just* the greeting — not a greeting+question
+  const greetingPattern  = /^\s*(hi|hey|hello|yo|sup|howdy|hiya|good\s+(morning|afternoon|evening))\b[\s,!.]*(fizz|there|bot|buddy)?[\s,!.]*$/i;
+  const gratitudePattern = /^\s*(thanks|thank\s*you|thx|ty|appreciate|awesome|cool|great|perfect|nice|love\s*it|amazing|helpful|got\s*it)[\s!.,]*(fizz)?[\s!.,]*$/i;
+  const farewellPattern  = /^\s*(bye|goodbye|see\s*ya|later|gtg|cya|peace|farewell)[\s!.,]*(fizz)?[\s!.,]*$/i;
+
+  if (greetingPattern.test(lower))  return 'greeting';
+  if (gratitudePattern.test(lower)) return 'gratitude';
+  if (farewellPattern.test(lower))  return 'farewell';
+
   if (/\b(who\s+are\s+you|what\s+are\s+you|what\s+can\s+you\s+do|what\s+do\s+you\s+do|how\s+(does|do)\s+(this|you)\s+work|are\s+you\s+(a\s+)?bot|are\s+you\s+(real|human|ai))\b/i.test(lower)) return 'capability';
   if (/^\s*(help|i\s+need\s+help|help\s+me)[\s!.?,]*$/i.test(lower)) return 'capability';
   if (/\b(another|more|other|else|what\s+else|anything\s+else|next|show\s+more|see\s+more)\b/i.test(lower)) return 'more';
@@ -1056,6 +1068,16 @@ function detectIntent(q) {
   if (/^(yes|yeah|yep|yup|sure|okay|ok|sounds good|please do)[\s!.,]*$/i.test(lower)) return 'affirmation';
   if (/^(no|nope|nah|not really|no thanks)[\s!.,]*$/i.test(lower)) return 'negation';
   return 'search';
+}
+
+// Strip leading greetings/filler from a search query so they don't drown out the real content.
+// "hey fizz my employee needs maternity leave" → "my employee needs maternity leave"
+function stripGreeting(q) {
+  return q
+    .replace(/^\s*(hi|hey|hello|yo|sup|howdy|hiya|good\s+(morning|afternoon|evening))[\s,!.]+(fizz|there|bot|buddy)?[\s,!.]*/i, '')
+    .replace(/^\s*(fizz|hey\s+fizz)[\s,!.]+/i, '')
+    .replace(/^\s*(so|um|uh|well|ok|okay|alright)[\s,!.]+/i, '')
+    .trim();
 }
 
 // --- TOKENIZATION + SYNONYM EXPANSION ---
@@ -1304,7 +1326,8 @@ function generateFizzReply(userMessage) {
   const q = userMessage.toLowerCase().trim();
   const intent = detectIntent(q);
 
-  // Quick intents
+  // Quick intents — these only fire when the WHOLE message is just a greeting/thanks/etc.
+  // (the patterns in detectIntent now require the message to end after the greeting)
   if (intent === 'greeting')   { ctx.lastIntent = intent; return { message: pick(GREETINGS),   resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,4), showCopilot: false }; }
   if (intent === 'gratitude')  { ctx.lastIntent = intent; return { message: pick(GRATITUDE),   resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,3), showCopilot: false }; }
   if (intent === 'farewell')   { ctx.lastIntent = intent; return { message: pick(FAREWELLS),   resourceIds: [], quickReplies: [],                       showCopilot: false }; }
@@ -1313,8 +1336,13 @@ function generateFizzReply(userMessage) {
   if (intent === 'affirmation' && ctx.lastResourceIds.length === 0) { ctx.lastIntent = intent; return { message: pick(AFFIRMATIONS), resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,4), showCopilot: false }; }
   if (intent === 'negation')   { ctx.lastIntent = intent; return { message: pick(NEGATIONS),   resourceIds: [], quickReplies: [], showCopilot: false }; }
 
+  // SEARCH INTENT — strip any greeting/filler prefix so "hey fizz my employee needs mat leave"
+  // is processed as "my employee needs mat leave" (the real question).
+  const cleanedQuery = stripGreeting(q);
+  const queryForSearch = cleanedQuery || q; // fallback to original if strip removed everything
+
   // Check canned answers first (more natural responses for common questions)
-  const canned = checkCannedAnswers(userMessage);
+  const canned = checkCannedAnswers(queryForSearch);
   if (canned) {
     ctx.lastResourceIds = canned.resourceIds;
     ctx.lastIntent = 'search';
@@ -1327,8 +1355,8 @@ function generateFizzReply(userMessage) {
     };
   }
 
-  // Tokenize
-  let rawTokens = tokenize(q);
+  // Tokenize (use cleaned query so "hey/fizz" don't pollute tokens)
+  let rawTokens = tokenize(queryForSearch);
 
   // If query is very short and intent was previously 'search', combine with last query context
   // (handles follow-ups like "what about for managers" after a topic was discussed)
@@ -1396,7 +1424,9 @@ function generateFizzReply(userMessage) {
   } else if (allPending) {
     message = "I found a few related resources, but they're all still in development. 🚧 Check back soon!";
   } else {
-    message = `Here are the best matches for "${userMessage.length > 50 ? userMessage.slice(0,50) + '...' : userMessage}" — click any to open. 👇`;
+    const displayQuery = (cleanedQuery || userMessage).trim();
+    const shown = displayQuery.length > 50 ? displayQuery.slice(0,50) + '...' : displayQuery;
+    message = `Here are the best matches for "${shown}" — click any to open. 👇`;
   }
 
   // Update context
