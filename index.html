@@ -41,6 +41,149 @@ canvas#bubbles { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 .logo-row span { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 0.22em; text-transform: uppercase; }
 .request-btn { position: absolute; top: 22px; right: 22px; display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--coke-red); border: none; border-radius: 2px; padding: 11px 18px; font-family: 'Montserrat'; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; z-index: 20; box-shadow: 0 6px 16px rgba(0,0,0,0.18); }
 .request-btn:hover { background: var(--black); color: var(--white); }
+
+/* ========= FILMSTRIP CAROUSEL ========= */
+.filmstrip-section {
+  position: relative;
+  margin: 28px 0 0;
+  padding: 22px 0 26px;
+  background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%);
+  overflow: hidden;
+}
+.filmstrip-section::before,
+.filmstrip-section::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 14px;
+  background-image: radial-gradient(circle at center, var(--black) 0, var(--black) 3.5px, transparent 4px);
+  background-size: 24px 14px;
+  background-repeat: repeat-x;
+  background-color: #1a1a1a;
+  z-index: 3;
+}
+.filmstrip-section::before { top: 0; }
+.filmstrip-section::after { bottom: 0; }
+.filmstrip-label {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.filmstrip-label::before,
+.filmstrip-label::after {
+  content: '';
+  width: 28px; height: 1.5px;
+  background: var(--gray-200);
+}
+.filmstrip-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 0 4px;
+  /* fade edges so frames slide in/out smoothly */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+.filmstrip-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: filmstripScroll 50s linear infinite;
+  will-change: transform;
+}
+.filmstrip-viewport:hover .filmstrip-track {
+  animation-play-state: paused;
+}
+@keyframes filmstripScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* moves exactly one full set since we duplicate */
+}
+.film-frame {
+  flex-shrink: 0;
+  width: 180px;
+  height: 240px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  background: var(--gray-100);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14), inset 0 0 0 1px rgba(255,255,255,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.film-frame:hover {
+  text-decoration: none;
+}
+.film-frame:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 36px rgba(244,0,9,0.28), inset 0 0 0 1px rgba(255,255,255,0.4);
+  z-index: 5;
+}
+.film-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* placeholder styling — varied red/black tones so the strip reads as content even before images load */
+.film-frame.placeholder {
+  background: linear-gradient(135deg, var(--coke-red) 0%, var(--coke-red-darker) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.85);
+}
+.film-frame.placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1.5px dashed rgba(255,255,255,0.35);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.film-frame.placeholder .ph-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 18px;
+}
+.film-frame.placeholder .ph-num {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.film-frame.placeholder .ph-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+.film-frame.placeholder.alt {
+  background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+}
+.film-frame.placeholder.alt .ph-num { color: var(--coke-red); }
+
+@media (max-width: 768px) {
+  .film-frame { width: 140px; height: 186px; }
+  .filmstrip-track { gap: 12px; animation-duration: 40s; }
+}
+
 .cap-divider { position: relative; max-width: 1100px; margin: -36px auto 0; display: flex; align-items: center; justify-content: center; gap: 18px; padding: 0 16px; z-index: 10; }
 .cap-line { flex: 1; height: 1px; background: var(--gray-200); }
 .bottle-cap { width: 64px; height: 64px; flex-shrink: 0; animation: spinSlow 24s linear infinite; filter: drop-shadow(0 6px 14px rgba(244,0,9,0.32)); }
@@ -195,6 +338,17 @@ canvas#bubbles { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     </div>
   </div>
 </div>
+
+<!-- ========= FILMSTRIP CAROUSEL ========= -->
+<section class="filmstrip-section" aria-label="Featured resources">
+  <div class="filmstrip-label">Featured Resources</div>
+  <div class="filmstrip-viewport">
+    <div class="filmstrip-track" id="filmstripTrack">
+      <!-- 10 placeholder frames — JS will duplicate for seamless loop -->
+    </div>
+  </div>
+</section>
+
 <div class="cap-divider">
   <div class="cap-line"></div>
   <svg class="bottle-cap" viewBox="0 0 100 100"><defs><radialGradient id="capGrad" cx="50%" cy="35%" r="60%"><stop offset="0%" stop-color="#FF1A1F"/><stop offset="60%" stop-color="#F40009"/><stop offset="100%" stop-color="#8B0008"/></radialGradient></defs><circle cx="50" cy="50" r="46" fill="url(#capGrad)"/><text x="50" y="57" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="18" font-weight="900" fill="white">RCCB</text></svg>
@@ -251,8 +405,8 @@ canvas#bubbles { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   <div class="chat-messages" id="chatMessages"></div>
   <div class="chat-input-area">
     <form class="chat-input-row" onsubmit="sendMessage(event)">
-      <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything HR...">
-      <button type="submit" class="chat-send-btn" id="sendBtn" disabled>
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything HR..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" id="sendBtn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </form>
@@ -277,6 +431,62 @@ canvas#bubbles { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 
 <script>
 
+/* =========================================================
+   FILMSTRIP CAROUSEL
+   ---------------------------------------------------------
+   To swap a placeholder for a real book cover image:
+   1. Find the entry in `filmstripImages` below.
+   2. Replace `null` with your image URL (e.g. './covers/onboarding.jpg').
+      Keep the `label` for accessibility / fallback text.
+   The track is automatically duplicated for a seamless loop.
+   ========================================================= */
+/* Each frame can be clickable — add a `link` to point to a resource URL.
+   If `link` is null, the frame renders but isn't clickable. */
+const filmstripImages = [
+  { url: null, label: 'Onboarding Guide',     link: 'https://heyzine.com/flip-book/baa9b97ca3.html#page/1' },
+  { url: null, label: 'Performance Mgmt',     link: 'https://heyzine.com/flip-book/RCCBPerformanceGuide' },
+  { url: null, label: 'Career Roadmaps',      link: 'https://csusteph.github.io/CareerRoadmaps/' },
+  { url: null, label: 'Leaves & FMLA',        link: 'https://heyzine.com/flip-book/RCCBLeavesToolkit' },
+  { url: null, label: 'Recognition Toolkit',  link: 'https://heyzine.com/flip-book/RCCBRecognitionToolkit' },
+  { url: null, label: 'Interview Guide',      link: 'https://heyzine.com/flip-book/1dea1e4827.html#page/1' },
+  { url: null, label: 'YRJ Leader Page',      link: 'https://reyesholdings.sharepoint.com/teams/DEMOYRJ/SitePages/LearningTeamHome11.aspx' },
+  { url: null, label: 'Mentoring Tool',       link: 'https://heyzine.com/flip-book/RCCBMentoringTool' },
+  { url: null, label: 'FIFA Playbook',        link: 'https://heyzine.com/flip-book/EmployeeFIFAPlaybook' },
+  { url: null, label: 'HR Audit Toolkit',     link: 'https://heyzine.com/flip-book/RCCBHRAudits' }
+];
+
+function buildFilmstrip() {
+  const track = document.getElementById('filmstripTrack');
+  const frameHtml = (item, idx) => {
+    // Build inner content (image OR placeholder)
+    let inner;
+    if (item.url) {
+      inner = '<img src="' + item.url + '" alt="' + item.label + '" loading="lazy">';
+    } else {
+      const altClass = idx % 2 === 0 ? '' : 'alt';
+      const num = String(idx + 1).padStart(2, '0');
+      inner = '<div class="ph-inner">' +
+                '<div class="ph-num">' + num + '</div>' +
+                '<div class="ph-label">' + item.label + '</div>' +
+              '</div>';
+      // include placeholder classes when no image
+      var placeholderClass = ' placeholder ' + altClass;
+    }
+    const placeholderClasses = item.url ? '' : (' placeholder ' + (idx % 2 === 0 ? '' : 'alt'));
+
+    // Wrap in <a> if there's a link, otherwise <div>
+    if (item.link) {
+      return '<a href="' + item.link + '" target="_blank" rel="noopener" class="film-frame' + placeholderClasses + '" title="Open: ' + item.label + '">' + inner + '</a>';
+    }
+    return '<div class="film-frame' + placeholderClasses + '" title="' + item.label + '">' + inner + '</div>';
+  };
+  // duplicate the set so translateX(-50%) creates a perfect seamless loop
+  const firstSet = filmstripImages.map(frameHtml).join('');
+  const secondSet = filmstripImages.map(frameHtml).join('');
+  track.innerHTML = firstSet + secondSet;
+}
+buildFilmstrip();
+
 
 const hrResources = [
 
@@ -289,17 +499,7 @@ const hrResources = [
     "title": "YRJ People Leader Page",
     "topic": "Professional Development",
     "desc": "Learning and development hub for people leaders across the Reyes organization.",
-    "tags": [
-      "leadership development",
-      "manager training",
-      "supervisor learning",
-      "leader resources",
-      "yrj",
-      "leadership academy",
-      "people manager",
-      "managing people",
-      "people leader"
-    ],
+    "tags": ["leadership development","manager training","supervisor learning","leader resources","yrj","leadership academy","people manager","managing people","people leader"],
     "url": "https://reyesholdings.sharepoint.com/teams/DEMOYRJ/SitePages/LearningTeamHome11.aspx",
     "status": "live"
   },
@@ -308,57 +508,25 @@ const hrResources = [
     "title": "YRJ Frontline Training",
     "topic": "Professional Development",
     "desc": "Frontline employee training materials and resources.",
-    "tags": [
-      "hourly training",
-      "associate training",
-      "employee development",
-      "frontline workers",
-      "plant training",
-      "warehouse training",
-      "yrj frontline",
-      "frontline training"
-    ],
+    "tags": ["hourly training","associate training","employee development","frontline workers","plant training","warehouse training","yrj frontline","frontline training"],
     "url": "https://heyzine.com/flip-book/e57d4c81e3.html#page/1",
     "status": "live"
   },
-
-  /* ✅ NEW CARD (ADDED — does NOT replace anything) */
   {
     "id": 31,
     "title": "Managing in a Union Environment",
     "topic": "Professional Development",
     "desc": "CareerConnect micro trainings focused on managing in a union environment.",
-    "tags": [
-      "union",
-      "labor",
-      "collective bargaining",
-      "steward",
-      "grievance",
-      "contract",
-      "careerconnect",
-      "micro training",
-      "manager",
-      "leadership"
-    ],
+    "tags": ["union","labor","collective bargaining","steward","grievance","contract","careerconnect","micro training","manager","leadership"],
     "url": "https://reyesholdings.csod.com/ui/lms-learning-details/app/curriculum/71efb727-2003-4887-a676-16e3d448ddd5?isOnePlayer=true",
     "status": "live"
   },
-
   {
     "id": 10,
     "title": "HR Excellence Competency Model",
     "topic": "Professional Development",
     "desc": "Framework defining the core competencies for HR excellence at Reyes.",
-    "tags": [
-      "competencies",
-      "skills framework",
-      "hr skills",
-      "capabilities",
-      "professional standards",
-      "hr development",
-      "competency model",
-      "hr competency"
-    ],
+    "tags": ["competencies","skills framework","hr skills","capabilities","professional standards","hr development","competency model","hr competency"],
     "url": "https://heyzine.com/flip-book/ReyesExcellencemodel.html",
     "status": "live"
   },
@@ -367,17 +535,7 @@ const hrResources = [
     "title": "Employee Career &amp; Development Guide",
     "topic": "Professional Development",
     "desc": "Career pathing guide helping RCCB employees plan and grow their careers.",
-    "tags": [
-      "career planning",
-      "career path",
-      "growth",
-      "advancement",
-      "promotion",
-      "career development",
-      "career ladder",
-      "career guide",
-      "career"
-    ],
+    "tags": ["career planning","career path","growth","advancement","promotion","career development","career ladder","career guide","career"],
     "url": "https://heyzine.com/flip-book/RCCBEmployeeDevelopmentGuide#page/1",
     "status": "live"
   },
@@ -386,16 +544,7 @@ const hrResources = [
     "title": "Development Plan Workbook",
     "topic": "Professional Development",
     "desc": "Interactive workbook for building individual development plans.",
-    "tags": [
-      "idp",
-      "individual development plan",
-      "goal planning",
-      "growth plan",
-      "development goals",
-      "learning plan",
-      "workbook",
-      "development plan"
-    ],
+    "tags": ["idp","individual development plan","goal planning","growth plan","development goals","learning plan","workbook","development plan"],
     "url": "https://heyzine.com/flip-book/72c6c722b1.html",
     "status": "live"
   },
@@ -404,15 +553,7 @@ const hrResources = [
     "title": "Career Connect Curriculum Guidebook",
     "topic": "Professional Development",
     "desc": "Curriculum guide for the Career Connect development program.",
-    "tags": [
-      "learning curriculum",
-      "training program",
-      "course catalog",
-      "learning paths",
-      "professional courses",
-      "career connect",
-      "curriculum"
-    ],
+    "tags": ["learning curriculum","training program","course catalog","learning paths","professional courses","career connect","curriculum"],
     "url": "https://heyzine.com/flip-book/CareerconnectCurriculum#page/1",
     "status": "live"
   },
@@ -421,16 +562,7 @@ const hrResources = [
     "title": "Mentoring Tool",
     "topic": "Professional Development",
     "desc": "Structured tool for establishing and managing mentoring relationships.",
-    "tags": [
-      "mentor",
-      "mentee",
-      "coaching",
-      "sponsorship",
-      "mentorship program",
-      "career guidance",
-      "advisor",
-      "mentoring"
-    ],
+    "tags": ["mentor","mentee","coaching","sponsorship","mentorship program","career guidance","advisor","mentoring"],
     "url": "https://heyzine.com/flip-book/RCCBMentoringTool",
     "status": "live"
   },
@@ -439,16 +571,7 @@ const hrResources = [
     "title": "Accelerate Resources",
     "topic": "Professional Development",
     "desc": "Resources for the Accelerate leadership development program. In development.",
-    "tags": [
-      "high potential",
-      "hipo",
-      "leadership pipeline",
-      "succession",
-      "talent acceleration",
-      "fast track",
-      "accelerate program",
-      "accelerate"
-    ],
+    "tags": ["high potential","hipo","leadership pipeline","succession","talent acceleration","fast track","accelerate program","accelerate"],
     "url": null,
     "status": "pending"
   },
@@ -457,30 +580,7 @@ const hrResources = [
     "title": "Career Roadmaps",
     "topic": "Professional Development",
     "desc": "Explore all RCCB career paths, roles, and advancement opportunities in one comprehensive guide.",
-    "tags": [
-      "career",
-      "roadmap",
-      "development",
-      "growth",
-      "roles",
-      "advancement",
-      "internal mobility",
-      "career planning",
-      "leadership",
-      "individual contributor",
-      "pathways",
-      "job levels",
-      "skills",
-      "promotions",
-      "sales",
-      "manufacturing",
-      "warehouse",
-      "transportation",
-      "merchandising",
-      "distribution",
-      "plant",
-      "logistics"
-    ],
+    "tags": ["career","roadmap","development","growth","roles","advancement","internal mobility","career planning","leadership","individual contributor","pathways","job levels","skills","promotions","sales","manufacturing","warehouse","transportation","merchandising","distribution","plant","logistics"],
     "url": "https://csusteph.github.io/CareerRoadmaps/",
     "status": "live"
   },
@@ -489,101 +589,40 @@ const hrResources = [
     "title": "Mandatory Compliance Training",
     "topic": "Professional Development",
     "desc": "Required compliance training materials available in SharePoint documents.",
-    "tags": [
-      "required training",
-      "annual training",
-      "ethics training",
-      "harassment",
-      "cybersecurity",
-      "compliance courses",
-      "mandatory courses",
-      "annual compliance",
-      "mandatory training"
-    ],
+    "tags": ["required training","annual training","ethics training","harassment","cybersecurity","compliance courses","mandatory courses","annual compliance","mandatory training"],
     "url": "#",
     "status": "live"
   },
 
-  /* =========================
-     ONBOARDING
-     ========================= */
-
+  /* ONBOARDING */
   {
     "id": 7,
     "title": "Onboarding Guide",
     "topic": "Onboarding",
     "desc": "Everything a new hire needs for a smooth and successful start at RCCB.",
-    "tags": [
-      "new hire",
-      "orientation",
-      "first day",
-      "new employee",
-      "paperwork",
-      "welcome",
-      "induction",
-      "day one",
-      "onboard",
-      "starting",
-      "onboarding",
-      "joining"
-    ],
+    "tags": ["new hire","orientation","first day","new employee","paperwork","welcome","induction","day one","onboard","starting","onboarding","joining"],
     "url": "https://heyzine.com/flip-book/baa9b97ca3.html#page/1",
     "status": "live"
   },
 
-  /* =========================
-     TALENT MANAGEMENT
-     ========================= */
-
+  /* TALENT MANAGEMENT */
   {
     "id": 6,
     "title": "Performance Management Guide",
     "topic": "Talent Management",
     "desc": "End-to-end guide for managing employee performance and development conversations.",
-    "tags": [
-      "reviews",
-      "feedback",
-      "goal setting",
-      "coaching",
-      "performance reviews",
-      "evaluations",
-      "pip",
-      "performance improvement",
-      "write up",
-      "corrective action",
-      "annual review",
-      "performance management",
-      "discipline",
-      "disciplinary",
-      "counseling",
-      "warning"
-    ],
+    "tags": ["reviews","feedback","goal setting","coaching","performance reviews","evaluations","pip","performance improvement","write up","corrective action","annual review","performance management","discipline","disciplinary","counseling","warning"],
     "url": "https://heyzine.com/flip-book/RCCBPerformanceGuide",
     "status": "live"
   },
 
-  /* =========================
-     FIFA
-     ========================= */
-
+  /* FIFA */
   {
     "id": 17,
     "title": "VIK Activator Playbook",
     "topic": "FIFA",
     "desc": "Onboarding guide for FIFA VIK Activator assignments supporting sporting events.",
-    "tags": [
-      "fifa",
-      "soccer",
-      "onboarding",
-      "events",
-      "operations",
-      "activator",
-      "stadium",
-      "compliance",
-      "field roles",
-      "partnership",
-      "global events"
-    ],
+    "tags": ["fifa","soccer","onboarding","events","operations","activator","stadium","compliance","field roles","partnership","global events"],
     "url": "https://heyzine.com/flip-book/EmployeeFIFAPlaybook",
     "status": "live"
   },
@@ -592,43 +631,18 @@ const hrResources = [
     "title": "FIFA Manager Playbook",
     "topic": "FIFA",
     "desc": "Guidance for evaluating performance and delivering feedback during FIFA event assignments.",
-    "tags": [
-      "fifa",
-      "soccer",
-      "leadership",
-      "managers",
-      "feedback",
-      "performance",
-      "evaluation",
-      "coaching",
-      "development",
-      "event leadership"
-    ],
+    "tags": ["fifa","soccer","leadership","managers","feedback","performance","evaluation","coaching","development","event leadership"],
     "url": "https://heyzine.com/flip-book/ManagerFIFAPlaybook",
     "status": "live"
   },
 
-  /* =========================
-     LIFE EVENTS
-     ========================= */
-
+  /* LIFE EVENTS */
   {
     "id": 29,
     "title": "Bereavement Toolkit",
     "topic": "Life Events",
     "desc": "Guidance and resources to support employees and leaders during times of loss, including bereavement leave, benefits, and compassionate communication practices.",
-    "tags": [
-      "bereavement",
-      "life events",
-      "employee support",
-      "leave",
-      "benefits",
-      "wellbeing",
-      "manager guidance",
-      "policy",
-      "grief",
-      "support resources"
-    ],
+    "tags": ["bereavement","life events","employee support","leave","benefits","wellbeing","manager guidance","policy","grief","support resources"],
     "url": "https://heyzine.com/flip-book/RCCBBereavementToolkit",
     "status": "live"
   },
@@ -637,40 +651,18 @@ const hrResources = [
     "title": "Retirement Toolkit",
     "topic": "Life Events",
     "desc": "Comprehensive guide to support employees and managers through the retirement process, including planning steps, benefits information, and transition guidance.",
-    "tags": [
-      "retirement",
-      "life events",
-      "career transition",
-      "benefits",
-      "planning",
-      "employee support",
-      "offboarding",
-      "financial planning",
-      "manager guidance",
-      "succession"
-    ],
+    "tags": ["retirement","life events","career transition","benefits","planning","employee support","offboarding","financial planning","manager guidance","succession"],
     "url": "https://heyzine.com/flip-book/ad7a4f11f1.html",
     "status": "live"
   },
 
-  /* =========================
-     TALENT ACQUISITION
-     ========================= */
-
+  /* TALENT ACQUISITION */
   {
     "id": 24,
     "title": "Internal Interview Guide",
     "topic": "Talent Acquisition",
     "desc": "Step-by-step guide for conducting structured internal interviews.",
-    "tags": [
-      "promotion interview",
-      "internal hiring",
-      "interview process",
-      "hiring manager guide",
-      "structured interview",
-      "interview questions",
-      "interview guide"
-    ],
+    "tags": ["promotion interview","internal hiring","interview process","hiring manager guide","structured interview","interview questions","interview guide"],
     "url": "https://heyzine.com/flip-book/1dea1e4827.html#page/1",
     "status": "live"
   },
@@ -679,16 +671,7 @@ const hrResources = [
     "title": "Build Your Own Interview Guide",
     "topic": "Talent Acquisition",
     "desc": "Customizable interview guide template for hiring managers.",
-    "tags": [
-      "interview questions",
-      "interview template",
-      "custom interview",
-      "interview builder",
-      "hiring questions",
-      "behavioral interview",
-      "custom guide",
-      "interview"
-    ],
+    "tags": ["interview questions","interview template","custom interview","interview builder","hiring questions","behavioral interview","custom guide","interview"],
     "url": "https://acrobat.adobe.com/id/urn:aaid:sc:US:80f61a10-90c6-426f-8fa9-e069289d1e2f",
     "status": "live"
   },
@@ -697,17 +680,7 @@ const hrResources = [
     "title": "Military Hiring Toolkit",
     "topic": "Talent Acquisition",
     "desc": "Resources and best practices for recruiting military talent.",
-    "tags": [
-      "veterans",
-      "military veterans",
-      "armed forces",
-      "veteran hiring",
-      "military recruiting",
-      "transitioning service members",
-      "military",
-      "vet",
-      "veteran"
-    ],
+    "tags": ["veterans","military veterans","armed forces","veteran hiring","military recruiting","transitioning service members","military","vet","veteran"],
     "url": "https://heyzine.com/flip-book/RCCBMilitary",
     "status": "live"
   },
@@ -716,18 +689,7 @@ const hrResources = [
     "title": "Campus Recruitment Toolkit",
     "topic": "Talent Acquisition",
     "desc": "Toolkit for campus recruiting events, outreach, and hiring programs.",
-    "tags": [
-      "college recruiting",
-      "university hiring",
-      "student recruiting",
-      "intern recruiting",
-      "campus events",
-      "school recruiting",
-      "campus",
-      "college",
-      "university",
-      "campus recruitment"
-    ],
+    "tags": ["college recruiting","university hiring","student recruiting","intern recruiting","campus events","school recruiting","campus","college","university","campus recruitment"],
     "url": "https://heyzine.com/flip-book/RCCBcampustoolkit",
     "status": "live"
   },
@@ -736,43 +698,18 @@ const hrResources = [
     "title": "Career Fair Checklist",
     "topic": "Talent Acquisition",
     "desc": "Complete checklist and prep guide for career fair events.",
-    "tags": [
-      "university",
-      "college",
-      "job fair",
-      "campus event",
-      "student recruiting",
-      "recruiting event prep",
-      "fair logistics",
-      "booth setup",
-      "career fair",
-      "job fair checklist"
-    ],
+    "tags": ["university","college","job fair","campus event","student recruiting","recruiting event prep","fair logistics","booth setup","career fair","job fair checklist"],
     "url": "https://reyesholdings.sharepoint.com/teams/RecruitmentResources/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources%2FCareer%20Fair%20Checklist%20%28Rev%202025%29%2Epdf&parent=%2Fteams%2FRecruitmentResources%2FShared%20Documents%2FGeneral%2FCareer%20Fair%20Resources",
     "status": "live"
   },
 
-  /* =========================
-     ENGAGEMENT & RECOGNITION
-     ========================= */
-
+  /* ENGAGEMENT & RECOGNITION */
   {
     "id": 21,
     "title": "Recognition Toolkit",
     "topic": "Engagement &amp; Recognition",
     "desc": "Manager's guide to building a meaningful recognition culture at RCCB.",
-    "tags": [
-      "employee appreciation",
-      "rewards",
-      "kudos",
-      "shoutouts",
-      "recognition program",
-      "appreciation",
-      "thank you",
-      "employee rewards",
-      "recognize",
-      "recognition"
-    ],
+    "tags": ["employee appreciation","rewards","kudos","shoutouts","recognition program","appreciation","thank you","employee rewards","recognize","recognition"],
     "url": "https://heyzine.com/flip-book/RCCBRecognitionToolkit",
     "status": "live"
   },
@@ -781,17 +718,7 @@ const hrResources = [
     "title": "Service Awards",
     "topic": "Engagement &amp; Recognition",
     "desc": "Resources and materials for the RCCB employee service awards program.",
-    "tags": [
-      "anniversary",
-      "tenure",
-      "milestone",
-      "years of service",
-      "employee milestones",
-      "longevity awards",
-      "recognition gifts",
-      "service award",
-      "service awards"
-    ],
+    "tags": ["anniversary","tenure","milestone","years of service","employee milestones","longevity awards","recognition gifts","service award","service awards"],
     "url": "https://reyesholdings.sharepoint.com/:f:/s/rc-rccb/IgCM8wvj79hORq_3b2vMcO-0AWu-N6psGZkce_sylCGINNo?e=LfDlJA",
     "status": "live"
   },
@@ -800,44 +727,18 @@ const hrResources = [
     "title": "RCCB Awards (GPTW, Fortune, Brandon Hall)",
     "topic": "Engagement &amp; Recognition",
     "desc": "Showcase of RCCB's award recognitions. Resource currently in development.",
-    "tags": [
-      "great place to work",
-      "gptw",
-      "fortune",
-      "brandon hall",
-      "company awards",
-      "employer awards",
-      "accolades"
-    ],
+    "tags": ["great place to work","gptw","fortune","brandon hall","company awards","employer awards","accolades"],
     "url": null,
     "status": "pending"
   },
 
-  /* =========================
-     COMPLIANCE (HR Compliance + Policies & Compliance)
-     ========================= */
-
+  /* COMPLIANCE */
   {
     "id": 19,
     "title": "HR Audit Toolkit",
     "topic": "HR Compliance",
     "desc": "Quick-reference guide for HR audits, compliance requirements, and required workplace documentation.",
-    "tags": [
-      "hr",
-      "compliance",
-      "audit",
-      "jj keller",
-      "workplace posters",
-      "i9",
-      "ofccp",
-      "affirmative action",
-      "employee files",
-      "medical files",
-      "records",
-      "documentation",
-      "policy",
-      "regulatory"
-    ],
+    "tags": ["hr","compliance","audit","jj keller","workplace posters","i9","ofccp","affirmative action","employee files","medical files","records","documentation","policy","regulatory"],
     "url": "https://heyzine.com/flip-book/RCCBHRAudits",
     "status": "live"
   },
@@ -846,17 +747,7 @@ const hrResources = [
     "title": "I9 and ICE Inspections",
     "topic": "Policies &amp; Compliance",
     "desc": "Guidance on I9 documentation and ICE inspection procedures.",
-    "tags": [
-      "immigration",
-      "audit",
-      "work authorization",
-      "eligibility",
-      "employment verification",
-      "federal compliance",
-      "documentation",
-      "i-9",
-      "i9"
-    ],
+    "tags": ["immigration","audit","work authorization","eligibility","employment verification","federal compliance","documentation","i-9","i9"],
     "url": null,
     "status": "pending"
   },
@@ -865,39 +756,7 @@ const hrResources = [
     "title": "Leaves / FMLA Training for HR",
     "topic": "Policies &amp; Compliance",
     "desc": "A complete guide to all federal and California leave types and other protected absences.",
-    "tags": [
-      "fmla",
-      "family medical leave act",
-      "leave",
-      "loa",
-      "leave of absence",
-      "maternity leave",
-      "paternity leave",
-      "parental leave",
-      "baby bonding",
-      "pregnancy",
-      "pdl",
-      "cfra",
-      "cpsl",
-      "california family rights act",
-      "paid family leave",
-      "pfl",
-      "sdi",
-      "disability leave",
-      "medical leave",
-      "sick leave",
-      "domestic violence leave",
-      "military leave",
-      "bereavement",
-      "jury duty",
-      "time off",
-      "pto",
-      "absence",
-      "attendance",
-      "leave request",
-      "return to work",
-      "leave policy"
-    ],
+    "tags": ["fmla","family medical leave act","leave","loa","leave of absence","maternity leave","paternity leave","parental leave","baby bonding","pregnancy","pdl","cfra","cpsl","california family rights act","paid family leave","pfl","sdi","disability leave","medical leave","sick leave","domestic violence leave","military leave","bereavement","jury duty","time off","pto","absence","attendance","leave request","return to work","leave policy"],
     "url": "https://heyzine.com/flip-book/RCCBLeavesToolkit",
     "status": "live"
   },
@@ -906,18 +765,7 @@ const hrResources = [
     "title": "Kronos Attendance Tracking (KAT)",
     "topic": "Policies &amp; Compliance",
     "desc": "Attendance tracking guide for union employees. Deploying June/July 2026.",
-    "tags": [
-      "timekeeping",
-      "clock in",
-      "punch",
-      "time clock",
-      "hours tracking",
-      "shift tracking",
-      "kat",
-      "union timekeeping",
-      "kronos",
-      "attendance tracking"
-    ],
+    "tags": ["timekeeping","clock in","punch","time clock","hours tracking","shift tracking","kat","union timekeeping","kronos","attendance tracking"],
     "url": null,
     "status": "pending"
   },
@@ -926,20 +774,7 @@ const hrResources = [
     "title": "Reasonable Suspicion",
     "topic": "Policies &amp; Compliance",
     "desc": "Training and reference guide for reasonable suspicion protocols.",
-    "tags": [
-      "drug testing",
-      "substance abuse",
-      "impairment",
-      "alcohol",
-      "fitness for duty",
-      "safety",
-      "workplace drugs",
-      "drug test",
-      "drug free",
-      "reasonable suspicion",
-      "dui",
-      "intoxicated"
-    ],
+    "tags": ["drug testing","substance abuse","impairment","alcohol","fitness for duty","safety","workplace drugs","drug test","drug free","reasonable suspicion","dui","intoxicated"],
     "url": "https://heyzine.com/flip-book/RCCBReasonableSuspicion",
     "status": "live"
   },
@@ -948,22 +783,14 @@ const hrResources = [
     "title": "Tax Credit Resources",
     "topic": "Policies &amp; Compliance",
     "desc": "Resources related to available tax credit programs. Currently in development.",
-    "tags": [
-      "wotc",
-      "work opportunity",
-      "hiring incentives",
-      "government credits",
-      "tax incentives",
-      "payroll credits",
-      "tax credit"
-    ],
+    "tags": ["wotc","work opportunity","hiring incentives","government credits","tax incentives","payroll credits","tax credit"],
     "url": null,
     "status": "pending"
   }
 
 ];
 
-  
+ 
 
 const filterChips = [
   { filter: 'All', label: 'All', icon: '✦' },
@@ -996,147 +823,560 @@ function getFizzSVG(size) {
   return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 60 120" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"><defs><linearGradient id="bb'+size+'" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a0505"/><stop offset="50%" stop-color="#4a1515"/><stop offset="100%" stop-color="#1a0505"/></linearGradient><linearGradient id="cc'+size+'" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FF4444"/><stop offset="100%" stop-color="#8B0008"/></linearGradient></defs><path d="M24 18 C24 18 22 20 22 24 L22 30 C22 32 20 34 18 37 C14 42 12 52 11 68 C10 84 12 100 15 108 C17 112 20 115 25 116 L35 116 C40 115 43 112 45 108 C48 100 50 84 49 68 C48 52 46 42 42 37 C40 34 38 32 38 30 L38 24 C38 20 36 18 36 18 Z" fill="url(#bb'+size+')"/><rect x="23" y="10" width="14" height="9" rx="2" fill="url(#cc'+size+')"/><rect x="15" y="58" width="30" height="18" rx="1.5" fill="white" opacity="0.97"/><rect x="16" y="59" width="28" height="16" rx="1" fill="#F40009"/><path d="M18 67 Q24 63 30 67 Q36 71 42 67" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="25" cy="42" rx="4" ry="4.5" fill="white"/><ellipse cx="35" cy="42" rx="4" ry="4.5" fill="white"/><circle cx="25.5" cy="41.5" r="2" fill="#1a1a1a"/><circle cx="35.5" cy="41.5" r="2" fill="#1a1a1a"/><circle cx="26" cy="40.5" r="0.8" fill="white"/><circle cx="36" cy="40.5" r="0.8" fill="white"/><path d="M26 49 Q30 52 34 49" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/><circle cx="40" cy="46" r="2.5" fill="#FF6B6B" opacity="0.35"/><path d="M14 38 Q14 22 30 22 Q46 22 46 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="13" cy="40" rx="3" ry="5" fill="#F40009"/><ellipse cx="47" cy="40" rx="3" ry="5" fill="#F40009"/></svg>';
 }
 
-// ========= FIZZ BRAIN: SYNONYM MAP =========
+// ============================================================
+// FIZZ BRAIN v2 — Enhanced for SharePoint deployment
+// All client-side, no API calls. Built for resilience.
+// ============================================================
+
+// --- SYNONYM MAP: maps user words/phrases to resource tag-vocab ---
 const SYNONYMS = {
-  'maternity': ['fmla','leave','pdl','cfra','baby bonding','pregnancy'],
-  'paternity': ['fmla','leave','cfra','baby bonding','parental'],
+  // Leaves
+  'maternity': ['fmla','leave','pdl','cfra','baby bonding','pregnancy','maternity leave'],
+  'paternity': ['fmla','leave','cfra','baby bonding','parental','paternity leave'],
   'pregnant': ['fmla','leave','pdl','pregnancy','maternity'],
+  'pregnancy': ['fmla','leave','pdl','pregnancy','maternity'],
   'baby': ['fmla','leave','baby bonding','parental'],
   'newborn': ['fmla','leave','baby bonding','parental'],
-  'time off': ['leave','pto','fmla'], 'vacation': ['leave','pto'],
-  'sick': ['leave','sick leave','fmla'], 'medical leave': ['fmla','leave','medical'],
-  'disability': ['fmla','leave','sdi','disability'], 'jury duty': ['leave','jury duty'],
-  'bereavement': ['leave','bereavement'], 'funeral': ['leave','bereavement'],
-  'military': ['leave','military','veteran'], 'fmla': ['fmla','leave','family medical'],
+  'adopt': ['fmla','leave','baby bonding','parental'],
+  'adoption': ['fmla','leave','baby bonding','parental'],
+  'time off': ['leave','pto','fmla'],
+  'time-off': ['leave','pto','fmla'],
+  'vacation': ['leave','pto'],
+  'pto': ['leave','pto'],
+  'sick': ['leave','sick leave','fmla'],
+  'illness': ['leave','sick leave','fmla','medical'],
+  'surgery': ['fmla','leave','medical'],
+  'medical leave': ['fmla','leave','medical'],
+  'disability': ['fmla','leave','sdi','disability'],
+  'sdi': ['fmla','leave','sdi','disability'],
+  'jury': ['leave','jury duty'],
+  'jury duty': ['leave','jury duty'],
+  'bereavement': ['bereavement','leave','grief'],
+  'funeral': ['bereavement','leave','grief'],
+  'grief': ['bereavement','leave','grief'],
+  'loss': ['bereavement','leave','grief'],
+  'died': ['bereavement','leave','grief'],
+  'death': ['bereavement','leave','grief'],
+  'passed away': ['bereavement','leave','grief'],
+  'military leave': ['leave','military','veteran'],
+  'fmla': ['fmla','leave','family medical'],
+  'cfra': ['fmla','leave','cfra'],
+  'pdl': ['fmla','leave','pdl','pregnancy'],
   'loa': ['fmla','leave','leave of absence'],
-  'pip': ['performance','performance improvement','pip','discipline'],
-  'write up': ['performance','discipline','corrective action'],
-  'write-up': ['performance','discipline','corrective action'],
-  'discipline': ['performance','corrective action','discipline'],
-  'fire': ['performance','discipline'], 'terminate': ['performance','discipline'],
-  'review': ['performance','evaluation','annual review'],
-  'evaluation': ['performance','evaluation'], 'feedback': ['performance','feedback','coaching'],
-  'coaching': ['performance','coaching','feedback','mentor'], 'goals': ['performance','goal setting'],
-  'career': ['career','development','roadmap'], 'grow': ['career','development','growth'],
-  'growth': ['career','development','growth'], 'promotion': ['career','development','advancement'],
-  'advance': ['career','development','advancement'], 'develop': ['development','career','idp'],
-  'learn': ['development','training','curriculum'], 'training': ['development','training','curriculum','compliance'],
-  'mentor': ['mentor','mentoring','coaching'], 'mentee': ['mentor','mentoring'],
-  'idp': ['idp','development plan','individual development'],
-  'new hire': ['onboarding','new hire','orientation'], 'new employee': ['onboarding','new hire','orientation'],
-  'first day': ['onboarding','new hire','orientation'], 'orientation': ['onboarding','orientation'],
-  'starting': ['onboarding'], 'just started': ['onboarding'],
-  'thank': ['recognition','appreciation'], 'appreciate': ['recognition','appreciation'],
-  'reward': ['recognition','rewards'], 'kudos': ['recognition','kudos'],
-  'shoutout': ['recognition','kudos'], 'award': ['recognition','service award','awards'],
-  'anniversary': ['service award','tenure','milestone'], 'tenure': ['service award','tenure'],
-  'hiring': ['interview','hiring','recruiting'], 'hire': ['interview','hiring','recruiting'],
-  'recruit': ['recruiting','campus','military','interview'], 'recruiting': ['recruiting','campus','military','interview'],
-  'interview': ['interview','interview guide'], 'candidate': ['interview','recruiting'],
-  'job fair': ['career fair','campus'], 'career fair': ['career fair','campus'],
-  'college': ['campus','college','university'], 'university': ['campus','college','university'],
-  'student': ['campus','college','intern'], 'intern': ['campus','intern'],
-  'veteran': ['military','veteran'], 'vet': ['military','veteran'],
-  'drug': ['reasonable suspicion','drug testing'], 'drugs': ['reasonable suspicion','drug testing'],
-  'drinking': ['reasonable suspicion','alcohol'], 'drunk': ['reasonable suspicion','alcohol'],
-  'high': ['reasonable suspicion'], 'impaired': ['reasonable suspicion'],
-  'i-9': ['i9','immigration','work authorization'], 'ice': ['i9','immigration','inspection'],
-  'immigration': ['i9','immigration'],
-  'attendance': ['kronos','attendance','kat','timekeeping'], 'clock': ['kronos','kat','timekeeping'],
-  'punch': ['kronos','kat','timekeeping'],
-  'tax': ['tax credit','wotc'], 'wotc': ['tax credit','wotc'],
-  'driver': ['transportation','cdl','transport'], 'truck': ['transportation','cdl'],
-  'cdl': ['transportation','cdl'], 'warehouse': ['warehouse','distribution'],
-  'forklift': ['warehouse'], 'merchandiser': ['merchandiser','merchandising'],
-  'merch': ['merchandiser','merchandising'], 'production': ['production','manufacturing','plant'],
-  'manufacturing': ['production','manufacturing','plant'], 'factory': ['production','manufacturing','plant'],
-  'manager': ['leadership','people leader','manager training'], 'supervisor': ['leadership','people leader','supervisor'],
-  'leadership': ['leadership','people leader'], 'leader': ['leadership','people leader']
-};
-const STOP_WORDS = new Set(['a','an','the','is','are','was','were','i','me','my','we','us','our','you','your','how','what','where','when','why','can','do','does','did','have','has','had','to','of','for','in','on','at','by','from','with','about','as','it','this','that','and','or','but','if','so','not','no','yes','please','thanks','thank','help','need','get','find','show','tell','give','want','looking','look','know','just','some','any','all']);
+  'pfl': ['fmla','leave','paid family leave'],
+  'absent': ['leave','attendance'],
+  'absence': ['leave','attendance'],
 
+  // Performance / discipline
+  'pip': ['performance','performance improvement','pip','discipline'],
+  'write up': ['performance','discipline','corrective action','write up'],
+  'write-up': ['performance','discipline','corrective action'],
+  'writeup': ['performance','discipline','corrective action'],
+  'discipline': ['performance','corrective action','discipline'],
+  'disciplinary': ['performance','corrective action','discipline'],
+  'warning': ['performance','discipline','warning'],
+  'fire': ['performance','discipline','termination'],
+  'firing': ['performance','discipline','termination'],
+  'terminate': ['performance','discipline','termination'],
+  'termination': ['performance','discipline','termination'],
+  'review': ['performance','evaluation','annual review','reviews'],
+  'reviews': ['performance','evaluation','annual review'],
+  'evaluation': ['performance','evaluation'],
+  'evaluations': ['performance','evaluation'],
+  'feedback': ['performance','feedback','coaching'],
+  'coaching': ['performance','coaching','feedback','mentor'],
+  'goal': ['performance','goal setting','goals'],
+  'goals': ['performance','goal setting'],
+
+  // Career / development
+  'career': ['career','development','roadmap'],
+  'grow': ['career','development','growth'],
+  'growth': ['career','development','growth'],
+  'promotion': ['career','development','advancement','promotion'],
+  'promoted': ['career','development','advancement'],
+  'advance': ['career','development','advancement'],
+  'advancement': ['career','development','advancement'],
+  'develop': ['development','career','idp'],
+  'development': ['development','career','idp'],
+  'learn': ['development','training','curriculum'],
+  'learning': ['development','training','curriculum'],
+  'training': ['development','training','curriculum','compliance training'],
+  'class': ['development','training','curriculum'],
+  'course': ['development','training','curriculum'],
+  'courses': ['development','training','curriculum'],
+  'mentor': ['mentor','mentoring','coaching'],
+  'mentee': ['mentor','mentoring'],
+  'mentoring': ['mentor','mentoring','coaching'],
+  'idp': ['idp','development plan','individual development'],
+  'roadmap': ['career','roadmap','development'],
+  'pathway': ['career','roadmap','development'],
+  'path': ['career','roadmap','development'],
+
+  // Onboarding
+  'new hire': ['onboarding','new hire','orientation'],
+  'newhire': ['onboarding','new hire'],
+  'new employee': ['onboarding','new hire','orientation'],
+  'first day': ['onboarding','new hire','orientation'],
+  'orientation': ['onboarding','orientation'],
+  'starting': ['onboarding','new hire'],
+  'just started': ['onboarding','new hire'],
+  'welcome': ['onboarding','welcome'],
+
+  // Recognition
+  'thank': ['recognition','appreciation'],
+  'thanks': ['recognition','appreciation'],
+  'appreciate': ['recognition','appreciation'],
+  'appreciation': ['recognition','appreciation'],
+  'reward': ['recognition','rewards'],
+  'rewards': ['recognition','rewards'],
+  'kudos': ['recognition','kudos'],
+  'shoutout': ['recognition','kudos'],
+  'shout out': ['recognition','kudos'],
+  'award': ['recognition','service award','awards'],
+  'awards': ['recognition','service award','awards'],
+  'anniversary': ['service award','tenure','milestone'],
+  'tenure': ['service award','tenure'],
+  'years of service': ['service award','tenure','milestone'],
+  'milestone': ['service award','tenure','milestone'],
+
+  // Hiring / recruiting
+  'hiring': ['interview','hiring','recruiting'],
+  'hire': ['interview','hiring','recruiting'],
+  'recruit': ['recruiting','campus','military','interview'],
+  'recruiting': ['recruiting','campus','military','interview'],
+  'recruitment': ['recruiting','campus','military','interview'],
+  'interview': ['interview','interview guide'],
+  'interviewing': ['interview','interview guide'],
+  'candidate': ['interview','recruiting'],
+  'job fair': ['career fair','campus'],
+  'career fair': ['career fair','campus'],
+  'college': ['campus','college','university'],
+  'university': ['campus','college','university'],
+  'student': ['campus','college','intern'],
+  'students': ['campus','college','intern'],
+  'intern': ['campus','intern'],
+  'interns': ['campus','intern'],
+  'internship': ['campus','intern'],
+  'veteran': ['military','veteran'],
+  'veterans': ['military','veteran'],
+  'vet': ['military','veteran'],
+  'service member': ['military','veteran'],
+  'military': ['military','veteran'],
+
+  // Compliance
+  'drug': ['reasonable suspicion','drug testing'],
+  'drugs': ['reasonable suspicion','drug testing'],
+  'drinking': ['reasonable suspicion','alcohol'],
+  'drunk': ['reasonable suspicion','alcohol'],
+  'high': ['reasonable suspicion'],
+  'impaired': ['reasonable suspicion'],
+  'intoxicated': ['reasonable suspicion','alcohol'],
+  'i-9': ['i9','immigration','work authorization'],
+  'i 9': ['i9','immigration','work authorization'],
+  'ice': ['i9','immigration','inspection'],
+  'immigration': ['i9','immigration'],
+  'work authorization': ['i9','immigration'],
+  'attendance': ['kronos','attendance','kat','timekeeping'],
+  'clock': ['kronos','kat','timekeeping'],
+  'clocking': ['kronos','kat','timekeeping'],
+  'punch': ['kronos','kat','timekeeping'],
+  'punching': ['kronos','kat','timekeeping'],
+  'kronos': ['kronos','kat','timekeeping','attendance'],
+  'kat': ['kronos','kat','timekeeping','attendance'],
+  'tax': ['tax credit','wotc'],
+  'wotc': ['tax credit','wotc'],
+  'audit': ['hr','compliance','audit'],
+  'compliance': ['hr','compliance','training','compliance training'],
+  'mandatory': ['compliance training','mandatory'],
+  'required': ['compliance training','mandatory'],
+  'harassment': ['compliance training','harassment'],
+  'ethics': ['compliance training','ethics'],
+
+  // Job functions
+  'driver': ['transportation','cdl','transport'],
+  'truck': ['transportation','cdl'],
+  'cdl': ['transportation','cdl'],
+  'warehouse': ['warehouse','distribution'],
+  'forklift': ['warehouse'],
+  'merchandiser': ['merchandiser','merchandising'],
+  'merch': ['merchandiser','merchandising'],
+  'production': ['production','manufacturing','plant'],
+  'manufacturing': ['production','manufacturing','plant'],
+  'factory': ['production','manufacturing','plant'],
+  'plant': ['production','manufacturing','plant'],
+
+  // Leadership
+  'manager': ['leadership','people leader','manager training'],
+  'managers': ['leadership','people leader','manager training'],
+  'supervisor': ['leadership','people leader','supervisor'],
+  'supervisors': ['leadership','people leader','supervisor'],
+  'leadership': ['leadership','people leader'],
+  'leader': ['leadership','people leader'],
+  'leading': ['leadership','people leader'],
+  'manage': ['leadership','people leader','manager training'],
+  'managing': ['leadership','people leader','manager training'],
+  'frontline': ['frontline training','yrj frontline','hourly'],
+  'hourly': ['frontline training','yrj frontline','hourly'],
+
+  // Life events
+  'retire': ['retirement','life events'],
+  'retirement': ['retirement','life events'],
+  'retiring': ['retirement','life events'],
+
+  // FIFA
+  'fifa': ['fifa','soccer','events'],
+  'soccer': ['fifa','soccer','events'],
+  'world cup': ['fifa','soccer','events'],
+
+  // Union
+  'union': ['union','labor','collective bargaining'],
+  'steward': ['union','steward'],
+  'grievance': ['union','grievance'],
+  'cba': ['union','collective bargaining'],
+  'collective bargaining': ['union','collective bargaining']
+};
+
+const STOP_WORDS = new Set([
+  'a','an','the','is','are','was','were','am','be','been','being','i','me','my','mine','we','us','our','you','your','yours','he','she','him','her','it','its','they','them','their',
+  'how','what','where','when','why','which','who','whom','can','could','do','does','did','done','have','has','had','having','to','of','for','in','on','at','by','from','with','about','as','it',
+  'this','that','these','those','and','or','but','if','so','not','no','yes','please','thanks','thank','help','need','needs','needed','get','got','find','show','tell','told','give','want','wants',
+  'looking','look','know','knew','just','some','any','all','out','up','down','more','most','less','very','really','also','too','than','then','there','here','because','since','while','will','would','should','may','might','must','shall'
+]);
+
+// --- INTENT DETECTION ---
 function detectIntent(q) {
-  if (/^\s*(hi|hey|hello|yo|sup|howdy|hiya|good\s+(morning|afternoon|evening))\b/i.test(q)) return 'greeting';
-  if (/^\s*(thanks|thank\s*you|thx|ty|appreciate|awesome|cool|great|perfect|nice|love\s*it)\b/i.test(q)) return 'gratitude';
-  if (/^\s*(bye|goodbye|see\s*ya|later|gtg)\b/i.test(q)) return 'farewell';
-  if (/\b(who\s+are\s+you|what\s+are\s+you|what\s+can\s+you\s+do|help\s*me|how\s+(does|do)\s+(this|you)\s+work)\b/i.test(q)) return 'capability';
-  if (/\b(another|more|other|else|what\s+else|anything\s+else)\b/i.test(q)) return 'more';
-  if (/\b(joke|funny|fun\s*fact)\b/i.test(q)) return 'fun';
+  const lower = q.toLowerCase().trim();
+  if (/^\s*(hi|hey|hello|yo|sup|howdy|hiya|good\s+(morning|afternoon|evening))\b/i.test(lower)) return 'greeting';
+  if (/^\s*(thanks|thank\s*you|thx|ty|appreciate|awesome|cool|great|perfect|nice|love\s*it|amazing|helpful|got\s*it)[\s!.,]*$/i.test(lower)) return 'gratitude';
+  if (/^\s*(bye|goodbye|see\s*ya|later|gtg|cya|peace|farewell)[\s!.,]*$/i.test(lower)) return 'farewell';
+  if (/\b(who\s+are\s+you|what\s+are\s+you|what\s+can\s+you\s+do|what\s+do\s+you\s+do|how\s+(does|do)\s+(this|you)\s+work|are\s+you\s+(a\s+)?bot|are\s+you\s+(real|human|ai))\b/i.test(lower)) return 'capability';
+  if (/^\s*(help|i\s+need\s+help|help\s+me)[\s!.?,]*$/i.test(lower)) return 'capability';
+  if (/\b(another|more|other|else|what\s+else|anything\s+else|next|show\s+more|see\s+more)\b/i.test(lower)) return 'more';
+  if (/\b(joke|funny|fun\s*fact|tell\s+me\s+a\s+joke|make\s+me\s+laugh)\b/i.test(lower)) return 'fun';
+  if (/^(yes|yeah|yep|yup|sure|okay|ok|sounds good|please do)[\s!.,]*$/i.test(lower)) return 'affirmation';
+  if (/^(no|nope|nah|not really|no thanks)[\s!.,]*$/i.test(lower)) return 'negation';
   return 'search';
 }
-function expandTokens(rawTokens) {
+
+// --- TOKENIZATION + SYNONYM EXPANSION ---
+function tokenize(q) {
+  // remove punctuation (except hyphens within words), lowercase, split, drop stopwords + short tokens
+  return q.toLowerCase()
+    .replace(/[^\w\s-]/g, ' ')
+    .split(/\s+/)
+    .map(t => t.trim())
+    .filter(t => t.length > 1 && !STOP_WORDS.has(t));
+}
+
+function expandTokens(rawTokens, fullText) {
   const expanded = new Set();
-  const fullText = rawTokens.join(' ');
+  // multi-word synonym keys (check whole phrase)
   for (const key of Object.keys(SYNONYMS)) {
-    if (key.includes(' ') && fullText.includes(key)) SYNONYMS[key].forEach(s => expanded.add(s.toLowerCase()));
+    if (key.includes(' ') || key.includes('-')) {
+      if (fullText.includes(key)) SYNONYMS[key].forEach(s => expanded.add(s.toLowerCase()));
+    }
   }
+  // single-token synonyms
   for (const t of rawTokens) {
     expanded.add(t);
     if (SYNONYMS[t]) SYNONYMS[t].forEach(s => expanded.add(s.toLowerCase()));
   }
   return Array.from(expanded);
 }
-function scoreResources(tokens, expanded) {
-  return hrResources.map(r => {
+
+// --- SIMPLE FUZZY MATCH for typos (Levenshtein distance, capped) ---
+function levenshtein(a, b) {
+  if (Math.abs(a.length - b.length) > 2) return 99; // early exit
+  const m = a.length, n = b.length;
+  if (m === 0) return n; if (n === 0) return m;
+  const dp = Array.from({length: m+1}, () => new Array(n+1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i-1] === b[j-1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost);
+    }
+  }
+  return dp[m][n];
+}
+
+function fuzzyFindSynonym(token) {
+  // Only try fuzzy match on tokens 4+ chars (avoids false positives on short words)
+  if (token.length < 4) return null;
+  for (const key of Object.keys(SYNONYMS)) {
+    if (key.includes(' ')) continue;
+    if (Math.abs(key.length - token.length) > 2) continue;
+    if (levenshtein(key, token) <= 1) return SYNONYMS[key];
+  }
+  return null;
+}
+
+// --- SCORING: rank resources by match strength ---
+function scoreResources(tokens, expanded, fullText) {
+  const scored = hrResources.map(r => {
     const titleText = r.title.toLowerCase();
     const descText = r.desc.toLowerCase();
-    const topicText = r.topic.toLowerCase();
+    const topicText = r.topic.toLowerCase().replace(/&amp;/g, '&');
     const tagsText = r.tags.join(' ').toLowerCase();
     let score = 0;
+    let matchedTerms = new Set();
+
+    // Direct token matches (higher weight)
     tokens.forEach(t => {
-      if (titleText.includes(t)) score += 15;
-      if (r.tags.some(tag => tag.toLowerCase() === t)) score += 12;
-      if (tagsText.includes(t)) score += 7;
-      if (descText.includes(t)) score += 3;
-      if (topicText.includes(t)) score += 2;
+      if (titleText.includes(t)) { score += 15; matchedTerms.add(t); }
+      if (r.tags.some(tag => tag.toLowerCase() === t)) { score += 12; matchedTerms.add(t); }
+      else if (tagsText.includes(t)) { score += 7; matchedTerms.add(t); }
+      if (descText.includes(t)) { score += 3; matchedTerms.add(t); }
+      if (topicText.includes(t)) { score += 4; matchedTerms.add(t); }
     });
+
+    // Expanded synonym matches (lower weight)
     expanded.forEach(t => {
       if (tokens.indexOf(t) >= 0) return;
       if (titleText.includes(t)) score += 6;
       if (tagsText.includes(t)) score += 4;
       if (descText.includes(t)) score += 1;
-      if (topicText.includes(t)) score += 1;
+      if (topicText.includes(t)) score += 2;
     });
-    return { resource: r, score };
+
+    // Bonus for matching multiple distinct terms (broad query relevance)
+    if (matchedTerms.size >= 2) score += matchedTerms.size * 2;
+
+    return { resource: r, score: score, matchedTerms: Array.from(matchedTerms) };
   }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+
+  return scored;
 }
-const GREETINGS = ['Hey there! 👋 Looking for a specific HR resource, or want me to suggest a category?', 'Hi! 😊 I\'m Fizz — your HR resource buddy. What can I help you find?', 'Hello! ✌️ Tell me what you need and I\'ll point you to the right resource.'];
-const GRATITUDE = ['You got it! Anything else I can help you find?', 'Happy to help! 🎉 Let me know if you need anything else.', 'Anytime! Just shout if you need another resource.'];
-const FAREWELLS = ['Catch you later! 👋 I\'ll be right here when you need me.', 'Bye! Come back anytime you need an HR resource.'];
-const CAPABILITY = ['I can help you find any HR resource at RCCB — from FMLA and leaves, to interview guides, career roadmaps, recognition toolkits, and more. Just describe what you\'re trying to do and I\'ll match you to the right toolkit.'];
-const FUN = ['Here\'s one: why don\'t scientists trust atoms? Because they make up everything! 😄 Now, what HR resource can I find for you?', 'Fun fact: Coca-Cola was originally green! 🍾 Anyway — what can I help you find?'];
-const DEFAULT_QUICK = ['Leaves & FMLA','Career development','Interview guides','Recognition & awards','Onboarding'];
+
+// --- CANNED ANSWERS for common HR questions ---
+// These give a direct answer + a relevant resource link, instead of just dumping resources
+const CANNED_ANSWERS = [
+  {
+    triggers: [/how\s+(much|many)\s+(maternity|paternity|parental)\s+leave/i, /how\s+long.*maternity/i, /how\s+long.*paternity/i],
+    response: "Maternity and parental leave varies by state and eligibility. In California, you may be entitled to PDL (up to 4 months for pregnancy disability), CFRA (up to 12 weeks for bonding), and FMLA (which often runs concurrently). The Leaves Toolkit has the full breakdown by leave type. 👇",
+    resourceIds: [2]
+  },
+  {
+    triggers: [/what.*pip/i, /what.*performance\s+improvement\s+plan/i, /how.*pip\s+work/i],
+    response: "A PIP (Performance Improvement Plan) is a structured plan to help an employee improve performance over a defined period — usually 30, 60, or 90 days, with clear goals and check-ins. The Performance Management Guide walks through how to write and deliver one. 👇",
+    resourceIds: [6]
+  },
+  {
+    triggers: [/how.*write\s+up.*employee/i, /document.*performance\s+issue/i, /corrective\s+action/i],
+    response: "Documentation is key for corrective action. The Performance Management Guide covers verbal warnings, written warnings, PIPs, and termination — including templates and best practices. 👇",
+    resourceIds: [6]
+  },
+  {
+    triggers: [/how.*conduct.*interview/i, /good\s+interview\s+questions/i, /best.*interview.*questions/i],
+    response: "Structured interviews give the most reliable hiring signal. Use the Internal Interview Guide for promotions/internal moves, or the Build Your Own Interview Guide to customize questions by role and competency. 👇",
+    resourceIds: [24, 25]
+  },
+  {
+    triggers: [/recognize.*employee/i, /how.*say\s+thank\s+you/i, /ways\s+to\s+recognize/i],
+    response: "Great recognition is specific, timely, and connected to behavior. The Recognition Toolkit has frameworks like SBI (Situation–Behavior–Impact) and tons of practical ideas, from quick shoutouts to formal awards. 👇",
+    resourceIds: [21]
+  },
+  {
+    triggers: [/reasonable\s+suspicion/i, /someone.*drunk.*work/i, /think.*employee.*drugs/i, /test.*drugs/i],
+    response: "Reasonable suspicion requires documented, observable signs — not a hunch. The Reasonable Suspicion guide walks you through what to observe, document, and the proper escalation path. Loop in HR before acting. 👇",
+    resourceIds: [4]
+  },
+  {
+    triggers: [/i9|i-9/i, /ice\s+inspection/i],
+    response: "I-9 and ICE inspection resources are still in development — we'll have a full toolkit available soon. In the meantime, contact your HR Business Partner for guidance on specific situations.",
+    resourceIds: [1]
+  },
+  {
+    triggers: [/career\s+(path|ladder|grow|next\s+step)/i, /how.*get\s+promoted/i, /what.*next.*role/i],
+    response: "Check out the Career Roadmaps — it lays out every RCCB career path with roles, levels, and the skills needed to advance. The Career & Development Guide pairs nicely for planning your next move. 👇",
+    resourceIds: [16, 11]
+  },
+  {
+    triggers: [/find.*mentor/i, /need.*mentor/i, /mentoring\s+program/i],
+    response: "The Mentoring Tool helps structure mentor/mentee relationships — including how to find one, what to discuss, and how to make it valuable. 👇",
+    resourceIds: [14]
+  },
+  {
+    triggers: [/(someone|employee|coworker).*(died|passed\s+away|lost.*family)/i, /lost.*loved\s+one/i],
+    response: "I'm really sorry. The Bereavement Toolkit has guidance on leave, benefits, and how to support someone (or yourself) compassionately during loss. 💛",
+    resourceIds: [29]
+  },
+  {
+    triggers: [/(thinking\s+about|planning\s+to|considering).*retir/i, /how.*retire/i, /retirement\s+process/i],
+    response: "The Retirement Toolkit covers the full process — planning steps, benefits, and the transition. Best to start the conversation a few months ahead. 👇",
+    resourceIds: [30]
+  },
+  {
+    triggers: [/new\s+to\s+(rccb|reyes)/i, /just\s+started/i, /first\s+day/i, /day\s+one/i],
+    response: "Welcome to RCCB! 🎉 The Onboarding Guide has everything for a smooth start — what to expect, key contacts, and resources for your first 30/60/90 days. 👇",
+    resourceIds: [7]
+  }
+];
+
+function checkCannedAnswers(userMessage) {
+  for (const canned of CANNED_ANSWERS) {
+    if (canned.triggers.some(re => re.test(userMessage))) {
+      return canned;
+    }
+  }
+  return null;
+}
+
+// --- RESPONSE BANKS ---
+const GREETINGS = [
+  "Hey there! 👋 What HR resource can I find for you today?",
+  "Hi! 😊 I'm Fizz — your HR resource buddy. What are you looking for?",
+  "Hello! ✌️ Tell me what you need and I'll point you to the right resource.",
+  "Hey! 🥤 Ready when you are — what HR topic should we dive into?"
+];
+const GRATITUDE = [
+  "You got it! Anything else I can help with?",
+  "Happy to help! 🎉 Let me know if you need anything else.",
+  "Anytime! Just shout if you need another resource.",
+  "Of course! I'm here whenever you need me."
+];
+const FAREWELLS = [
+  "Catch you later! 👋 I'll be right here when you need me.",
+  "Bye! Come back anytime you need an HR resource.",
+  "See you soon! 🥤"
+];
+const CAPABILITY = [
+  "I can help you find any HR resource at RCCB — from FMLA and leaves, to interview guides, career roadmaps, recognition toolkits, performance management, onboarding, and more. Just describe what you're trying to do (in plain words!) and I'll match you to the right toolkit."
+];
+const FUN = [
+  "Why don't scientists trust atoms? Because they make up everything! 😄 Now, what HR resource can I find for you?",
+  "Fun fact: Coca-Cola was originally green! 🍾 Anyway — what can I help you find?",
+  "What do you call a fake noodle? An im-pasta! 🍝 Okay okay — what HR topic are we tackling?"
+];
+const AFFIRMATIONS = [
+  "Awesome! What would you like to explore?",
+  "Great! What can I help you find?",
+  "Cool — what HR topic are we diving into?"
+];
+const NEGATIONS = [
+  "No worries! Let me know if anything else comes up.",
+  "All good — I'm here whenever you need me.",
+  "Got it. Happy to help with anything else."
+];
+const NO_MATCH = [
+  "Hmm, I couldn't find a great match for that. 🤔 Try rephrasing, or pick a category below to browse.",
+  "I'm not quite catching what you need. Could you give me a bit more detail? Or try one of these:",
+  "That one stumped me! Try different keywords, or browse a category 👇"
+];
+const DEFAULT_QUICK = ['Leaves & FMLA','Career development','Interview guides','Recognition','Onboarding'];
+
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 function generateQuickReplies(topResource, hasMore) {
   if (!topResource) return DEFAULT_QUICK.slice(0, 4);
   const replies = [];
   if (hasMore) replies.push('Show me more');
-  const map = {
+  const topicMap = {
     'Policies & Compliance': ['FMLA leave','Drug testing','Compliance training'],
-    'Talent Management': ['Performance reviews','PIP guide','Coaching'],
+    'Talent Management': ['Performance reviews','PIP guide','Coaching feedback'],
     'Onboarding': ['New hire guide','First day prep'],
     'Professional Development': ['Career roadmaps','Mentoring','Development plan'],
-    'Engagement & Recognition': ['Service awards','Recognition toolkit'],
-    'Talent Acquisition': ['Interview guides','Career fair','Campus recruiting']
+    'Engagement & Recognition': ['Service awards','Recognition ideas'],
+    'Talent Acquisition': ['Interview guides','Career fair','Campus recruiting'],
+    'Life Events': ['Bereavement','Retirement'],
+    'HR Compliance': ['HR audits','I-9 compliance'],
+    'FIFA': ['VIK Activator','Manager Playbook']
   };
-  (map[topResource.topic] || []).slice(0, 3).forEach(s => { if (replies.indexOf(s) < 0) replies.push(s); });
+  const topicKey = topResource.topic.replace(/&amp;/g, '&');
+  (topicMap[topicKey] || []).slice(0, 3).forEach(s => {
+    if (replies.indexOf(s) < 0) replies.push(s);
+  });
   return replies.slice(0, 4);
 }
-let ctx = { lastResourceIds: [], turnCount: 0 };
+
+// --- CONVERSATION CONTEXT (memory across turns) ---
+let ctx = {
+  lastResourceIds: [],
+  lastTopic: null,
+  lastQuery: '',
+  turnCount: 0,
+  lastIntent: null
+};
+
+// --- MAIN REPLY GENERATOR ---
 function generateFizzReply(userMessage) {
   const q = userMessage.toLowerCase().trim();
   const intent = detectIntent(q);
-  if (intent === 'greeting') return { message: pick(GREETINGS), resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0, 4), showCopilot: false };
-  if (intent === 'gratitude') return { message: pick(GRATITUDE), resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0, 3), showCopilot: false };
-  if (intent === 'farewell') return { message: pick(FAREWELLS), resourceIds: [], quickReplies: [], showCopilot: false };
-  if (intent === 'capability') return { message: pick(CAPABILITY), resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0, 4), showCopilot: false };
-  if (intent === 'fun') return { message: pick(FUN), resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0, 3), showCopilot: false };
-  const rawTokens = q.replace(/[^\w\s-]/g, ' ').split(/\s+/).filter(t => t.length > 1 && !STOP_WORDS.has(t));
-  if (rawTokens.length === 0) return { message: 'I\'d love to help — can you tell me a bit more about what you\'re looking for?', resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0, 4), showCopilot: false };
-  const expanded = expandTokens(rawTokens);
-  let scored = scoreResources(rawTokens, expanded);
-  if (intent === 'more' && ctx.lastResourceIds.length > 0) scored = scored.filter(s => ctx.lastResourceIds.indexOf(s.resource.id) < 0);
-  if (scored.length === 0) return { message: 'Hmm, I couldn\'t find a perfect match. 🤔 Try rephrasing or browse a category below.', resourceIds: [], quickReplies: ['Browse all categories'].concat(DEFAULT_QUICK.slice(0, 3)), showCopilot: false };
+
+  // Quick intents
+  if (intent === 'greeting')   { ctx.lastIntent = intent; return { message: pick(GREETINGS),   resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,4), showCopilot: false }; }
+  if (intent === 'gratitude')  { ctx.lastIntent = intent; return { message: pick(GRATITUDE),   resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,3), showCopilot: false }; }
+  if (intent === 'farewell')   { ctx.lastIntent = intent; return { message: pick(FAREWELLS),   resourceIds: [], quickReplies: [],                       showCopilot: false }; }
+  if (intent === 'capability') { ctx.lastIntent = intent; return { message: pick(CAPABILITY),  resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,4), showCopilot: false }; }
+  if (intent === 'fun')        { ctx.lastIntent = intent; return { message: pick(FUN),         resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,3), showCopilot: false }; }
+  if (intent === 'affirmation' && ctx.lastResourceIds.length === 0) { ctx.lastIntent = intent; return { message: pick(AFFIRMATIONS), resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0,4), showCopilot: false }; }
+  if (intent === 'negation')   { ctx.lastIntent = intent; return { message: pick(NEGATIONS),   resourceIds: [], quickReplies: [], showCopilot: false }; }
+
+  // Check canned answers first (more natural responses for common questions)
+  const canned = checkCannedAnswers(userMessage);
+  if (canned) {
+    ctx.lastResourceIds = canned.resourceIds;
+    ctx.lastIntent = 'search';
+    const topResource = hrResources.find(r => r.id === canned.resourceIds[0]);
+    return {
+      message: canned.response,
+      resourceIds: canned.resourceIds,
+      quickReplies: generateQuickReplies(topResource, true),
+      showCopilot: false
+    };
+  }
+
+  // Tokenize
+  let rawTokens = tokenize(q);
+
+  // If query is very short and intent was previously 'search', combine with last query context
+  // (handles follow-ups like "what about for managers" after a topic was discussed)
+  if (rawTokens.length === 0) {
+    if (ctx.lastQuery && intent === 'affirmation') {
+      // User said "yes" — re-show last results
+      return {
+        message: "Here are those again — let me know what looks helpful! 👇",
+        resourceIds: ctx.lastResourceIds.slice(0,3),
+        quickReplies: DEFAULT_QUICK.slice(0,4),
+        showCopilot: false
+      };
+    }
+    return {
+      message: "I'd love to help — can you tell me a bit more about what you're looking for?",
+      resourceIds: [],
+      quickReplies: DEFAULT_QUICK.slice(0,4),
+      showCopilot: false
+    };
+  }
+
+  // Try fuzzy matching for unrecognized tokens (handle typos)
+  rawTokens.forEach(t => {
+    if (!SYNONYMS[t]) {
+      const fuzzy = fuzzyFindSynonym(t);
+      if (fuzzy) fuzzy.forEach(s => { if (rawTokens.indexOf(s) < 0) rawTokens.push(s); });
+    }
+  });
+
+  const expanded = expandTokens(rawTokens, q);
+  let scored = scoreResources(rawTokens, expanded, q);
+
+  // "more" intent: exclude already-shown resources
+  if (intent === 'more' && ctx.lastResourceIds.length > 0) {
+    scored = scored.filter(s => ctx.lastResourceIds.indexOf(s.resource.id) < 0);
+  }
+
+  if (scored.length === 0) {
+    ctx.lastIntent = 'search';
+    return {
+      message: pick(NO_MATCH),
+      resourceIds: [],
+      quickReplies: ['Browse all categories'].concat(DEFAULT_QUICK.slice(0,3)),
+      showCopilot: false
+    };
+  }
+
+  // Filter to high-confidence matches only
   const topScore = scored[0].score;
   const cutoff = Math.max(topScore * 0.4, 4);
   const filtered = scored.filter(s => s.score >= cutoff).slice(0, 3);
@@ -1144,66 +1384,129 @@ function generateFizzReply(userMessage) {
   const top = filtered[0].resource;
   const hasMore = scored.length > filtered.length;
   const allPending = filtered.every(s => s.resource.status === 'pending');
+
+  // Compose response message
   let message;
   if (filtered.length === 1) {
-    if (top.status === 'pending') message = 'Heads up — "' + top.title + '" is still in development. 🚧 Want a similar live resource?';
-    else message = 'Found it! "' + top.title + '" should help. 👇';
-  } else if (allPending) message = 'I found a few related resources, but they\'re all still in development. 🚧';
-  else message = 'Here are the best matches — click any to open. 👇';
+    if (top.status === 'pending') {
+      message = `Heads up — "${top.title}" is still in development. 🚧 Try a related topic below, or check back soon.`;
+    } else {
+      message = `Found it! "${top.title}" should help. 👇`;
+    }
+  } else if (allPending) {
+    message = "I found a few related resources, but they're all still in development. 🚧 Check back soon!";
+  } else {
+    message = `Here are the best matches for "${userMessage.length > 50 ? userMessage.slice(0,50) + '...' : userMessage}" — click any to open. 👇`;
+  }
+
+  // Update context
   ctx.lastResourceIds = ids;
+  ctx.lastTopic = top.topic;
+  ctx.lastQuery = q;
+  ctx.lastIntent = 'search';
   ctx.turnCount++;
-  return { message: message, resourceIds: ids, quickReplies: generateQuickReplies(top, hasMore), showCopilot: allPending };
+
+  return {
+    message,
+    resourceIds: ids,
+    quickReplies: generateQuickReplies(top, hasMore),
+    showCopilot: allPending
+  };
 }
 
-// ========= CHAT STATE & RENDER =========
+// ============================================================
+// CHAT STATE & RENDER  —  FIXED: send button always works
+// ============================================================
 let isChatOpen = false;
 let messages = [];
 let isTyping = false;
+
 function toggleChat() {
   isChatOpen = !isChatOpen;
-  const win = document.getElementById('chatWindow');
-  const ping = document.getElementById('botPing');
-  const ring = document.getElementById('botRing');
+  const win   = document.getElementById('chatWindow');
+  const ping  = document.getElementById('botPing');
+  const ring  = document.getElementById('botRing');
   const label = document.getElementById('botLabel');
   if (isChatOpen) {
     win.classList.add('open');
-    ping.style.display = 'none'; ring.style.display = 'none';
-    label.textContent = 'Chatting'; label.style.color = '#F40009';
-    document.getElementById('chatInput').focus();
+    ping.style.display = 'none';
+    ring.style.display = 'none';
+    label.textContent = 'Chatting';
+    label.style.color = '#F40009';
+    // delay focus so animation doesn't fight the keyboard
+    setTimeout(() => { try { document.getElementById('chatInput').focus(); } catch(e){} }, 200);
     if (messages.length === 0) {
-      messages.push({ role: 'bot', message: "Hey! 👋 I'm Fizz — I can help you find any resource in the RCCB HR Resource Center. What are you looking for?", resourceIds: [], quickReplies: DEFAULT_QUICK.slice(0, 5), showCopilot: false });
+      messages.push({
+        role: 'bot',
+        message: "Hey! 👋 I'm Fizz — I can help you find any resource in the RCCB HR Resource Center. Ask me anything, like \"how does FMLA work?\" or \"I need interview questions\".",
+        resourceIds: [],
+        quickReplies: DEFAULT_QUICK.slice(0, 5),
+        showCopilot: false
+      });
       renderChat();
     }
   } else {
     win.classList.remove('open');
-    ping.style.display = 'block'; ring.style.display = 'block';
-    label.textContent = 'Ask Fizz'; label.style.color = '';
+    ping.style.display = 'block';
+    ring.style.display = 'block';
+    label.textContent = 'Ask Fizz';
+    label.style.color = '';
   }
 }
+
 function sendMessage(e) {
-  e.preventDefault();
+  if (e && e.preventDefault) e.preventDefault();
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
-  if (!text || isTyping) return;
+  if (!text) return;            // ignore empty
+  if (isTyping) return;         // ignore double-submit while bot is "thinking"
+
   input.value = '';
-  document.getElementById('sendBtn').disabled = true;
   messages.push({ role: 'user', text: text });
   isTyping = true;
   renderChat();
+
+  // Simulate small delay so the typing indicator is visible
+  const delay = Math.min(350 + text.length * 10, 1100);
   setTimeout(() => {
-    const reply = generateFizzReply(text);
-    isTyping = false;
-    messages.push({ role: 'bot', message: reply.message, resourceIds: reply.resourceIds, quickReplies: reply.quickReplies, showCopilot: reply.showCopilot });
-    renderChat();
-  }, Math.min(400 + text.length * 12, 1200));
+    try {
+      const reply = generateFizzReply(text);
+      messages.push({
+        role: 'bot',
+        message: reply.message,
+        resourceIds: reply.resourceIds,
+        quickReplies: reply.quickReplies,
+        showCopilot: reply.showCopilot
+      });
+    } catch (err) {
+      // SAFETY NET: never let an error trap Fizz in "typing forever" state
+      console.error('Fizz reply error:', err);
+      messages.push({
+        role: 'bot',
+        message: "Oops, something hiccupped on my end. 😅 Try asking that again or try different words.",
+        resourceIds: [],
+        quickReplies: DEFAULT_QUICK.slice(0,4),
+        showCopilot: false
+      });
+    } finally {
+      isTyping = false;
+      renderChat();
+      // Refocus input so user can keep typing
+      try { document.getElementById('chatInput').focus(); } catch(e){}
+    }
+  }, delay);
 }
+
 function handleQuickReply(reply) {
   const input = document.getElementById('chatInput');
   input.value = reply;
-  document.getElementById('sendBtn').disabled = false;
   sendMessage({ preventDefault: () => {} });
 }
-function escapeHtml(s) { return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
 function renderChat() {
   const c = document.getElementById('chatMessages');
   let html = '';
@@ -1213,41 +1516,53 @@ function renderChat() {
     } else {
       const formatted = escapeHtml(msg.message || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
       html += '<div class="chat-message-group"><div class="chat-message-row"><div class="chat-message-avatar">' + getFizzSVG(28) + '</div><div class="chat-bubble bot">' + formatted + '</div></div>';
+
       if (msg.resourceIds && msg.resourceIds.length > 0) {
         html += '<div class="chat-resource-cards">';
         msg.resourceIds.forEach(id => {
           const r = hrResources.find(x => x.id === id);
           if (!r) return;
-          const icon = topicIcons[r.topic] || '📄';
+          const icon = topicIcons[r.topic.replace(/&amp;/g, '&')] || '📄';
           const isLive = r.status === 'live' && r.url && r.url !== '#';
-          const badge = r.status === 'pending' ? '<span class="chat-resource-badge">Coming Soon</span>' : '';
-          const href = isLive ? 'href="' + r.url + '" target="_blank" rel="noopener"' : '';
-          const style = r.status === 'pending' ? 'opacity:0.75;cursor:default;' : '';
-          html += '<a class="chat-resource-card" ' + href + ' style="' + style + '"><div class="chat-resource-icon">' + icon + '</div><div class="chat-resource-info"><div class="chat-resource-title">' + escapeHtml(r.title) + badge + '</div><div class="chat-resource-topic">' + escapeHtml(r.topic) + '</div></div><span class="chat-resource-arrow">' + (isLive ? '↗' : '⏳') + '</span></a>';
+          const badge  = r.status === 'pending' ? '<span class="chat-resource-badge">Coming Soon</span>' : '';
+          const href   = isLive ? 'href="' + r.url + '" target="_blank" rel="noopener"' : '';
+          const style  = r.status === 'pending' ? 'opacity:0.75;cursor:default;' : '';
+          html += '<a class="chat-resource-card" ' + href + ' style="' + style + '"><div class="chat-resource-icon">' + icon + '</div><div class="chat-resource-info"><div class="chat-resource-title">' + escapeHtml(r.title) + badge + '</div><div class="chat-resource-topic">' + escapeHtml(r.topic.replace(/&amp;/g, '&')) + '</div></div><span class="chat-resource-arrow">' + (isLive ? '↗' : '⏳') + '</span></a>';
         });
         html += '</div>';
       }
+
       if (msg.quickReplies && msg.quickReplies.length > 0) {
         html += '<div class="quick-replies">';
         msg.quickReplies.forEach(r => {
-          const safe = escapeHtml(r).replace(/'/g, '&#39;');
-          html += '<button class="quick-reply-btn" onclick="handleQuickReply(\'' + safe.replace(/\\/g, '\\\\').replace(/"/g, '&quot;') + '\')">' + escapeHtml(r) + '</button>';
+          // Safely escape for inline onclick
+          const dataEsc = String(r).replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          html += '<button class="quick-reply-btn" data-reply="' + dataEsc + '">' + escapeHtml(r) + '</button>';
         });
         html += '</div>';
       }
+
       html += '</div>';
     }
   });
+
   if (isTyping) {
     html += '<div class="chat-message-group"><div class="typing-indicator"><div class="chat-message-avatar">' + getFizzSVG(28) + '</div><div class="typing-dots"><span></span><span></span><span></span></div></div></div>';
   }
+
   c.innerHTML = html;
   c.scrollTop = c.scrollHeight;
-  if (!isTyping) document.getElementById('sendBtn').disabled = !document.getElementById('chatInput').value.trim();
+
+  // Wire up quick-reply buttons (delegation-style, attached after render)
+  c.querySelectorAll('.quick-reply-btn').forEach(btn => {
+    btn.onclick = () => handleQuickReply(btn.getAttribute('data-reply'));
+  });
 }
-document.getElementById('chatInput').addEventListener('input', e => { document.getElementById('sendBtn').disabled = !e.target.value.trim(); });
+
+// Initial wiring — keep input listener simple. Button is NEVER disabled now;
+// sendMessage just ignores empty input. This prevents stuck-disabled bugs.
 document.getElementById('botCharacter').innerHTML = getFizzSVG(80);
-document.getElementById('chatAvatar').innerHTML = getFizzSVG(44);
+document.getElementById('chatAvatar').innerHTML   = getFizzSVG(44);
 
 // ========= CARDS / FILTERS =========
 function renderChips() {
