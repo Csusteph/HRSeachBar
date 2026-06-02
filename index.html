@@ -707,7 +707,7 @@ const hrResources = [
   {
     "id": 21,
     "title": "Recognition Toolkit",
-    "topic": "Engagement &amp; Recognition",
+    "topic": "Engagement & Recognition",
     "desc": "Manager's guide to building a meaningful recognition culture at RCCB.",
     "tags": ["employee appreciation","rewards","kudos","shoutouts","recognition program","appreciation","thank you","employee rewards","recognize","recognition"],
     "url": "https://heyzine.com/flip-book/RCCBRecognitionToolkit",
@@ -716,7 +716,7 @@ const hrResources = [
   {
     "id": 22,
     "title": "Service Awards",
-    "topic": "Engagement &amp; Recognition",
+    "topic": "Engagement & Recognition",
     "desc": "Resources and materials for the RCCB employee service awards program.",
     "tags": ["anniversary","tenure","milestone","years of service","employee milestones","longevity awards","recognition gifts","service award","service awards"],
     "url": "https://reyesholdings.sharepoint.com/:f:/s/rc-rccb/IgCM8wvj79hORq_3b2vMcO-0AWu-N6psGZkce_sylCGINNo?e=LfDlJA",
@@ -725,7 +725,7 @@ const hrResources = [
   {
     "id": 23,
     "title": "RCCB Awards (GPTW, Fortune, Brandon Hall)",
-    "topic": "Engagement &amp; Recognition",
+    "topic": "Engagement & Recognition",
     "desc": "Showcase of RCCB's award recognitions. Resource currently in development.",
     "tags": ["great place to work","gptw","fortune","brandon hall","company awards","employer awards","accolades"],
     "url": null,
@@ -736,7 +736,7 @@ const hrResources = [
   {
     "id": 19,
     "title": "HR Audit Toolkit",
-    "topic": "HR Compliance",
+    "topic":  "Policies & Compliance",
     "desc": "Quick-reference guide for HR audits, compliance requirements, and required workplace documentation.",
     "tags": ["hr","compliance","audit","jj keller","workplace posters","i9","ofccp","affirmative action","employee files","medical files","records","documentation","policy","regulatory"],
     "url": "https://heyzine.com/flip-book/RCCBHRAudits",
@@ -745,7 +745,7 @@ const hrResources = [
   {
     "id": 1,
     "title": "I9 and ICE Inspections",
-    "topic": "Policies &amp; Compliance",
+    "topic": "Policies & Compliance",
     "desc": "Guidance on I9 documentation and ICE inspection procedures.",
     "tags": ["immigration","audit","work authorization","eligibility","employment verification","federal compliance","documentation","i-9","i9"],
     "url": null,
@@ -754,7 +754,7 @@ const hrResources = [
   {
     "id": 2,
     "title": "Leaves / FMLA Training for HR",
-    "topic": "Policies &amp; Compliance",
+    "topic": "Policies & Compliance",
     "desc": "A complete guide to all federal and California leave types and other protected absences.",
     "tags": ["fmla","family medical leave act","leave","loa","leave of absence","maternity leave","paternity leave","parental leave","baby bonding","pregnancy","pdl","cfra","cpsl","california family rights act","paid family leave","pfl","sdi","disability leave","medical leave","sick leave","domestic violence leave","military leave","bereavement","jury duty","time off","pto","absence","attendance","leave request","return to work","leave policy"],
     "url": "https://heyzine.com/flip-book/RCCBLeavesToolkit",
@@ -763,7 +763,7 @@ const hrResources = [
   {
     "id": 3,
     "title": "Kronos Attendance Tracking (KAT)",
-    "topic": "Policies &amp; Compliance",
+    "topic": "Policies & Compliance",
     "desc": "Attendance tracking guide for union employees. Deploying June/July 2026.",
     "tags": ["timekeeping","clock in","punch","time clock","hours tracking","shift tracking","kat","union timekeeping","kronos","attendance tracking"],
     "url": null,
@@ -772,7 +772,7 @@ const hrResources = [
   {
     "id": 4,
     "title": "Reasonable Suspicion",
-    "topic": "Policies &amp; Compliance",
+    "topic": "Policies & Compliance",
     "desc": "Training and reference guide for reasonable suspicion protocols.",
     "tags": ["drug testing","substance abuse","impairment","alcohol","fitness for duty","safety","workplace drugs","drug test","drug free","reasonable suspicion","dui","intoxicated"],
     "url": "https://heyzine.com/flip-book/RCCBReasonableSuspicion",
@@ -781,7 +781,7 @@ const hrResources = [
   {
     "id": 5,
     "title": "Tax Credit Resources",
-    "topic": "Policies &amp; Compliance",
+    "topic": "Policies & Compliance",
     "desc": "Resources related to available tax credit programs. Currently in development.",
     "tags": ["wotc","work opportunity","hiring incentives","government credits","tax incentives","payroll credits","tax credit"],
     "url": null,
@@ -790,7 +790,6 @@ const hrResources = [
 
 ];
 
- 
 
 const filterChips = [
   { filter: 'All', label: 'All', icon: '✦' },
@@ -799,10 +798,12 @@ const filterChips = [
   { filter: 'Talent Management', label: 'Talent Mgmt', icon: '📊' },
   { filter: 'Life Events', label: 'Life Events', icon: '💛' },
   { filter: 'Talent Acquisition', label: 'Talent Acquisition', icon: '🔍' },
-  { filter: 'Engagement &amp; Recognition', label: 'Engagement &amp; Recognition', icon: '🏆' },
-  { filter: 'Policies &amp; Compliance', label: 'Policies &amp; Compliance', icon: '📋' },
+  { filter: 'Engagement & Recognition', label: 'Engagement & Recognition', icon: '🏆' },
+  { filter: 'Policies & Compliance', label: 'Policies & Compliance', icon: '📋' },
   { filter: 'FIFA', label: 'FIFA', icon: '⚽' }
 ];
+
+
 
 const tagStyles = {
   'Policies & Compliance':    { bg: '#FDECEC', color: '#8B0008', accent: '#F40009' },
@@ -810,11 +811,25 @@ const tagStyles = {
   'Onboarding':               { bg: '#FDECEC', color: '#8B0008', accent: '#F40009' },
   'Professional Development': { bg: '#F0F0F0', color: '#111111', accent: '#111111' },
   'Engagement & Recognition': { bg: '#FDECEC', color: '#8B0008', accent: '#F40009' },
-  'Talent Acquisition':       { bg: '#F0F0F0', color: '#111111', accent: '#111111' }
+  'Talent Acquisition':       { bg: '#F0F0F0', color: '#111111', accent: '#111111' },
+  'Life Events':              { bg: '#FDECEC', color: '#8B0008', accent: '#F40009' },
+  'HR Compliance':            { bg: '#F0F0F0', color: '#111111', accent: '#111111' },
+  'FIFA':                     { bg: '#FDECEC', color: '#8B0008', accent: '#F40009' }
 };
+
+
 const topicIcons = {
-  'Policies & Compliance': '📋','Talent Management': '📊','Onboarding': '👋','Professional Development': '📈','Engagement & Recognition': '🏆','Talent Acquisition': '🔍','FIFA': '⚽'
+  'Policies & Compliance': '📋',
+  'Talent Management': '📊',
+  'Onboarding': '👋',
+  'Professional Development': '📈',
+  'Engagement & Recognition': '🏆',
+  'Talent Acquisition': '🔍',
+  'Life Events': '💛',
+  'HR Compliance': '📋',
+  'FIFA': '⚽'
 };
+
 let currentFilter = 'All';
 let searchQuery = '';
 
